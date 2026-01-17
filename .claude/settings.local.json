@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(nul)",
+      "Bash(pnpm init)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm dlx tailwindcss:*)",
+      "Bash(npx tailwindcss init -p)",
+      "Bash(mkdir:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

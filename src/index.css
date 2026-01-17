@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-forest-primary: 45 80 22;
+    --color-mountain-primary: 74 124 156;
+    --color-sunrise-primary: 217 119 6;
+  }
+
+  * {
+    @apply border-earth-400;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-earth-600 antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold text-forest-900;
+  }
+}
+
+@layer utilities {
+  .text-gradient-forest {
+    @apply bg-gradient-to-r from-forest-600 to-forest-500 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-mountain {
+    @apply bg-gradient-to-r from-mountain-600 to-mountain-400 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-sunrise {
+    @apply bg-gradient-to-r from-sunrise-600 to-sunrise-500 bg-clip-text text-transparent;
+  }
+}
