@@ -71,7 +71,7 @@ export const About = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="grid gap-4 sm:grid-cols-2"
           >
-            {values.map((value, index) => {
+            {values.map((value) => {
               const Icon = value.icon;
               return (
                 <Card key={value.title} hover className="text-center">

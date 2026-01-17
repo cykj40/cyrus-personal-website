@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { scrollToSection } from '@/lib/utils';
-import { Button } from '@/components/ui/Button';
 
 const navItems = [
   { label: 'Home', href: 'hero' },
