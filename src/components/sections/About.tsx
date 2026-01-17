@@ -18,7 +18,7 @@ const values = [
   {
     icon: Zap,
     title: 'Relentless',
-    description: 'I don't stop at "good enough." I iterate until it's right.',
+    description: "I don't stop at \"good enough.\" I iterate until it's right.",
   },
   {
     icon: Code2,
