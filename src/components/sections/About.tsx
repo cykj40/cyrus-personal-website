@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Code2, Mountain, TreePine, Zap } from 'lucide-react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import { skillsData } from '@/data/skills';
+import { skills } from '@/data/skills';
 
 const values = [
   {
@@ -46,10 +46,10 @@ export const About = () => {
             className="space-y-4 text-earth-600"
           >
             <p className="text-lg leading-relaxed">
-              I'm a <strong className="text-forest-700">full-stack developer</strong> who builds
-              intelligent systems that actually work. My background spans health tech integrations,
-              AI automation, and developer tools—always with a focus on clean code and real-world
-              impact.
+              I'm a <strong className="text-forest-700">full-stack developer</strong> who builds production systems for
+              environments where reliability matters construction operations and personal health.
+              My work spans workflow automation, real-time health integrations, and developer tooling,
+              with a constant focus on clean architecture and real-world impact.
             </p>
             <p className="text-lg leading-relaxed">
               Whether I'm building{' '}
@@ -99,7 +99,7 @@ export const About = () => {
         >
           <h3 className="mb-8 text-center text-2xl font-bold text-forest-900">Tech Stack</h3>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {skillsData.map((category) => (
+            {skills.map((category) => (
               <Card key={category.category}>
                 <CardHeader>
                   <CardTitle className="text-lg">{category.category}</CardTitle>

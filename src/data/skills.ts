@@ -3,29 +3,45 @@ export interface SkillCategory {
   skills: string[];
 }
 
-export const skillsData: SkillCategory[] = [
+export const skills: SkillCategory[] = [
   {
-    category: 'Languages',
+    category: 'Core Languages',
     skills: ['TypeScript', 'JavaScript', 'Python', 'Go', 'SQL', 'HTML/CSS'],
   },
   {
-    category: 'Frontend',
+    category: 'Frontend Engineering',
     skills: ['React', 'Next.js', 'TanStack Router', 'TanStack Query', 'Tailwind CSS', 'Framer Motion'],
   },
   {
-    category: 'Backend',
-    skills: ['Node.js', 'Express', 'PostgreSQL', 'Prisma', 'REST APIs', 'GraphQL'],
+    category: 'Backend & Data',
+    skills: [
+      'Node.js',
+      'Fastify',
+      'Express',
+      'PostgreSQL',
+      'Drizzle',
+      'REST APIs',
+      'GraphQL',
+      'Auth (JWT/OAuth)',
+      'Webhooks',
+      'Background Jobs'
+    ],
   },
   {
-    category: 'AI & Automation',
-    skills: ['Claude API', 'MCP Protocol', 'Prompt Engineering', 'AI Agents', 'Workflow Automation'],
+    category: 'Applied AI Systems',
+    skills: [
+      'Claude API',
+      'MCP Protocol',
+      'AI Agents',
+      'LLM Integration',
+      'Tool Calling',
+      'Workflow Automation',
+      'Dexcom API',
+      'Time-Series Data'
+    ],
   },
   {
-    category: 'Tools & DevOps',
-    skills: ['Git', 'Docker', 'Vercel', 'GitHub Actions', 'Vite', 'pnpm'],
-  },
-  {
-    category: 'Health Tech',
-    skills: ['Dexcom API', 'TSheets API', 'Health Data Integration', 'CGM Systems', 'Medical APIs'],
+    category: 'Infrastructure & Delivery',
+    skills: ['Git', 'Docker', 'Linux', 'GitHub Actions', 'CI/CD', 'Vercel', 'Vite', 'pnpm'],
   },
 ];

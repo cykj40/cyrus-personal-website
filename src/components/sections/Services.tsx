@@ -9,7 +9,7 @@ const services = [
     title: 'Full-Stack Development',
     description:
       'End-to-end web application development with React, TypeScript, Node.js, and modern frameworks. Clean, maintainable code that scales.',
-    features: ['React & Next.js', 'TypeScript', 'REST & GraphQL APIs', 'PostgreSQL & Prisma'],
+    features: ['React & Next.js', 'TypeScript', 'REST & GraphQL APIs', 'PostgreSQL & Drizzle'],
   },
   {
     icon: Bot,
