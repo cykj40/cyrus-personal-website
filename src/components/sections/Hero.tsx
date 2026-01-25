@@ -65,7 +65,7 @@ export const Hero = () => {
                 <Linkedin className="h-6 w-6" />
               </a>
               <a
-                href="mailto:cyrus@example.com"
+                href="mailto:cyrus@cyruskhiabani.com"
                 className="text-earth-500 transition-colors hover:text-forest-600"
                 aria-label="Email"
               >
@@ -85,7 +85,7 @@ export const Hero = () => {
               {/* Profile Photo */}
               <div className="absolute inset-0 overflow-hidden rounded-2xl bg-gradient-to-br from-forest-100 to-mountain-100 shadow-2xl">
                 <img
-                  src="/images/profile/Cyrus-portfolio-picture.png"
+                  src="/images/profile/cyrus-portfolio-picture-1.png"
                   alt="Cyrus Jalili Khiabani - Full-Stack Developer"
                   className="h-full w-full object-cover"
                 />

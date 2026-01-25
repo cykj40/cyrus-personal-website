@@ -26,17 +26,11 @@ export const Projects = () => {
               <Card hover className="flex h-full flex-col">
                 {/* Project Image */}
                 <div className="relative h-48 overflow-hidden rounded-t-xl bg-gradient-to-br from-forest-100 to-mountain-100">
-                  {/* 📸 ADD PROJECT SCREENSHOT HERE */}
-                  <div className="flex h-full items-center justify-center">
-                    <div className="text-center text-earth-400">
-                      <div className="mb-2 text-4xl">📸</div>
-                      <p className="text-xs">
-                        Add screenshot:
-                        <br />
-                        {project.image}
-                      </p>
-                    </div>
-                  </div>
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
 
                 <CardHeader>
@@ -71,14 +65,14 @@ export const Projects = () => {
                       Code
                     </Button>
                   )}
-                  {project.demo && (
+                  {(project.demo || project.live) && (
                     <Button
                       variant="secondary"
                       size="sm"
-                      onClick={() => window.open(project.demo, '_blank')}
+                      onClick={() => window.open(project.demo || project.live, '_blank')}
                     >
                       <ExternalLink className="mr-2 h-4 w-4" />
-                      Demo
+                      {project.live ? 'Live' : 'Demo'}
                     </Button>
                   )}
                 </CardFooter>
