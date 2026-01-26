@@ -11,7 +11,7 @@ export const Projects = () => {
       <div className="container mx-auto px-4">
         <SectionHeading
           title="Featured Projects"
-          subtitle="A selection of my recent work in AI automation, health tech, and full-stack development"
+          subtitle="Recent projects in AI automation, backend systems, and full-stack development."
         />
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

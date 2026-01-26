@@ -9,42 +9,51 @@ const services = [
     title: 'Full-Stack Development',
     description:
       'End-to-end web application development with React, TypeScript, Node.js, and modern frameworks. Clean, maintainable code that scales.',
-    features: ['React & Next.js', 'TypeScript', 'REST & GraphQL APIs', 'PostgreSQL & Drizzle'],
+    features: [
+      'React & Next.js',
+      'TypeScript',
+      'REST API Design, Authentication, and Data Modeling',
+      'PostgreSQL & Drizzle',
+    ],
   },
   {
     icon: Bot,
     title: 'AI Integration & Automation',
     description:
-      'Build intelligent systems with Claude API, MCP servers, and custom AI workflows. Make your tools smarter.',
+      'Build production-grade AI systems—chatbots, agents, and MCP servers—using Claude and OpenAI APIs to automate real workflows.',
     features: [
       'MCP Server Development',
+      'Chatbots & AI Agents',
       'Claude API Integration',
+      'OpenAI API Integration',
       'Workflow Automation',
       'Prompt Engineering',
     ],
   },
   {
     icon: Database,
-    title: 'Health Tech Integration',
+    title: 'Operations & Business Systems Integration',
     description:
-      'Specialized in medical device APIs (Dexcom, TSheets) and health data systems. HIPAA-aware development.',
+      'Custom integrations between time tracking, billing, and internal systems to automate reporting and reduce operational overhead in real-world businesses.',
     features: [
-      'Dexcom CGM Integration',
-      'Medical API Development',
-      'Health Data Visualization',
-      'Secure Data Handling',
+      'TSheets API Integration',
+      'Sage 100 Data Formatting & Export',
+      'Job Notes & Field Data Automation',
+      'Secure OAuth2 API Integrations',
+      'Internal Tooling for Operations Teams',
     ],
   },
   {
     icon: Puzzle,
-    title: 'Technical Consulting',
+    title: 'Software Modernization & Code Conversion',
     description:
-      'Architecture reviews, code audits, and strategic guidance for your projects. Get expert advice on technical decisions.',
+      'Modernizing legacy codebases and translating systems between languages and stacks, with a focus on moving older backends to TypeScript-based architectures.',
     features: [
-      'Code Review & Audits',
-      'Architecture Design',
-      'Tech Stack Selection',
-      'Performance Optimization',
+      'Java → TypeScript / Node.js conversions',
+      'Backend stack migrations',
+      'API refactoring & normalization',
+      'Legacy code cleanup',
+      'Architecture simplification',
     ],
   },
 ];

@@ -89,10 +89,10 @@ export const Contact = () => {
                   <div>
                     <p className="text-sm font-medium text-forest-900">Email</p>
                     <a
-                      href="mailto:cyrus@example.com"
+                      href="mailto:cyrus@cyruskhiabani.com"
                       className="text-earth-600 hover:text-forest-600"
                     >
-                      cyrus@example.com
+                      cyrus@cyruskhiabani.com
                     </a>
                   </div>
                 </CardContent>
@@ -105,7 +105,7 @@ export const Contact = () => {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-forest-900">Location</p>
-                    <p className="text-earth-600">Pacific Northwest, USA</p>
+                    <p className="text-earth-600">New Jersey Shore, USA</p>
                   </div>
                 </CardContent>
               </Card>
