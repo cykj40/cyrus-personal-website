@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Cyrus Khiabani's portfolio website",
   "scripts": {
-    "dev": "vite",
+    "dev": "vercel dev",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "deploy": "vercel --prod"
@@ -40,6 +40,7 @@
     "autoprefixer": "^10.4.23",
     "postcss": "^8.5.6",
     "tailwindcss": "3.4.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vercel": "^50.9.2"
   }
 }

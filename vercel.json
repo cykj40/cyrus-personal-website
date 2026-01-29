@@ -1,11 +1,11 @@
 {
   "buildCommand": "pnpm build",
   "outputDirectory": "dist",
-  "devCommand": "pnpm dev",
+  "devCommand": "vite",
   "installCommand": "pnpm install",
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ]
