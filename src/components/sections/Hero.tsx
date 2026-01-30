@@ -23,15 +23,16 @@ export const Hero = () => {
                 Full-Stack & Agentic AI Developer
               </span>
             </div>
-
             <h1 className="mb-6 text-5xl font-bold leading-tight text-forest-900 sm:text-6xl lg:text-7xl">
               Building Intelligent Systems
               <br />
               <span className="text-gradient-mountain">That Actually Work</span>
             </h1>
-
             <p className="mb-8 max-w-xl text-lg text-earth-500 sm:text-xl">
-              Specializing in full-stack web development, AI chatbots, workflow automations, Model Context Protocol (MCP) servers, and autonomous AI agents. I integrate LLMs with external tools and data for scalable, context-aware intelligence from internal construction platforms to experimental agent swarms.
+              Building production systems for environments where reliability matters construction operations and personal health. Work spans workflow automation, real-time health integrations, and developer tooling, with a constant focus on clean architecture and real-world impact.
+            </p>
+            <p className="mb-8 max-w-xl text-lg text-earth-500 sm:text-xl">
+              Whether building MCP servers for Claude Desktop, integrating Dexcom CGM data, or creating full-stack web applications, discipline and precision drive every project.
             </p>
 
             {/* CTA Buttons */}

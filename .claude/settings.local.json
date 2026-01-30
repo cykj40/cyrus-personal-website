@@ -14,7 +14,17 @@
       "Bash(pnpm build:*)",
       "Bash(timeout 15 pnpm dev:*)",
       "Bash(pnpm remove:*)",
-      "Bash(timeout 10 pnpm dev:*)"
+      "Bash(timeout 10 pnpm dev:*)",
+      "Bash(vercel env:*)",
+      "Bash(vercel logs:*)",
+      "Bash(vercel ls:*)",
+      "Bash(curl:*)",
+      "Bash(git add:*)",
+      "Bash(git restore:*)",
+      "Bash(git commit:*)",
+      "Bash(vercel dev:*)",
+      "Bash(timeout 5 bash:*)",
+      "Bash(timeout:*)"
     ],
     "deny": [],
     "ask": []

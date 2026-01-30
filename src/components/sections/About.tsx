@@ -47,19 +47,19 @@ export const About = () => {
           >
             <p className="text-lg leading-relaxed">
               I'm a <strong className="text-forest-700">full-stack developer</strong> who builds production systems for
-              environments where reliability matters construction operations and personal health.
+              environments where reliability matters — construction operations and personal health.
               My work spans workflow automation, real-time health integrations, and developer tooling,
               with a constant focus on clean architecture and real-world impact.
             </p>
             <p className="text-lg leading-relaxed">
-              Whether I'm building{' '}
+              Whether building{' '}
               <strong className="text-mountain-600">MCP servers for Claude Desktop</strong>,
               integrating <strong className="text-forest-700">Dexcom CGM data</strong>, or creating
-              full-stack web applications, I bring discipline and precision to every project.
+              full-stack web applications, discipline and precision drive every project.
             </p>
             <p className="text-lg leading-relaxed">
-              Outside of code, you'll find me in the mountains—hiking, backpacking, and recharging
-              in nature. I believe the best solutions come from a grounded, focused mind.
+              Outside of code: running local trails, yoga, strength training, and riding the Peloton.
+              Consistency, structure, and clarity — in fitness and in systems.
             </p>
           </motion.div>
 
