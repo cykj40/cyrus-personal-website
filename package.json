@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Cyrus Khiabani's portfolio website",
   "scripts": {
-    "dev": "vercel dev",
+    "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "deploy": "vercel --prod"
