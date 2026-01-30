@@ -21,7 +21,10 @@
       "Bash(curl:*)",
       "Bash(git add:*)",
       "Bash(git restore:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(vercel dev:*)",
+      "Bash(timeout 5 bash:*)",
+      "Bash(timeout:*)"
     ],
     "deny": [],
     "ask": []
