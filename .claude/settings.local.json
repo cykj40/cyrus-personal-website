@@ -24,7 +24,8 @@
       "Bash(git commit:*)",
       "Bash(vercel dev:*)",
       "Bash(timeout 5 bash:*)",
-      "Bash(timeout:*)"
+      "Bash(timeout:*)",
+      "Bash(timeout 30 bash:*)"
     ],
     "deny": [],
     "ask": []

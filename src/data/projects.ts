@@ -90,17 +90,16 @@ export const projectsData: Project[] = [
     category: 'security',
   },
   {
-    id: 'periodic-table-speller',
-    title: 'Periodic Table Word Speller',
-    description: 'Interactive web app that spells words using chemical element symbols',
+    id: 'dexcom-mcp-server',
+    title: 'Dexcom MCP Server',
+    description: 'Human-in-the-loop diabetes management assistant powered by Claude AI and real-time CGM data',
     longDescription:
-      'Educational tool that attempts to spell any word using the symbols from the periodic table. Features recursive algorithm for finding valid element combinations, real-time validation, and interactive element cards displaying atomic details. Built with vanilla JavaScript and modern async/await patterns for efficient data handling.',
-    tech: ['JavaScript', 'HTML5', 'CSS3', 'JSON', 'Recursive Algorithms'],
-    github: 'https://github.com/cykj40/periodic-table-name-finder',
-    demo: 'https://periodic-table-name-finder.vercel.app/',
-    image: '/images/projects/periodic-table.png',
+      'Model Context Protocol server that connects Claude AI to Dexcom CGM devices for intelligent diabetes management assistance. Features real-time glucose monitoring with trend analysis, adaptive metabolic modeling that learns insulin sensitivity over time, predictive intelligence for estimating glucose impact of insulin and carbs, parameter drift detection to identify when physiology changes, and comprehensive event logging for meals, insulin, and exercise. Built with TypeScript and SQLite for local-first privacy—all data stays on your machine. Implements OAuth2 for secure Dexcom API access and provides visualization tools including AGP (Ambulatory Glucose Profile) charts. Pure assistive intelligence: Claude analyzes and recommends, but you decide and act.',
+    tech: ['TypeScript', 'Node.js', 'MCP Protocol', 'OAuth2', 'SQLite', 'Dexcom API', 'Claude API'],
+    github: 'https://github.com/cykj40/dexcom-mcp-server',
+    image: '/images/projects/dexcom-mcp-server.png',
     featured: true,
-    category: 'web',
+    category: 'health',
   }
 ];
 
