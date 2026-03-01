@@ -29,7 +29,9 @@ export const Projects = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="h-full w-full object-cover"
+                    className={`h-full w-full ${
+                      project.id === 'field-notes' ? 'object-contain' : 'object-cover'
+                    }`}
                   />
                 </div>
 
