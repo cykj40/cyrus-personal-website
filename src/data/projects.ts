@@ -28,13 +28,13 @@ export const projectsData: Project[] = [
   {
     id: 'field-notes',
     title: 'Field Notes',
-    description: 'Internal PWA that lets field supervisors submit job site notes directly to Google Chat from their phones',
+    description: 'Internal PWA built for Long & DeLosa Construction Group field supervisors. Speak job site notes in English or Spanish — OpenAI Whisper handles bilingual voice transcription — then submit directly to Google Chat.',
     longDescription:
-      'Built for Long & DeLosa Construction Group to streamline field-to-office communication. Supervisors open the app on their phones, dictate or type job site notes, and send them directly to the team Google Chat space. All field communications land in one place without phone calls or manual data entry. Features role-based authentication, voice dictation via Web Speech API, and Upstash Redis for note storage. Deployed as an installable PWA so supervisors can add it to their home screen like a native app.',
-    tech: ['Next.js', 'TypeScript', 'Upstash Redis', 'PostgreSQL', 'Zod', 'iron-session', 'PWA', 'Tailwind CSS'],
+      'Built for Long & DeLosa Construction Group to streamline field-to-office communication. Supervisors tap a mic button, speak job site notes in English or Spanish, and OpenAI Whisper transcribes the audio server-side via /api/transcribe before appending it to the notes textarea. Notes are sent directly to the team Google Chat space, keeping all field communications in one place without phone calls or manual data entry. Features role-based authentication, photo capture with client-side compression, Upstash Redis for note storage, and an installable PWA so supervisors can add it to their home screen like a native app.',
+    tech: ['Next.js', 'TypeScript', 'Whisper API', 'Upstash Redis', 'Zod', 'iron-session', 'PWA', 'Tailwind CSS'],
     github: 'https://github.com/cykj40/field-notes-assistant',
     live: '',
-    image: '/images/projects/field-notes-app.png',
+    image: '/images/projects/field-notes-app.jpeg',
     featured: false,
     category: 'productivity',
   },
