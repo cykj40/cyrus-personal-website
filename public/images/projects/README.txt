@@ -35,13 +35,13 @@ Add these files to this directory:
 - OR Dexcom developer portal/docs
 **Recommended**: Show both MCP and Dexcom branding if possible
 
-### 4. journalai.png
-**Project**: JournalAI
+### 4. health-journal-ai.jpg
+**Project**: Health Journal AI
 **What to show**:
-- Journal entry interface with text
-- Sentiment analysis visualization
-- Clean, minimal design
-**Recommended**: Show a sample journal entry with mood indicators
+- Health journaling interface with data visualizations
+- Conversational AI chat for querying health history
+- Clean, modern design
+**Recommended**: Show health metrics dashboard with AI insights
 
 ### 5. reelingit.png
 **Project**: ReelingIt Movie Platform

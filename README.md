@@ -73,7 +73,7 @@ Save screenshots to `public/images/projects/` with these names:
 - `tsheets-mcp.png` - TSheets MCP Server
 - `diabetes-ai.png` - Diabetes AI Assistant
 - `dexcom-mcp.png` - Dexcom MCP Server
-- `journalai.png` - JournalAI
+- `health-journal-ai.jpg` - Health Journal AI
 - `reelingit.png` - ReelingIt
 - `password-gen.png` - Password Generator
 

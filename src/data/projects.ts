@@ -40,28 +40,26 @@ export const projectsData: Project[] = [
   },
   {
     id: 'journalai',
-    title: 'JournalAI',
-    description: 'AI-powered journaling with real-time sentiment analysis and mood tracking',
+    title: 'Health Journal AI',
+    description: 'AI-powered health journaling with intelligent data analysis and personalized health insights',
     longDescription:
-      'Full-stack journaling platform with OpenAI-powered sentiment analysis. Features include real-time autosave rich text editor with emoji support and image uploads, AI-driven mood detection with sentiment scoring (-10 to +10 scale), interactive analytics dashboard with time-series visualizations, natural language Q&A over journal history using vector embeddings, and comprehensive data export (JSON/CSV/PDF with customizable filters). Built with Next.js 14 App Router, Drizzle ORM, and Clerk authentication.',
+      'Full-stack health journaling platform built to analyze personal health data using Claude AI and surface actionable insights. Log mood, sleep, activity, vitals, and nutrition — then let the AI identify patterns, flag anomalies, and recommend improvements. Features a conversational chat interface for querying your health history in plain English, time-series visualizations, and AI-driven health scoring. Currently being rebuilt with Claude as the core AI layer for deeper reasoning and more nuanced health analysis. Built with Next.js 14 App Router, Drizzle ORM, and Clerk authentication.',
     tech: [
       'Next.js',
       'TypeScript',
       'React',
-      'OpenAI API',
-      'LangChain',
+      'Claude API',
       'PostgreSQL',
       'Drizzle ORM',
       'Clerk',
-      'TipTap',
       'Recharts',
       'Tailwind CSS'
     ],
     github: 'https://github.com/cykj40/journal-ai-app',
-    live: 'journal-ai-app-eta.vercel.app', // Verify this URL or replace with actual deployment
-    image: '/images/projects/journalai.png',
-    featured: true, // Consider making this featured - it's production-grade
-    category: 'productivity',
+    live: 'https://journal-ai-app-eta.vercel.app',
+    image: '/images/projects/health-journal-ai.jpg',
+    featured: true,
+    category: 'health',
   },
   {
     id: 'reelingit',

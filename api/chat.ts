@@ -19,7 +19,7 @@ I am a systems-driven software developer focused on usefulness, correctness, and
 ## Featured Projects
 1. **Personal Diabetes AI Tracker**: Integrates Dexcom CGM data with AI for holistic glucose management
 2. **TSheets MCP Server**: Production MCP server reducing manual timesheet processing by 90%
-3. **JournalAI**: Full-stack journaling platform with AI sentiment analysis and vector search
+3. **Health Journal AI**: Full-stack health journaling platform with Claude AI analysis and personalized health insights
 4. **Dexcom MCP Server**: OAuth2-enabled MCP server for glucose monitoring data
 
 ## Professional Experience

@@ -67,12 +67,12 @@ Eliminated approximately 6 hours of weekly manual data entry. Aggregates, format
 
 ---
 
-### JournalAI
-Full-stack journaling platform with AI-powered sentiment analysis. Features real-time autosave rich text editor, mood detection with sentiment scoring (-10 to +10 scale), interactive analytics dashboard, and natural language Q&A over journal history using vector embeddings.
+### Health Journal AI
+Full-stack health journaling platform built to analyze personal health data using Claude AI and surface actionable insights. Log mood, sleep, activity, vitals, and nutrition — then let the AI identify patterns, flag anomalies, and recommend improvements. Features a conversational chat interface for querying your health history in plain English, time-series visualizations, and AI-driven health scoring.
 
-Turns reflection into actionable insight by identifying recurring mood patterns and emotional triggers.
+Currently being rebuilt with Claude as the core AI layer for deeper reasoning and more nuanced health analysis.
 
-**Tech**: Next.js 14, TypeScript, OpenAI API, LangChain, PostgreSQL, Drizzle ORM, Clerk auth, TipTap editor, Recharts
+**Tech**: Next.js 14, TypeScript, Claude API, PostgreSQL, Drizzle ORM, Clerk, Recharts, Tailwind CSS
 
 **GitHub**: https://github.com/cykj40/journal-ai-app
 **Live**: https://journal-ai-app-eta.vercel.app
@@ -301,7 +301,7 @@ GUIDELINES:
 
 TOPICS TO HANDLE WELL:
 - "What does Cyrus do?" → Full-stack developer, AI automation specialist, MCP server development
-- "What projects has he built?" → Diabetes AI Tracker, TSheets MCP, JournalAI, etc.
+- "What projects has he built?" → Diabetes AI Tracker, TSheets MCP, Health Journal AI, etc.
 - "What's his background?" → Self-taught, bootcamp, continuous learning, former stockbroker
 - "Why should I hire him?" → Real systems, real results, discipline, accountability
 - "What's he looking for?" → Real problems, competent teams, systems with accountability
