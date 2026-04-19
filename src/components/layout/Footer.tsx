@@ -1,4 +1,5 @@
 import { Github, Linkedin, Mail } from 'lucide-react';
+import { Link } from '@tanstack/react-router';
 
 const socialLinks = [
   { icon: Github, href: 'https://github.com/cykj40', label: 'GitHub' },
@@ -46,6 +47,11 @@ export const Footer = () => {
                 <a href="#contact" className="hover:text-forest-600">
                   Contact
                 </a>
+              </li>
+              <li>
+                <Link to="/resume" className="hover:text-forest-600">
+                  Resume
+                </Link>
               </li>
             </ul>
           </div>

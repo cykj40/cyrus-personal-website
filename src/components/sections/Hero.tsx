@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail, FileText } from 'lucide-react';
+import { Link } from '@tanstack/react-router';
 import { Button } from '@/components/ui/Button';
 import { scrollToSection } from '@/lib/utils';
 
@@ -43,6 +44,12 @@ export const Hero = () => {
               <Button variant="outline" size="lg" onClick={() => scrollToSection('contact')}>
                 Get In Touch
               </Button>
+              <Link to="/resume">
+                <Button variant="outline" size="lg">
+                  <FileText className="h-5 w-5 mr-2" />
+                  Resume
+                </Button>
+              </Link>
             </div>
 
             {/* Social Links */}

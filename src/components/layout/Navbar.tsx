@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from '@tanstack/react-router';
 import { scrollToSection } from '@/lib/utils';
 
 const navItems = [
@@ -24,12 +25,9 @@ export const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <button
-            onClick={() => handleNavClick('hero')}
-            className="text-xl font-bold text-forest-700 hover:text-forest-800"
-          >
+          <Link to="/" className="text-xl font-bold text-forest-700 hover:text-forest-800 transition-colors">
             Cyrus Khiabani
-          </button>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-8 md:flex">
@@ -42,6 +40,12 @@ export const Navbar = () => {
                 {item.label}
               </button>
             ))}
+            <Link
+              to="/resume"
+              className="inline-flex items-center rounded-lg bg-forest-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-forest-700 transition-colors"
+            >
+              Resume
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -75,6 +79,13 @@ export const Navbar = () => {
                     {item.label}
                   </button>
                 ))}
+                <Link
+                  to="/resume"
+                  onClick={() => setIsOpen(false)}
+                  className="inline-flex items-center justify-center rounded-lg bg-forest-600 px-4 py-2 text-base font-medium text-white hover:bg-forest-700 transition-colors"
+                >
+                  Resume
+                </Link>
               </div>
             </div>
           </motion.div>
