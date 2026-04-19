@@ -25,7 +25,12 @@
       "Bash(vercel dev:*)",
       "Bash(timeout 5 bash:*)",
       "Bash(timeout:*)",
-      "Bash(timeout 30 bash:*)"
+      "Bash(timeout 30 bash:*)",
+      "Bash(node *)",
+      "Bash(npm install *)",
+      "Bash(pnpm approve-builds *)",
+      "Bash(PUPPETEER_SKIP_DOWNLOAD=true pnpm add -D puppeteer)",
+      "Bash(npx playwright *)"
     ],
     "deny": [],
     "ask": []
