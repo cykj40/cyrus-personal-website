@@ -31,7 +31,7 @@ export const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="text-xl font-bold text-forest-700 hover:text-forest-800 transition-colors">
+          <Link to="/" search={{ scrollTo: '' }} className="text-xl font-bold text-forest-700 hover:text-forest-800 transition-colors">
             Cyrus Khiabani
           </Link>
 

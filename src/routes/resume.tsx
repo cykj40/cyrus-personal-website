@@ -36,6 +36,7 @@ function PageHeader() {
           <motion.div variants={fadeUp} className="mb-6">
             <Link
               to="/"
+              search={{ scrollTo: '' }}
               className="inline-flex items-center gap-2 text-sm text-earth-500 hover:text-forest-600 transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />
