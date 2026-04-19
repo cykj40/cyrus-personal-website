@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from '@tanstack/react-router';
+import { Link, useLocation, useNavigate } from '@tanstack/react-router';
 import { scrollToSection } from '@/lib/utils';
 
 const navItems = [
@@ -14,9 +14,15 @@ const navItems = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleNavClick = (href: string) => {
-    scrollToSection(href);
+    if (location.pathname === '/') {
+      scrollToSection(href);
+    } else {
+      navigate({ to: '/', search: { scrollTo: href } });
+    }
     setIsOpen(false);
   };
 
