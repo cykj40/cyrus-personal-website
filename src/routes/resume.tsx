@@ -120,12 +120,12 @@ function SummarySection() {
           </motion.h2>
           <motion.p variants={fadeUp} className="text-earth-600 leading-relaxed text-base">
             AI Engineer and Full-Stack Developer specializing in production-grade LLM integration,
-            MCP server development, and agentic workflow automation. Builds real tools that solve
-            real problems — from OAuth2-secured MCP servers connecting Claude AI to healthcare APIs
-            and construction billing systems, to full-stack health platforms with real-time CGM data
-            analysis. Proven 90% reduction in operational overhead through AI deployments built on
-            TypeScript, Next.js, Node.js, and PostgreSQL. Strong bias toward clean architecture,
-            type-safety, and systems that scale beyond prototypes.
+            MCP server development, and agentic workflow automation. Currently building T1Copilot —
+            an open-source, self-hosted multi-agent AI platform for Type 1 Diabetes management,
+            with 7 specialized agents reasoning over live CGM, workout, and metabolic data. Proven 90%
+            reduction in operational overhead through AI deployments built on TypeScript, Next.js,
+            Vercel AI SDK, and PostgreSQL. Strong bias toward clean architecture, type-safety, and
+            systems that scale beyond prototypes.
           </motion.p>
         </motion.div>
       </div>
@@ -273,8 +273,56 @@ function ProjectsSection() {
             Notable Projects
           </motion.h2>
 
+          {/* Featured: T1Copilot */}
+          <motion.div variants={fadeUp} className="mb-6">
+            <Card className="border-2 border-forest-200 bg-forest-50/40">
+              <CardContent className="pt-5 pb-5">
+                <div className="flex items-start justify-between gap-4 mb-2">
+                  <div>
+                    <span className="text-xs font-semibold text-forest-600 uppercase tracking-wide mb-1 block">
+                      Flagship Project
+                    </span>
+                    <h3 className="font-bold text-forest-900 text-lg">T1Copilot</h3>
+                  </div>
+                  <a
+                    href="https://github.com/cykj40/t1pilot"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-xs text-mountain-600 hover:text-mountain-700 shrink-0 transition-colors"
+                  >
+                    <Github className="h-3.5 w-3.5" />
+                    GitHub
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                </div>
+
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {['TypeScript', 'Next.js 15', 'Vercel AI SDK', 'LangGraph.ts', 'Claude API', 'MCP Protocol', 'Drizzle ORM', 'Neon Postgres', 'PGVector', 'Turso', 'Zod', 'Fly.io', 'Vitest', 'Laminar'].map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded-full bg-mountain-50 px-2.5 py-0.5 text-xs text-mountain-700"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <p className="text-sm text-earth-600 leading-relaxed">
+                  Production multi-agent AI system built for real-world T1D management. A 7-agent graph
+                  (Orchestrator, Glucose, Exercise, Modeling, Event Logger, Research, Insight) reasons over
+                  live Dexcom CGM readings, Peloton workout data, insulin events, and carb intake
+                  simultaneously. Built on Next.js 15, Vercel AI SDK streaming chat, LangGraph.ts, Drizzle
+                  ORM, Neon Postgres with PGVector, and two production MCP servers deployed on Fly.io.
+                  Implements a full HITL gate on all medical writes — no agent autonomously logs insulin or
+                  modifies parameters. Self-hosted BYOD architecture; each user owns their instance and
+                  their data.
+                </p>
+              </CardContent>
+            </Card>
+          </motion.div>
+
           <div className="space-y-4">
-            {projectsData.map((project) => (
+            {projectsData.filter((p) => p.id !== 't1copilot').map((project) => (
               <motion.div key={project.id} variants={fadeUp}>
                 <Card>
                   <CardContent className="pt-5 pb-5">
