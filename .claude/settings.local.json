@@ -31,7 +31,16 @@
       "Bash(pnpm approve-builds *)",
       "Bash(PUPPETEER_SKIP_DOWNLOAD=true pnpm add -D puppeteer)",
       "Bash(npx playwright *)",
-      "Bash(pnpm tsc *)"
+      "Bash(pnpm tsc *)",
+      "Bash(awk *)",
+      "Bash(pnpm dev *)",
+      "Read(//tmp/**)",
+      "Skill(run)",
+      "Bash(npx --yes playwright --version)",
+      "Read(//Users/cyruskhiabani/.cache/**)",
+      "Bash(mdfind \"kMDItemFSName == 'Google Chrome.app'\")",
+      "Bash(rm -f scripts-tmp-shot*.mjs)",
+      "Bash(pkill -f \"vite\")"
     ],
     "deny": [],
     "ask": []

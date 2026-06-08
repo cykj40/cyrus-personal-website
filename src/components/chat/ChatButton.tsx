@@ -1,40 +1,66 @@
 import { motion } from 'framer-motion';
-import { MessageCircle } from 'lucide-react';
 
 interface ChatButtonProps {
   onClick: () => void;
 }
 
-const buttonVariants = {
-  idle: { scale: 1 },
-  hover: { scale: 1.1 },
-  tap: { scale: 0.95 },
-};
-
-const pulseVariants = {
-  pulse: {
-    boxShadow: [
-      '0 0 0 0 rgba(45, 80, 22, 0.4)',
-      '0 0 0 12px rgba(45, 80, 22, 0)',
-    ],
-    transition: { duration: 1.5, repeat: Infinity },
-  },
-};
-
 export function ChatButton({ onClick }: ChatButtonProps) {
   return (
     <motion.button
       onClick={onClick}
-      variants={buttonVariants}
-      initial="idle"
-      whileHover="hover"
-      whileTap="tap"
-      className="fixed bottom-6 right-6 w-14 h-14 max-md:w-12 max-md:h-12 rounded-full bg-gradient-to-br from-forest-600 to-forest-700 text-white shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-forest-500/50 transition-shadow z-50 flex items-center justify-center"
+      whileHover={{ scale: 1.06 }}
+      whileTap={{ scale: 0.95 }}
+      className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2.5 border-none bg-transparent p-0 cursor-pointer focus:outline-none"
       aria-label="Open chat assistant"
-      aria-expanded={false}
     >
-      <motion.div variants={pulseVariants} animate="pulse" className="absolute inset-0 rounded-full" />
-      <MessageCircle className="w-6 h-6 max-md:w-5 max-md:h-5 relative z-10" />
+      {/* Speech bubble */}
+      <div className="speech-bubble">
+        Ask me about Cyrus ✦
+      </div>
+
+      {/* Robot button circle */}
+      <div className="robot-btn">
+        <svg
+          className="robot-svg"
+          viewBox="0 0 32 36"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <g className="body-bob">
+            {/* Head */}
+            <rect x="10" y="7" width="12" height="10" rx="2.5" fill="white" opacity="0.92" />
+            {/* Antenna stem */}
+            <line x1="16" y1="7" x2="16" y2="4.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.8" />
+            {/* Antenna tip */}
+            <circle cx="16" cy="3.5" r="1.5" fill="white" opacity="0.7" />
+            {/* Left eye */}
+            <g className="eye-blink" style={{ transformOrigin: '13px 13px' }}>
+              <circle cx="13" cy="13" r="2" fill="#3a6b24" />
+              <circle cx="13" cy="12.5" r="0.7" fill="white" opacity="0.9" />
+            </g>
+            {/* Right eye */}
+            <g className="eye-blink" style={{ transformOrigin: '19px 13px' }}>
+              <circle cx="19" cy="13" r="2" fill="#3a6b24" />
+              <circle cx="19" cy="12.5" r="0.7" fill="white" opacity="0.9" />
+            </g>
+            {/* Body */}
+            <rect x="8" y="18" width="16" height="11" rx="3" fill="white" opacity="0.92" />
+            {/* Smile */}
+            <path d="M13 23.5 Q16 25.5 19 23.5" stroke="#3a6b24" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+            {/* Left leg */}
+            <rect x="10" y="29" width="4" height="5" rx="1.5" fill="white" opacity="0.75" />
+            {/* Right leg */}
+            <rect x="18" y="29" width="4" height="5" rx="1.5" fill="white" opacity="0.75" />
+            {/* Left arm — waves */}
+            <g className="arm-wave">
+              <rect x="1" y="19" width="7" height="3" rx="1.5" fill="white" opacity="0.8" />
+            </g>
+            {/* Right arm — static */}
+            <rect x="24" y="19" width="7" height="3" rx="1.5" fill="white" opacity="0.8" />
+          </g>
+        </svg>
+      </div>
     </motion.button>
   );
 }
