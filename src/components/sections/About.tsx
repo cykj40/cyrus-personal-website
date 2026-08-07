@@ -19,7 +19,7 @@ export const About = () => {
               <img
                 src="/images/profile/cyrus-portfolio-picture-1.png"
                 alt="Cyrus Khiabani"
-                className="aspect-[4/5] h-full w-full object-cover"
+                className="aspect-[4/5] w-full object-cover"
               />
             </div>
           </motion.div>

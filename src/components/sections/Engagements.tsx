@@ -6,7 +6,7 @@ const engagements = [
   {
     title: 'Automation Audit',
     description:
-      'One week, fixed fee. I map your workflows, identify what’s automatable, and deliver a written build plan with effort estimates. You keep the plan whether or not we work together.',
+      "One week, fixed fee. I map your workflows, identify what's automatable, and deliver a written build plan with effort estimates. You keep the plan whether or not we work together.",
     price: '$3,500',
   },
   {
@@ -28,7 +28,7 @@ export const Engagements = () => {
     <section id="engagements" className="py-20">
       <div className="container mx-auto px-4">
         <SectionHeading
-          title="Ways to Work Together"
+          title="Engagements"
           subtitle="Start with a focused assessment, a defined build, or ongoing support."
         />
 
