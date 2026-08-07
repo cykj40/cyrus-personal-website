@@ -4,12 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation, useNavigate } from '@tanstack/react-router';
 import { scrollToSection } from '@/lib/utils';
 
-const navItems = [
-  { label: 'Home', href: 'hero' },
-  { label: 'About', href: 'about' },
-  { label: 'Projects', href: 'projects' },
+// Section links scroll on the homepage and route back to it from other pages.
+// NOTE: 'Work' targets the existing `projects` section for now; Phase 4 repoints
+// it to the case-study section.
+const sectionItems = [
   { label: 'Services', href: 'services' },
-  { label: 'Contact', href: 'contact' },
+  { label: 'Work', href: 'projects' },
 ];
 
 export const Navbar = () => {
@@ -17,7 +17,7 @@ export const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleNavClick = (href: string) => {
+  const handleSectionClick = (href: string) => {
     if (location.pathname === '/') {
       scrollToSection(href);
     } else {
@@ -37,20 +37,26 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-8 md:flex">
-            {navItems.map((item) => (
+            {sectionItems.map((item) => (
               <button
                 key={item.href}
-                onClick={() => handleNavClick(item.href)}
+                onClick={() => handleSectionClick(item.href)}
                 className="text-sm font-medium text-earth-600 transition-colors hover:text-forest-600"
               >
                 {item.label}
               </button>
             ))}
             <Link
-              to="/resume"
+              to="/engineering"
+              className="text-sm font-medium text-earth-600 transition-colors hover:text-forest-600"
+            >
+              Engineering
+            </Link>
+            <Link
+              to="/contact"
               className="inline-flex items-center rounded-lg bg-forest-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-forest-700 transition-colors"
             >
-              Resume
+              Book a call
             </Link>
           </div>
 
@@ -76,21 +82,28 @@ export const Navbar = () => {
           >
             <div className="container mx-auto px-4 py-4">
               <div className="flex flex-col gap-4">
-                {navItems.map((item) => (
+                {sectionItems.map((item) => (
                   <button
                     key={item.href}
-                    onClick={() => handleNavClick(item.href)}
+                    onClick={() => handleSectionClick(item.href)}
                     className="text-left text-base font-medium text-earth-600 hover:text-forest-600"
                   >
                     {item.label}
                   </button>
                 ))}
                 <Link
-                  to="/resume"
+                  to="/engineering"
+                  onClick={() => setIsOpen(false)}
+                  className="text-left text-base font-medium text-earth-600 hover:text-forest-600"
+                >
+                  Engineering
+                </Link>
+                <Link
+                  to="/contact"
                   onClick={() => setIsOpen(false)}
                   className="inline-flex items-center justify-center rounded-lg bg-forest-600 px-4 py-2 text-base font-medium text-white hover:bg-forest-700 transition-colors"
                 >
-                  Resume
+                  Book a call
                 </Link>
               </div>
             </div>
