@@ -48,7 +48,11 @@
       "Bash(xxd)",
       "Bash(kill %1)",
       "Bash(pkill -f \"vite preview\")",
-      "Bash(grep -nA2 -B2 'bottom-6 left-6')"
+      "Bash(grep -nA2 -B2 'bottom-6 left-6')",
+      "Bash(gh auth *)",
+      "Bash(gh repo *)",
+      "Bash(gh api *)",
+      "Bash(grep -iE '\\\\.\\(ts|js\\)$')"
     ],
     "deny": [],
     "ask": []
