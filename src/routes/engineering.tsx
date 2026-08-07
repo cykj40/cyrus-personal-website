@@ -445,11 +445,15 @@ function EducationSection() {
 }
 
 function StickyDownload() {
+  // Pinned bottom-LEFT so it clears the chat button (bottom-right, z-50).
+  // Hidden below md: at 24px from the bottom its lower edge intrudes into the
+  // iOS home-indicator / Android gesture-nav safe area, so on mobile we rely on
+  // the inline "Download PDF" button in the page header instead.
   return (
     <a
       href="/resume/Cyrus_Khiabani_AI_Engineer_Resume.pdf"
       download
-      className="fixed bottom-6 right-6 z-40"
+      className="hidden md:block fixed bottom-6 left-6 z-40"
       aria-label="Download resume PDF"
     >
       <Button size="md" className="shadow-lg shadow-forest-900/20">

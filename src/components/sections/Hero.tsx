@@ -1,8 +1,15 @@
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail, FileText } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import { Link } from '@tanstack/react-router';
 import { Button } from '@/components/ui/Button';
 import { scrollToSection } from '@/lib/utils';
+
+// Typographic proof strip — no cards, no icons.
+const proofStats = [
+  { stat: '90% less manual billing work', label: 'construction firm, 50+ field users' },
+  { stat: '5 production MCP servers', label: 'shipped and running on real infrastructure' },
+  { stat: '30 min → 5 min', label: 'timesheet-to-invoice cycle' },
+];
 
 export const Hero = () => {
   return (
@@ -21,64 +28,41 @@ export const Hero = () => {
           >
             <div className="mb-4 inline-block">
               <span className="rounded-full bg-forest-100 px-4 py-1.5 text-sm font-medium text-forest-700">
-                Full-Stack & Agentic AI Developer
+                AI integration &amp; automation
               </span>
             </div>
-            <h1 className="mb-6 text-5xl font-bold leading-tight text-forest-900 sm:text-6xl lg:text-7xl">
-              Building Intelligent Systems
-              <br />
-              <span className="text-gradient-mountain">That Actually Work</span>
+            <h1 className="mb-6 text-4xl font-bold leading-tight text-forest-900 sm:text-5xl lg:text-6xl">
+              AI that plugs into{' '}
+              <span className="text-gradient-mountain">the software you already run.</span>
             </h1>
             <p className="mb-8 max-w-xl text-lg text-earth-500 sm:text-xl">
-              Building production systems for environments where reliability matters construction operations and personal health. Work spans workflow automation, real-time health integrations, and developer tooling, with a constant focus on clean architecture and real-world impact.
-            </p>
-            <p className="mb-8 max-w-xl text-lg text-earth-500 sm:text-xl">
-              Whether building MCP servers for Claude Desktop, integrating Dexcom CGM data, or creating full-stack web applications, discipline and precision drive every project.
+              I build custom agents, MCP servers, and assistants that connect Claude and GPT to
+              your real tools — QuickBooks, Procore, your database, your internal APIs. Not demos.
+              Systems that run in production and get used every week.
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4">
-              <Button size="lg" onClick={() => scrollToSection('projects')}>
-                View My Work
-              </Button>
-              <Button variant="outline" size="lg" onClick={() => scrollToSection('contact')}>
-                Get In Touch
-              </Button>
-              <Link to="/resume">
-                <Button variant="outline" size="lg">
-                  <FileText className="h-5 w-5 mr-2" />
-                  Resume
-                </Button>
+              <Link to="/contact">
+                <Button size="lg">Book a project call</Button>
               </Link>
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => scrollToSection('projects')}
+              >
+                See case studies
+              </Button>
             </div>
 
-            {/* Social Links */}
-            <div className="mt-8 flex gap-4">
-              <a
-                href="https://github.com/cykj40"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-earth-500 transition-colors hover:text-forest-600"
-                aria-label="GitHub"
-              >
-                <Github className="h-6 w-6" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/cyrus-jalili-khiabani-44605b163"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-earth-500 transition-colors hover:text-forest-600"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-6 w-6" />
-              </a>
-              <a
-                href="mailto:cyrus@cyruskhiabani.com"
-                className="text-earth-500 transition-colors hover:text-forest-600"
-                aria-label="Email"
-              >
-                <Mail className="h-6 w-6" />
-              </a>
+            {/* Proof strip */}
+            <div className="mt-10 flex flex-wrap gap-x-8 gap-y-5 border-t border-earth-400/20 pt-8">
+              {proofStats.map((s) => (
+                <div key={s.stat} className="max-w-[15rem]">
+                  <p className="text-lg font-bold text-forest-800 sm:text-xl">{s.stat}</p>
+                  <p className="mt-1 text-sm text-earth-500">{s.label}</p>
+                </div>
+              ))}
             </div>
           </motion.div>
 
@@ -94,7 +78,7 @@ export const Hero = () => {
               <div className="absolute inset-0 overflow-hidden rounded-2xl bg-gradient-to-br from-forest-100 to-mountain-100 shadow-2xl">
                 <img
                   src="/images/profile/cyrus-portfolio-picture-1.png"
-                  alt="Cyrus Jalili Khiabani - Full-Stack Developer"
+                  alt="Cyrus Jalili Khiabani"
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -117,7 +101,7 @@ export const Hero = () => {
         <button
           onClick={() => scrollToSection('about')}
           className="flex flex-col items-center gap-2 text-earth-400 transition-colors hover:text-forest-600"
-          aria-label="Scroll to About section"
+          aria-label="Scroll to next section"
         >
           <span className="text-sm">Scroll Down</span>
           <ArrowDown className="h-5 w-5 animate-bounce" />

@@ -43,7 +43,12 @@
       "Bash(pkill -f \"vite\")",
       "Bash(pnpm exec *)",
       "Bash(git --no-pager diff --stat)",
-      "Bash(git *)"
+      "Bash(git *)",
+      "Bash(break)",
+      "Bash(xxd)",
+      "Bash(kill %1)",
+      "Bash(pkill -f \"vite preview\")",
+      "Bash(grep -nA2 -B2 'bottom-6 left-6')"
     ],
     "deny": [],
     "ask": []
