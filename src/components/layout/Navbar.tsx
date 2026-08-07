@@ -5,11 +5,9 @@ import { Link, useLocation, useNavigate } from '@tanstack/react-router';
 import { scrollToSection } from '@/lib/utils';
 
 // Section links scroll on the homepage and route back to it from other pages.
-// NOTE: 'Work' targets the existing `projects` section for now; Phase 4 repoints
-// it to the case-study section.
 const sectionItems = [
   { label: 'Services', href: 'services' },
-  { label: 'Work', href: 'projects' },
+  { label: 'Work', href: 'work' },
 ];
 
 export const Navbar = () => {

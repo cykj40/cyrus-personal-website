@@ -130,7 +130,7 @@ export const Hero = () => {
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => scrollToSection('projects')}
+                onClick={() => scrollToSection('work')}
               >
                 See case studies
               </Button>
@@ -169,7 +169,7 @@ export const Hero = () => {
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <button
-          onClick={() => scrollToSection('about')}
+          onClick={() => scrollToSection('services')}
           className="flex flex-col items-center gap-2 text-earth-400 transition-colors hover:text-forest-600"
           aria-label="Scroll to next section"
         >

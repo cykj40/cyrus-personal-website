@@ -33,7 +33,7 @@ const services = [
     cta: 'Discuss an assistant',
     service: 'assistant',
   },
-];
+] as const;
 
 export const Services = () => {
   return (

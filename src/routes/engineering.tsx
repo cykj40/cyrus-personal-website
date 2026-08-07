@@ -256,6 +256,9 @@ function ExperienceSection() {
   );
 }
 
+const caseStudyProjectIds = new Set(['tsheets-mcp', 'field-notes', 't1copilot']);
+const engineeringProjects = projectsData.filter((project) => !caseStudyProjectIds.has(project.id));
+
 function ProjectsSection() {
   return (
     <section className="py-14 bg-forest-50/40">
@@ -270,97 +273,36 @@ function ProjectsSection() {
             variants={fadeUp}
             className="text-2xl font-bold text-forest-900 mb-8 pb-3 border-b-2 border-forest-100"
           >
-            Notable Projects
+            More Engineering Projects
           </motion.h2>
 
-          {/* Featured: T1Copilot */}
-          <motion.div variants={fadeUp} className="mb-6">
-            <Card className="border-2 border-forest-200 bg-forest-50/40">
-              <CardContent className="pt-5 pb-5">
-                <div className="flex items-start justify-between gap-4 mb-2">
+          <motion.div variants={fadeUp}>
+            <Card className="divide-y divide-earth-400/20 p-0">
+              {engineeringProjects.map((project) => (
+                <div
+                  key={project.id}
+                  className="flex flex-col gap-2 p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-6"
+                >
                   <div>
-                    <span className="text-xs font-semibold text-forest-600 uppercase tracking-wide mb-1 block">
-                      Flagship Project
-                    </span>
-                    <h3 className="font-bold text-forest-900 text-lg">T1Copilot</h3>
+                    <h3 className="font-bold text-forest-900">{project.title}</h3>
+                    <p className="mt-1 text-sm text-earth-600">{project.description}</p>
                   </div>
-                  <a
-                    href="https://github.com/cykj40/t1pilot"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-xs text-mountain-600 hover:text-mountain-700 shrink-0 transition-colors"
-                  >
-                    <Github className="h-3.5 w-3.5" />
-                    GitHub
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
-                </div>
-
-                <div className="flex flex-wrap gap-1.5 mb-3">
-                  {['TypeScript', 'Next.js 15', 'Vercel AI SDK', 'LangGraph.ts', 'Claude API', 'MCP Protocol', 'Drizzle ORM', 'Neon Postgres', 'PGVector', 'Turso', 'Zod', 'Fly.io', 'Vitest', 'Laminar'].map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-full bg-mountain-50 px-2.5 py-0.5 text-xs text-mountain-700"
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex shrink-0 items-center gap-1 text-sm text-mountain-600 transition-colors hover:text-mountain-700"
                     >
-                      {tech}
-                    </span>
-                  ))}
+                      <Github className="h-4 w-4" />
+                      Repository
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  )}
                 </div>
-
-                <p className="text-sm text-earth-600 leading-relaxed">
-                  Production multi-agent AI system built for real-world T1D management. A 7-agent graph
-                  (Orchestrator, Glucose, Exercise, Modeling, Event Logger, Research, Insight) reasons over
-                  live Dexcom CGM readings, Peloton workout data, insulin events, and carb intake
-                  simultaneously. Built on Next.js 15, Vercel AI SDK streaming chat, LangGraph.ts, Drizzle
-                  ORM, Neon Postgres with PGVector, and two production MCP servers deployed on Fly.io.
-                  Implements a full HITL gate on all medical writes — no agent autonomously logs insulin or
-                  modifies parameters. Self-hosted BYOD architecture; each user owns their instance and
-                  their data.
-                </p>
-              </CardContent>
+              ))}
             </Card>
           </motion.div>
-
-          <div className="space-y-4">
-            {projectsData.filter((p) => p.id !== 't1copilot').map((project) => (
-              <motion.div key={project.id} variants={fadeUp}>
-                <Card>
-                  <CardContent className="pt-5 pb-5">
-                    <div className="flex items-start justify-between gap-4 mb-2">
-                      <h3 className="font-bold text-forest-900 text-base">{project.title}</h3>
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-1 text-xs text-mountain-600 hover:text-mountain-700 shrink-0 transition-colors"
-                        >
-                          <Github className="h-3.5 w-3.5" />
-                          GitHub
-                          <ExternalLink className="h-3 w-3" />
-                        </a>
-                      )}
-                    </div>
-
-                    <div className="flex flex-wrap gap-1.5 mb-3">
-                      {project.tech.map((tech) => (
-                        <span
-                          key={tech}
-                          className="rounded-full bg-mountain-50 px-2.5 py-0.5 text-xs text-mountain-700"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-
-                    <p className="text-sm text-earth-600 leading-relaxed">
-                      {project.longDescription}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
         </motion.div>
       </div>
     </section>

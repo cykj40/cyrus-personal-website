@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,17 +8,47 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 
+export const CONTACT_SERVICE_VALUES = ['automation', 'mcp', 'assistant'] as const;
+export type ContactService = (typeof CONTACT_SERVICE_VALUES)[number];
+
+const contactServiceOptions: { value: ContactService; label: string }[] = [
+  { value: 'automation', label: 'Workflow Automation & AI Agents' },
+  { value: 'mcp', label: 'System & MCP Integrations' },
+  { value: 'assistant', label: 'AI Assistants & Chatbots' },
+];
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
+  service: z.enum(CONTACT_SERVICE_VALUES).optional(),
   subject: z.string().min(5, 'Subject must be at least 5 characters'),
   message: z.string().min(20, 'Message must be at least 20 characters'),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
-export const Contact = () => {
+interface ContactProps {
+  service?: ContactService;
+  showSchedulingSlot?: boolean;
+}
+
+const SchedulingSlot = () => {
+  return (
+    <>
+      {/* TODO: replace with Cal.com or Savvycal embed — swap this block for the embed's iframe/script when ready */}
+      <Card>
+        <CardContent className="py-5">
+          <p className="font-medium text-forest-900">Schedule a call</p>
+          <p className="mt-1 text-sm text-earth-600">
+            Direct scheduling is coming soon. For now, send the form and I’ll follow up with times.
+          </p>
+        </CardContent>
+      </Card>
+    </>
+  );
+};
+
+export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
@@ -27,9 +57,15 @@ export const Contact = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
+    defaultValues: { service },
   });
+
+  useEffect(() => {
+    setValue('service', service);
+  }, [service, setValue]);
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
@@ -44,7 +80,7 @@ export const Contact = () => {
 
       if (response.ok) {
         setSubmitStatus('success');
-        reset();
+        reset({ service });
       } else {
         setSubmitStatus('error');
       }
@@ -80,6 +116,8 @@ export const Contact = () => {
                 tech—reach out!
               </p>
             </div>
+
+            {showSchedulingSlot && <SchedulingSlot />}
 
             <div className="space-y-4">
               <Card>
@@ -154,6 +192,33 @@ export const Contact = () => {
                     />
                     {errors.email && (
                       <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                    )}
+                  </div>
+
+                  {/* Service */}
+                  <div>
+                    <label
+                      htmlFor="service"
+                      className="mb-1 block text-sm font-medium text-forest-900"
+                    >
+                      What do you need?
+                    </label>
+                    <select
+                      id="service"
+                      {...register('service', {
+                        setValueAs: (value) => value || undefined,
+                      })}
+                      className="w-full rounded-lg border border-earth-400/30 bg-white px-4 py-2 focus:border-forest-500 focus:outline-none focus:ring-2 focus:ring-forest-500/20"
+                    >
+                      <option value="">Select a service</option>
+                      {contactServiceOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.service && (
+                      <p className="mt-1 text-sm text-red-600">{errors.service.message}</p>
                     )}
                   </div>
 

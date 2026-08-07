@@ -4,6 +4,7 @@ import { Hero }     from '@/components/sections/Hero';
 import { About }    from '@/components/sections/About';
 import { Projects } from '@/components/sections/Projects';
 import { Services } from '@/components/sections/Services';
+import { Engagements } from '@/components/sections/Engagements';
 import { Contact }  from '@/components/sections/Contact';
 import { scrollToSection } from '@/lib/utils';
 
@@ -26,9 +27,10 @@ function HomePage() {
   return (
     <>
       <Hero />
-      <About />
-      <Projects />
       <Services />
+      <Projects />
+      <Engagements />
+      <About />
       <Contact />
     </>
   );

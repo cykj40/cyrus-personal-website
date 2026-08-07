@@ -34,7 +34,7 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/" search={{ scrollTo: 'projects' }} className="hover:text-forest-600">
+                <Link to="/" search={{ scrollTo: 'work' }} className="hover:text-forest-600">
                   Work
                 </Link>
               </li>
