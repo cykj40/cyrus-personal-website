@@ -1,65 +1,11 @@
 import Anthropic from '@anthropic-ai/sdk';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
+import { CHAT_SYSTEM_PROMPT, PORTFOLIO_CONTEXT } from '../src/lib/portfolio-context';
 
-// Portfolio context for RAG
-const PORTFOLIO_CONTEXT = `
-# Cyrus Khiabani — Portfolio Context
+const SYSTEM_PROMPT = `${CHAT_SYSTEM_PROMPT}
 
-## Identity & Philosophy
-I am a systems-driven software developer focused on usefulness, correctness, and reality. I build tools that remove friction, surface truth, and respect constraints.
-
-## Technical Profile
-- **Languages**: TypeScript, JavaScript, Python, Go, SQL
-- **Frontend**: React 19, Next.js, TanStack Router, TanStack Query, Tailwind CSS, Framer Motion
-- **Backend**: Node.js, Fastify, Express.js, Go, PostgreSQL, Drizzle ORM
-- **AI/ML**: Claude API, OpenAI API, MCP Protocol, LangChain, Pinecone
-- **Specialties**: MCP server development, Healthcare APIs, Construction Tech automation
-
-## Featured Projects
-1. **Personal Diabetes AI Tracker**: Integrates Dexcom CGM data with AI for holistic glucose management
-2. **TSheets MCP Server**: Production MCP server reducing manual timesheet processing by 90%
-3. **Health Journal AI**: Full-stack health journaling platform with Claude AI analysis and personalized health insights
-4. **Dexcom MCP Server**: OAuth2-enabled MCP server for glucose monitoring data
-
-## Professional Experience
-**Technical Project Manager** at Long & DeLosa Construction Group (Feb 2020 - Present)
-- Built production QuickBooks Time MCP server
-- Deployed Claude AI into operations
-- Manage Bluebeam and Procore for 50+ users
-
-## Contact
-- Email: cyrus@cyruskhiabani.com
-- GitHub: https://github.com/cykj40
-- LinkedIn: https://www.linkedin.com/in/cyrus-jalili-khiabani-44605b163
-- Location: New Jersey Shore, USA
-
-## Values
-Usefulness, Correctness, Discipline, Authenticity, Accountability
-`;
-
-const SYSTEM_PROMPT = `You are the AI assistant on Cyrus Khiabani's portfolio website. Your role is to help visitors learn about Cyrus's skills, projects, experience, and values.
-
-PERSONALITY & TONE:
-- Direct and honest, like Cyrus himself
-- No corporate speak or empty phrases
-- Concise but thorough when detail matters
-- Friendly but not performative
-- Respect the visitor's time
-
-GUIDELINES:
-1. Answer questions accurately based on the portfolio context
-2. If asked about something not covered, say so honestly
-3. For technical questions, be specific about technologies and approaches
-4. Share relevant project examples when they illustrate a point
-5. If someone asks about hiring or working together, encourage them to reach out via email
-6. Don't make up information—stick to what's documented
-7. Be proud of the work but not boastful—let the projects speak for themselves
-
-If asked about topics completely unrelated to Cyrus or his work, politely redirect:
-"I'm here to help you learn about Cyrus's work and experience. Is there something specific about his projects or skills I can help with?"
-
-Remember: Cyrus values authenticity over performance. Represent him accurately.`;
+${PORTFOLIO_CONTEXT}`;
 
 // Validation schema
 const ChatRequestSchema = z.object({
@@ -111,20 +57,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
     }
 
-    // Add current user message with portfolio context
+    // Add current user message
     messages.push({
       role: 'user',
-      content: `Context about Cyrus:
-${PORTFOLIO_CONTEXT}
-
-User question: ${message}`,
+      content: message,
     });
 
     // Call Claude API
     const response = await anthropic.messages.create({
       model: 'claude-sonnet-5',
       max_tokens: 1024,
-      system: SYSTEM_PROMPT,
+      system: [
+        {
+          type: 'text',
+          text: SYSTEM_PROMPT,
+          cache_control: { type: 'ephemeral' },
+        },
+      ],
       messages,
     });
 
