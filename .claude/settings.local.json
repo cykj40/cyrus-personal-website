@@ -40,7 +40,12 @@
       "Read(//Users/cyruskhiabani/.cache/**)",
       "Bash(mdfind \"kMDItemFSName == 'Google Chrome.app'\")",
       "Bash(rm -f scripts-tmp-shot*.mjs)",
-      "Bash(pkill -f \"vite\")"
+      "Bash(pkill -f \"vite\")",
+      "Bash(git tag *)",
+      "Bash(git push *)",
+      "Bash(git ls-remote *)",
+      "Bash(git reset *)",
+      "Bash(git fetch *)"
     ],
     "deny": [],
     "ask": []
