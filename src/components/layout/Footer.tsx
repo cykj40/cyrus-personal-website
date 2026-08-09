@@ -18,9 +18,7 @@ export const Footer = () => {
           <div>
             <h3 className="mb-2 text-lg font-bold text-forest-900">Cyrus Khiabani</h3>
             <p className="text-sm text-earth-500">
-              Full-Stack Developer & AI Specialist
-              <br />
-              Building systems that work.
+              AI agents, MCP integrations, and automation
             </p>
           </div>
 

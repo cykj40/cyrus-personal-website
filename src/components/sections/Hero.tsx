@@ -1,6 +1,7 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import { Link } from '@tanstack/react-router';
+import { track } from '@vercel/analytics/react';
 import { Button } from '@/components/ui/Button';
 import { scrollToSection } from '@/lib/utils';
 
@@ -93,6 +94,8 @@ function ToolCallPane() {
 }
 
 export const Hero = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section
       id="hero"
@@ -102,7 +105,7 @@ export const Hero = () => {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left Column - Text Content */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="flex flex-col justify-center"
@@ -124,7 +127,7 @@ export const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4">
-              <Link to="/contact">
+              <Link to="/contact" onClick={() => track('cta_hero_book')}>
                 <Button size="lg">Book a project call</Button>
               </Link>
               <Button
@@ -151,7 +154,7 @@ export const Hero = () => {
               Hidden below md (cramped at 375px); on md–lg it stacks below the
               copy, at lg+ it sits in the second column. */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="hidden items-center justify-center md:flex"
@@ -163,7 +166,7 @@ export const Hero = () => {
 
       {/* Scroll Indicator */}
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={shouldReduceMotion ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.6 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
@@ -174,7 +177,7 @@ export const Hero = () => {
           aria-label="Scroll to next section"
         >
           <span className="text-sm">Scroll Down</span>
-          <ArrowDown className="h-5 w-5 animate-bounce" />
+          <ArrowDown className="h-5 w-5 animate-bounce motion-reduce:animate-none" />
         </button>
       </motion.div>
     </section>

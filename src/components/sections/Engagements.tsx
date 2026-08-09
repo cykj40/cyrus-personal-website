@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card';
 
@@ -24,6 +24,8 @@ const engagements = [
 ];
 
 export const Engagements = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section id="engagements" className="py-20">
       <div className="container mx-auto px-4">
@@ -36,7 +38,7 @@ export const Engagements = () => {
           {engagements.map((engagement, index) => (
             <motion.div
               key={engagement.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}

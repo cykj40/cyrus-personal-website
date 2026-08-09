@@ -7,7 +7,7 @@
     {
       "source": "/resume",
       "destination": "/engineering",
-      "permanent": true
+      "statusCode": 301
     }
   ],
   "rewrites": [

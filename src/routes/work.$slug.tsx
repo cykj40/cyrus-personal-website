@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { caseStudies } from '@/data/caseStudies';
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 
 export const Route = createFileRoute('/work/$slug')({
   component: CaseStudyPage,
@@ -20,6 +21,16 @@ const stagger = {
 function CaseStudyPage() {
   const { slug } = Route.useParams();
   const caseStudy = caseStudies.find((entry) => entry.slug === slug);
+  const shouldReduceMotion = useReducedMotion();
+  const pageTitle = caseStudy ? `${caseStudy.title} | Cyrus Khiabani` : 'Case Study | Cyrus Khiabani';
+  const pageFadeUp = shouldReduceMotion
+    ? { hidden: { opacity: 1, y: 0 }, show: { opacity: 1, y: 0 } }
+    : fadeUp;
+  const pageStagger = shouldReduceMotion
+    ? { hidden: {}, show: {} }
+    : stagger;
+
+  useDocumentTitle(pageTitle);
 
   if (!caseStudy) {
     return (
@@ -44,12 +55,12 @@ function CaseStudyPage() {
       <section className="bg-gradient-to-br from-forest-50 via-white to-mountain-50 bg-topographic pb-16 pt-28">
         <div className="container mx-auto px-4">
           <motion.div
-            variants={stagger}
+            variants={pageStagger}
             initial="hidden"
             animate="show"
             className="mx-auto max-w-3xl"
           >
-            <motion.div variants={fadeUp} className="mb-6">
+            <motion.div variants={pageFadeUp} className="mb-6">
               <Link
                 to="/"
                 search={{ scrollTo: 'work' }}
@@ -61,13 +72,13 @@ function CaseStudyPage() {
             </motion.div>
 
             <motion.p
-              variants={fadeUp}
+              variants={pageFadeUp}
               className="mb-3 text-sm font-medium text-mountain-600"
             >
               {caseStudy.client}
             </motion.p>
             <motion.h1
-              variants={fadeUp}
+              variants={pageFadeUp}
               className="text-4xl font-bold leading-tight text-forest-900 sm:text-5xl"
             >
               {caseStudy.title}
@@ -78,27 +89,27 @@ function CaseStudyPage() {
 
       <section className="bg-white py-16">
         <motion.div
-          variants={stagger}
+          variants={pageStagger}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           className="container mx-auto max-w-3xl space-y-12 px-4"
         >
-          <motion.div variants={fadeUp}>
+          <motion.div variants={pageFadeUp}>
             <h2 className="mb-5 border-b-2 border-forest-100 pb-3 text-2xl font-bold text-forest-900">
               Problem
             </h2>
             <p className="leading-relaxed text-earth-600">{caseStudy.problem}</p>
           </motion.div>
 
-          <motion.div variants={fadeUp}>
+          <motion.div variants={pageFadeUp}>
             <h2 className="mb-5 border-b-2 border-forest-100 pb-3 text-2xl font-bold text-forest-900">
               Build
             </h2>
             <p className="leading-relaxed text-earth-600">{caseStudy.build}</p>
           </motion.div>
 
-          <motion.div variants={fadeUp}>
+          <motion.div variants={pageFadeUp}>
             <h2 className="mb-5 border-b-2 border-forest-100 pb-3 text-2xl font-bold text-forest-900">
               Result
             </h2>
@@ -112,7 +123,7 @@ function CaseStudyPage() {
             </ul>
           </motion.div>
 
-          <motion.div variants={fadeUp}>
+          <motion.div variants={pageFadeUp}>
             <h2 className="mb-5 border-b-2 border-forest-100 pb-3 text-2xl font-bold text-forest-900">
               Stack
             </h2>

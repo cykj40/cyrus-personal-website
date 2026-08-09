@@ -1,7 +1,9 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 
 export const About = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section id="about" className="border-t border-earth-400/20 py-20">
       <div className="container mx-auto px-4">
@@ -9,7 +11,7 @@ export const About = () => {
 
         <div className="mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-[280px_1fr] lg:gap-14">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
@@ -25,7 +27,7 @@ export const About = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}

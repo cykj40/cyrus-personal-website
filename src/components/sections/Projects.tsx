@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { track } from '@vercel/analytics/react';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card';
@@ -7,6 +8,8 @@ import { Button } from '@/components/ui/Button';
 import { caseStudies } from '@/data/caseStudies';
 
 export const Projects = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section id="work" className="bg-forest-50/30 py-20">
       <div className="container mx-auto px-4">
@@ -21,7 +24,7 @@ export const Projects = () => {
             .map((caseStudy, index) => (
               <motion.div
                 key={caseStudy.slug}
-                initial={{ opacity: 0, y: 20 }}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -56,7 +59,11 @@ export const Projects = () => {
                   </CardContent>
 
                   <CardFooter>
-                    <Link to="/work/$slug" params={{ slug: caseStudy.slug }}>
+                    <Link
+                      to="/work/$slug"
+                      params={{ slug: caseStudy.slug }}
+                      onClick={() => track('case_study_click', { slug: caseStudy.slug })}
+                    >
                       <Button variant="outline" size="sm">
                         View case study
                         <ArrowRight className="ml-2 h-4 w-4" />

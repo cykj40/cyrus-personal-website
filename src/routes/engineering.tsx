@@ -8,6 +8,7 @@ import { skills } from '@/data/skills';
 import { projectsData } from '@/data/projects';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 
 export const Route = createFileRoute('/engineering')({
   component: EngineeringPage,
@@ -407,6 +408,8 @@ function StickyDownload() {
 }
 
 function EngineeringPage() {
+  useDocumentTitle('Engineering | Cyrus Khiabani');
+
   return (
     <>
       <PageHeader />

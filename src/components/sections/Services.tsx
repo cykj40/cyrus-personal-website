@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { track } from '@vercel/analytics/react';
 import { Bot, Workflow, Puzzle } from 'lucide-react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card';
@@ -14,6 +15,7 @@ const services = [
     bestFor: 'operations, back-office, reporting, field-to-office handoffs',
     cta: 'Automate a workflow',
     service: 'automation',
+    analyticsEvent: 'cta_service_automation',
   },
   {
     icon: Puzzle,
@@ -23,6 +25,7 @@ const services = [
     bestFor: 'internal tools, third-party APIs, legacy line-of-business software',
     cta: 'Discuss an integration',
     service: 'mcp',
+    analyticsEvent: 'cta_service_mcp',
   },
   {
     icon: Bot,
@@ -32,10 +35,13 @@ const services = [
     bestFor: 'customer support, internal knowledge bases, sales enablement',
     cta: 'Discuss an assistant',
     service: 'assistant',
+    analyticsEvent: 'cta_service_assistant',
   },
 ] as const;
 
 export const Services = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section id="services" className="py-20">
       <div className="container mx-auto px-4">
@@ -50,7 +56,7 @@ export const Services = () => {
             return (
               <motion.div
                 key={service.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -74,7 +80,13 @@ export const Services = () => {
                   </CardContent>
 
                   <CardFooter>
-                    <Link to="/contact" search={{ service: service.service }}>
+                    <Link
+                      to="/contact"
+                      search={{ service: service.service }}
+                      onClick={() =>
+                        track(service.analyticsEvent, { service: service.service })
+                      }
+                    >
                       <Button size="sm">{service.cta}</Button>
                     </Link>
                   </CardFooter>

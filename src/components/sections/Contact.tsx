@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { track } from '@vercel/analytics/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -51,6 +52,7 @@ const SchedulingSlot = () => {
 export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const shouldReduceMotion = useReducedMotion();
 
   const {
     register,
@@ -68,6 +70,7 @@ export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) =
   }, [service, setValue]);
 
   const onSubmit = async (data: ContactFormData) => {
+    track('contact_submit');
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -102,7 +105,7 @@ export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) =
         <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-2">
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
@@ -153,7 +156,7 @@ export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) =
 
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
