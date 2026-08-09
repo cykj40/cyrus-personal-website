@@ -128,7 +128,7 @@ export const Hero = () => {
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4">
               <Link to="/contact" onClick={() => track('cta_hero_book')}>
-                <Button size="lg">Book a project call</Button>
+                <Button size="lg">Get in touch</Button>
               </Link>
               <Button
                 variant="outline"

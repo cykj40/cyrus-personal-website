@@ -37,11 +37,12 @@ const SchedulingSlot = () => {
   return (
     <>
       {/* TODO: replace with Cal.com or Savvycal embed — swap this block for the embed's iframe/script when ready */}
-      <Card>
+      <Card className="bg-white/70 shadow-none">
         <CardContent className="py-5">
-          <p className="font-medium text-forest-900">Schedule a call</p>
+          <p className="font-medium text-forest-900">Prefer to talk it through?</p>
           <p className="mt-1 text-sm text-earth-600">
-            Direct scheduling is coming soon. For now, send the form and I’ll follow up with times.
+            You can also book a 30-minute call. Mention it in the form and I’ll follow up with
+            times while direct scheduling is being set up.
           </p>
         </CardContent>
       </Card>
@@ -102,67 +103,23 @@ export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) =
           subtitle="Have a project in mind? Let's talk about how we can work together."
         />
 
-        <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-2">
-          {/* Contact Info */}
+        <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(280px,2fr)]">
+          {/* Contact Form */}
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
-            <div>
-              <h3 className="mb-4 text-2xl font-bold text-forest-900">Let's Connect</h3>
-              <p className="text-earth-600">
-                I'm always interested in hearing about new projects, opportunities, and
-                collaborations. Whether you need a developer, consultant, or just want to chat about
-                tech—reach out!
-              </p>
-            </div>
-
-            {showSchedulingSlot && <SchedulingSlot />}
-
-            <div className="space-y-4">
-              <Card>
-                <CardContent className="flex items-center gap-4 py-4">
-                  <div className="rounded-lg bg-forest-100 p-3">
-                    <Mail className="h-5 w-5 text-forest-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-forest-900">Email</p>
-                    <a
-                      href="mailto:cyrus@cyruskhiabani.com"
-                      className="text-earth-600 hover:text-forest-600"
-                    >
-                      cyrus@cyruskhiabani.com
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="flex items-center gap-4 py-4">
-                  <div className="rounded-lg bg-mountain-100 p-3">
-                    <MapPin className="h-5 w-5 text-mountain-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-forest-900">Location</p>
-                    <p className="text-earth-600">New Jersey Shore, USA</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
           >
             <Card>
               <CardContent className="py-6">
+                <div className="mb-6">
+                  <h3 className="text-2xl font-bold text-forest-900">Send a message</h3>
+                  <p className="mt-2 text-earth-600">
+                    Tell me what you’re working on and I’ll follow up by email.
+                  </p>
+                </div>
+
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                   {/* Name */}
                   <div>
@@ -285,6 +242,57 @@ export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) =
                 </form>
               </CardContent>
             </Card>
+          </motion.div>
+
+          {/* Contact Info and Secondary Scheduling Option */}
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-6"
+          >
+            <div>
+              <h3 className="mb-4 text-2xl font-bold text-forest-900">Let's Connect</h3>
+              <p className="text-earth-600">
+                I'm always interested in hearing about new projects, opportunities, and
+                collaborations. Whether you need a developer, consultant, or just want to chat about
+                tech—reach out!
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <Card>
+                <CardContent className="flex items-center gap-4 py-4">
+                  <div className="rounded-lg bg-forest-100 p-3">
+                    <Mail className="h-5 w-5 text-forest-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-forest-900">Email</p>
+                    <a
+                      href="mailto:cyrus@cyruskhiabani.com"
+                      className="text-earth-600 hover:text-forest-600"
+                    >
+                      cyrus@cyruskhiabani.com
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="flex items-center gap-4 py-4">
+                  <div className="rounded-lg bg-mountain-100 p-3">
+                    <MapPin className="h-5 w-5 text-mountain-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-forest-900">Location</p>
+                    <p className="text-earth-600">New Jersey Shore, USA</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {showSchedulingSlot && <SchedulingSlot />}
           </motion.div>
         </div>
       </div>

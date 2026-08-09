@@ -10,16 +10,22 @@ const engagements = [
     price: '$3,500',
   },
   {
+    title: 'Setup & Integration',
+    description:
+      'Configuring existing MCP servers and AI tools into your systems — vetted, credentialed safely, and tested. Covers up to 2 integrations.',
+    price: '$2,500',
+  },
+  {
     title: 'Build',
     description:
       'Scoped project, fixed fee. Typically 2–6 weeks. Design, build, deploy, hand off with documentation.',
-    price: null,
+    price: 'Starting at $8,000',
   },
   {
     title: 'Ongoing',
     description:
-      'Monthly retainer. Maintenance, iteration, and new automations as your operations change.',
-    price: null,
+      'Monthly retainer. Up to 10 hours of maintenance, iteration, and priority support. Additional work billed at the Build rate.',
+    price: '$3,000/mo',
   },
 ];
 
@@ -34,7 +40,7 @@ export const Engagements = () => {
           subtitle="Start with a focused assessment, a defined build, or ongoing support."
         />
 
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-4">
           {engagements.map((engagement, index) => (
             <motion.div
               key={engagement.title}

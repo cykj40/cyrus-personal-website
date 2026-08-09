@@ -54,7 +54,7 @@ export const Navbar = () => {
               to="/contact"
               className="inline-flex items-center rounded-lg bg-forest-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-forest-700 transition-colors"
             >
-              Book a call
+              Get in touch
             </Link>
           </div>
 
@@ -101,7 +101,7 @@ export const Navbar = () => {
                   onClick={() => setIsOpen(false)}
                   className="inline-flex items-center justify-center rounded-lg bg-forest-600 px-4 py-2 text-base font-medium text-white hover:bg-forest-700 transition-colors"
                 >
-                  Book a call
+                  Get in touch
                 </Link>
               </div>
             </div>

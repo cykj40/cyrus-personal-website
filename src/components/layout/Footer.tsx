@@ -43,7 +43,7 @@ export const Footer = () => {
               </li>
               <li>
                 <Link to="/contact" className="hover:text-forest-600">
-                  Book a call
+                  Get in touch
                 </Link>
               </li>
             </ul>
