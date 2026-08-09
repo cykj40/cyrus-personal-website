@@ -1,7 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
-import { CHAT_SYSTEM_PROMPT, PORTFOLIO_CONTEXT } from '../src/lib/portfolio-context';
+import { CHAT_SYSTEM_PROMPT, PORTFOLIO_CONTEXT } from '../src/lib/portfolio-context.js';
 
 const SYSTEM_PROMPT = `${CHAT_SYSTEM_PROMPT}
 
@@ -77,13 +77,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       messages,
     });
 
-    // Extract the assistant's response
-    const content = response.content[0];
-    if (content.type !== 'text') {
-      throw new Error('Unexpected response type from Claude API');
+    // Extract the assistant's response. The model may emit non-text blocks
+    // (e.g. thinking) before the text block, so find the text block rather
+    // than assuming it is first.
+    const textBlock = response.content.find((block) => block.type === 'text');
+    if (!textBlock) {
+      throw new Error('No text block in Claude API response');
     }
 
-    const assistantMessage = content.text;
+    const assistantMessage = textBlock.text;
 
     return res.status(200).json({
       message: assistantMessage,
