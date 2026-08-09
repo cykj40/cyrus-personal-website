@@ -1,125 +1,48 @@
-import { motion } from 'framer-motion';
-import { Code2, Mountain, TreePine, Zap } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import { skills } from '@/data/skills';
-
-const values = [
-  {
-    icon: TreePine,
-    title: 'Grounded',
-    description: 'Like a tree with deep roots, I build on solid foundations and proven principles.',
-  },
-  {
-    icon: Mountain,
-    title: 'Disciplined',
-    description: 'Every line of code is intentional. Every feature serves a purpose.',
-  },
-  {
-    icon: Zap,
-    title: 'Relentless',
-    description: "I don't stop at \"good enough.\" I iterate until it's right.",
-  },
-  {
-    icon: Code2,
-    title: 'Pragmatic',
-    description: 'Technology is a tool, not the goal. I focus on solving real problems.',
-  },
-];
 
 export const About = () => {
-  return (
-    <section id="about" className="py-20">
-      <div className="container mx-auto px-4">
-        <SectionHeading
-          title="About Me"
-          subtitle="Building at the intersection of code, nature, and relentless curiosity"
-        />
+  const shouldReduceMotion = useReducedMotion();
 
-        <div className="mb-16 grid gap-12 lg:grid-cols-2">
-          {/* Story */}
+  return (
+    <section id="about" className="border-t border-earth-400/20 py-20">
+      <div className="container mx-auto px-4">
+        <SectionHeading title="Who You’re Working With" />
+
+        <div className="mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-[280px_1fr] lg:gap-14">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="space-y-4 text-earth-600"
+            className="mx-auto w-full max-w-[280px]"
           >
-            <p className="text-lg leading-relaxed">
-              I'm a <strong className="text-forest-700">full-stack developer</strong> who builds production systems for
-              environments where reliability matters — construction operations and personal health.
-              My work spans workflow automation, real-time health integrations, and developer tooling,
-              with a constant focus on clean architecture and real-world impact.
-            </p>
-            <p className="text-lg leading-relaxed">
-              Whether building{' '}
-              <strong className="text-mountain-600">MCP servers for Claude Desktop</strong>,
-              integrating <strong className="text-forest-700">Dexcom CGM data</strong>, or creating
-              full-stack web applications, discipline and precision drive every project.
-            </p>
-            <p className="text-lg leading-relaxed">
-              Outside of code: running local trails, yoga, strength training, and riding the Peloton.
-              Consistency, structure, and clarity — in fitness and in systems.
-            </p>
+            <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-forest-100 to-mountain-100 shadow-xl">
+              <img
+                src="/images/profile/cyrus-portfolio-picture-1.png"
+                alt="Cyrus Khiabani"
+                className="aspect-[4/5] w-full object-cover"
+              />
+            </div>
           </motion.div>
 
-          {/* Values */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid gap-4 sm:grid-cols-2"
+            className="space-y-4 text-lg leading-relaxed text-earth-600"
           >
-            {values.map((value) => {
-              const Icon = value.icon;
-              return (
-                <Card key={value.title} hover className="text-center">
-                  <CardContent className="pt-6">
-                    <div className="mb-3 flex justify-center">
-                      <div className="rounded-full bg-forest-100 p-3">
-                        <Icon className="h-6 w-6 text-forest-600" />
-                      </div>
-                    </div>
-                    <h3 className="mb-2 font-bold text-forest-900">{value.title}</h3>
-                    <p className="text-sm text-earth-500">{value.description}</p>
-                  </CardContent>
-                </Card>
-              );
-            })}
+            <p>
+              I’m Cyrus, a full-stack developer and AI engineer based on the New Jersey Shore.
+              I build production automation for construction operations and personal health, where
+              access, reliability, and human judgment matter.
+            </p>
+            <p>
+              You work directly with me from the first workflow map through deployment and handoff.
+            </p>
           </motion.div>
         </div>
-
-        {/* Skills */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <h3 className="mb-8 text-center text-2xl font-bold text-forest-900">Tech Stack</h3>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {skills.map((category) => (
-              <Card key={category.category}>
-                <CardHeader>
-                  <CardTitle className="text-lg">{category.category}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-full bg-forest-50 px-3 py-1 text-sm text-forest-700"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

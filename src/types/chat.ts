@@ -18,6 +18,7 @@ export interface ChatResponse {
 export const WELCOME_MESSAGE: ChatMessage = {
   id: 'welcome',
   role: 'assistant',
-  content: "Hi! 👋 I'm Cyrus's AI assistant. I can tell you about his projects, skills, experience, or help you get in touch. What would you like to know?",
+  content:
+    "Hi! 👋 This chatbot is one of the things I build. Ask it anything about my work, projects, or experience—or how to get in touch.",
   timestamp: new Date(),
 };

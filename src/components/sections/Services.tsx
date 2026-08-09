@@ -1,84 +1,67 @@
-import { motion } from 'framer-motion';
-import { Bot, Code2, Database, Puzzle } from 'lucide-react';
+import { Link } from '@tanstack/react-router';
+import { motion, useReducedMotion } from 'framer-motion';
+import { track } from '@vercel/analytics/react';
+import { Bot, Workflow, Puzzle } from 'lucide-react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
 
 const services = [
   {
-    icon: Code2,
-    title: 'Full-Stack Development',
+    icon: Workflow,
+    title: 'Workflow Automation & AI Agents',
     description:
-      'End-to-end web application development with React, TypeScript, Node.js, and modern frameworks. Clean, maintainable code that scales.',
-    features: [
-      'React & Next.js',
-      'TypeScript',
-      'REST API Design, Authentication, and Data Modeling',
-      'PostgreSQL & Drizzle',
-    ],
-  },
-  {
-    icon: Bot,
-    title: 'AI Integration & Automation',
-    description:
-      'Build production-grade AI systems—chatbots, agents, and MCP servers—using Claude and OpenAI APIs to automate real workflows.',
-    features: [
-      'MCP Server Development',
-      'Chatbots & AI Agents',
-      'Claude API Integration',
-      'OpenAI API Integration',
-      'Workflow Automation',
-      'Prompt Engineering',
-    ],
-  },
-  {
-    icon: Database,
-    title: 'Operations & Business Systems Integration',
-    description:
-      'Custom integrations between time tracking, billing, and internal systems to automate reporting and reduce operational overhead in real-world businesses.',
-    features: [
-      'TSheets API Integration',
-      'Sage 100 Data Formatting & Export',
-      'Job Notes & Field Data Automation',
-      'Secure OAuth2 API Integrations',
-      'Internal Tooling for Operations Teams',
-    ],
+      'Agents that do repetitive work across your existing tools — intake, reporting, document processing, follow-ups. They run on a schedule or on a trigger, and a human approves anything that matters.',
+    bestFor: 'operations, back-office, reporting, field-to-office handoffs',
+    cta: 'Automate a workflow',
+    service: 'automation',
+    analyticsEvent: 'cta_service_automation',
   },
   {
     icon: Puzzle,
-    title: 'Software Modernization & Code Conversion',
+    title: 'System & MCP Integrations',
     description:
-      'Modernizing legacy codebases and translating systems between languages and stacks, with a focus on moving older backends to TypeScript-based architectures.',
-    features: [
-      'Java → TypeScript / Node.js conversions',
-      'Backend stack migrations',
-      'API refactoring & normalization',
-      'Legacy code cleanup',
-      'Architecture simplification',
-    ],
+      "Secure MCP servers that let Claude and other AI tools read and write your actual business systems — OAuth2, type-safe validation, audit trails. This is the part most people can't build.",
+    bestFor: 'internal tools, third-party APIs, legacy line-of-business software',
+    cta: 'Discuss an integration',
+    service: 'mcp',
+    analyticsEvent: 'cta_service_mcp',
   },
-];
+  {
+    icon: Bot,
+    title: 'AI Assistants & Chatbots',
+    description:
+      'Assistants that answer questions from your real business information — documents, databases, product data — with citations and no invented answers.',
+    bestFor: 'customer support, internal knowledge bases, sales enablement',
+    cta: 'Discuss an assistant',
+    service: 'assistant',
+    analyticsEvent: 'cta_service_assistant',
+  },
+] as const;
 
 export const Services = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section id="services" className="py-20">
       <div className="container mx-auto px-4">
         <SectionHeading
           title="What I Do"
-          subtitle="Specialized services for startups, health tech companies, and developers"
+          subtitle="Specialized AI systems built around the tools and information your business already uses"
         />
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-8 lg:grid-cols-3">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <motion.div
                 key={service.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <Card hover className="h-full">
+                <Card hover className="flex h-full flex-col">
                   <CardHeader>
                     <div className="mb-4 flex items-center gap-3">
                       <div className="rounded-lg bg-forest-100 p-3">
@@ -88,40 +71,30 @@ export const Services = () => {
                     </div>
                     <p className="text-earth-600">{service.description}</p>
                   </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {service.features.map((feature) => (
-                        <li key={feature} className="flex items-center gap-2 text-sm text-earth-600">
-                          <span className="h-1.5 w-1.5 rounded-full bg-forest-500" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
+
+                  <CardContent className="flex-1">
+                    <p className="text-sm text-earth-600">
+                      <span className="font-medium text-forest-800">Best for:</span>{' '}
+                      {service.bestFor}
+                    </p>
                   </CardContent>
+
+                  <CardFooter>
+                    <Link
+                      to="/contact"
+                      search={{ service: service.service }}
+                      onClick={() =>
+                        track(service.analyticsEvent, { service: service.service })
+                      }
+                    >
+                      <Button size="sm">{service.cta}</Button>
+                    </Link>
+                  </CardFooter>
                 </Card>
               </motion.div>
             );
           })}
         </div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 text-center"
-        >
-          <p className="mb-4 text-lg text-earth-600">
-            Ready to build something great together?
-          </p>
-          <a
-            href="#contact"
-            className="inline-block rounded-lg bg-forest-600 px-8 py-3 font-medium text-white transition-colors hover:bg-forest-700"
-          >
-            Let's Talk
-          </a>
-        </motion.div>
       </div>
     </section>
   );

@@ -18,9 +18,7 @@ export const Footer = () => {
           <div>
             <h3 className="mb-2 text-lg font-bold text-forest-900">Cyrus Khiabani</h3>
             <p className="text-sm text-earth-500">
-              Full-Stack Developer & AI Specialist
-              <br />
-              Building systems that work.
+              AI agents, MCP integrations, and automation
             </p>
           </div>
 
@@ -29,28 +27,23 @@ export const Footer = () => {
             <h4 className="mb-2 text-sm font-semibold text-forest-900">Quick Links</h4>
             <ul className="space-y-1 text-sm text-earth-500">
               <li>
-                <a href="#about" className="hover:text-forest-600">
-                  About
-                </a>
-              </li>
-              <li>
-                <a href="#projects" className="hover:text-forest-600">
-                  Projects
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="hover:text-forest-600">
+                <Link to="/" search={{ scrollTo: 'services' }} className="hover:text-forest-600">
                   Services
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#contact" className="hover:text-forest-600">
-                  Contact
-                </a>
+                <Link to="/" search={{ scrollTo: 'work' }} className="hover:text-forest-600">
+                  Work
+                </Link>
               </li>
               <li>
-                <Link to="/resume" className="hover:text-forest-600">
-                  Resume
+                <Link to="/engineering" className="hover:text-forest-600">
+                  Engineering
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="hover:text-forest-600">
+                  Get in touch
                 </Link>
               </li>
             </ul>
