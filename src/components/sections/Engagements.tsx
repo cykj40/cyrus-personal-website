@@ -12,20 +12,32 @@ const engagements = [
   {
     title: 'Setup & Integration',
     description:
-      'Configuring existing MCP servers and AI tools into your systems — vetted, credentialed safely, and tested. Covers up to 2 integrations.',
+      'Configure existing MCP servers and AI tools in your systems. The fixed fee covers up to two integrations; each additional integration is $750.',
     price: '$2,500',
   },
   {
-    title: 'Build',
+    title: 'Custom MCP Server Build',
     description:
-      'Scoped project, fixed fee. Typically 2–6 weeks. Design, build, deploy, hand off with documentation.',
+      'A scoped custom MCP server project. Includes authentication, typed tools, input validation, testing, deployment, documentation, and handoff. Exact scope is set before work begins.',
     price: 'Starting at $8,000',
   },
   {
-    title: 'Ongoing',
+    title: 'Custom AI Agent Build',
     description:
-      'Monthly retainer. Up to 10 hours of maintenance, iteration, and priority support. Additional work billed at the Build rate.',
-    price: '$3,000/mo',
+      'A scoped custom agent project, typically completed in 2–6 weeks. Includes design, implementation, deployment, documentation, and handoff. Exact scope is set before work begins.',
+    price: 'Starting at $10,000',
+  },
+  {
+    title: 'RAG Chatbot Build',
+    description:
+      'A scoped retrieval-backed chatbot project. Includes source ingestion, retrieval and citation setup, interface integration, deployment, documentation, and handoff. Exact scope is set before work begins.',
+    price: 'Starting at $8,000',
+  },
+  {
+    title: 'Ongoing Support',
+    description:
+      'Monthly retainer capped at 10 hours of maintenance, iteration, and priority support. Additional work is scoped and billed separately.',
+    price: '$3,000/month',
   },
 ];
 
@@ -40,7 +52,7 @@ export const Engagements = () => {
           subtitle="Start with a focused assessment, a defined build, or ongoing support."
         />
 
-        <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
           {engagements.map((engagement, index) => (
             <motion.div
               key={engagement.title}

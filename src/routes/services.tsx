@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { Engagements } from '@/components/sections/Engagements';
 import { SchedulingSlot } from '@/components/sections/Contact';
 import { Services } from '@/components/sections/Services';
+import { ServicesProcess } from '@/components/sections/ServicesProcess';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 
 export const Route = createFileRoute('/services')({
@@ -15,6 +16,7 @@ function ServicesPage() {
     <div className="pt-16">
       <Services />
       <Engagements />
+      <ServicesProcess />
       <div className="container mx-auto max-w-5xl px-4 pb-20">
         <SchedulingSlot />
       </div>

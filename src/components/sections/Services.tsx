@@ -5,35 +5,55 @@ import { Bot, Workflow, Puzzle } from 'lucide-react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { caseStudies } from '@/data/caseStudies';
+import { projectsData } from '@/data/projects';
+
+const tsheetsBilling = caseStudies.find((caseStudy) => caseStudy.slug === 'tsheets-billing');
+const fieldNotes = caseStudies.find((caseStudy) => caseStudy.slug === 'field-notes-pwa');
+const healthJournal = projectsData.find((project) => project.id === 'journalai');
+
+if (!tsheetsBilling || !fieldNotes || !healthJournal) {
+  throw new Error('Missing project data required by the services page.');
+}
 
 const services = [
   {
-    icon: Workflow,
-    title: 'Workflow Automation & AI Agents',
-    description:
-      'Agents that do repetitive work across your existing tools — intake, reporting, document processing, follow-ups. They run on a schedule or on a trigger, and a human approves anything that matters.',
-    bestFor: 'operations, back-office, reporting, field-to-office handoffs',
-    cta: 'Automate a workflow',
-    service: 'automation',
-    analyticsEvent: 'cta_service_automation',
-  },
-  {
     icon: Puzzle,
-    title: 'System & MCP Integrations',
+    title: 'MCP Servers',
     description:
-      "Secure MCP servers that let Claude and other AI tools read and write your actual business systems — OAuth2, type-safe validation, audit trails. This is the part most people can't build.",
-    bestFor: 'internal tools, third-party APIs, legacy line-of-business software',
+      'A production MCP server or integration that connects an AI client to the business systems you already use. The scope includes authentication, typed tools, input validation, testing, deployment, documentation, and handoff.',
+    exampleTitle: 'TSheets MCP',
+    example: tsheetsBilling.result[0],
+    price:
+      'Custom MCP server builds start at $8,000. Existing-server setup is $2,500 for up to two integrations, plus $750 for each additional integration.',
+    bestFor: 'third-party APIs, internal tools, and legacy line-of-business software',
     cta: 'Discuss an integration',
     service: 'mcp',
     analyticsEvent: 'cta_service_mcp',
   },
   {
-    icon: Bot,
-    title: 'AI Assistants & Chatbots',
+    icon: Workflow,
+    title: 'Agents',
     description:
-      'Assistants that answer questions from your real business information — documents, databases, product data — with citations and no invented answers.',
-    bestFor: 'customer support, internal knowledge bases, sales enablement',
-    cta: 'Discuss an assistant',
+      'A custom agent or automation for a defined operational workflow. The build includes triggers, integrations, validation, human approval steps where needed, production deployment, documentation, and handoff.',
+    exampleTitle: 'Field Notes PWA',
+    example: fieldNotes.result[0],
+    price: 'Custom AI agent builds start at $10,000.',
+    bestFor: 'operations, back-office work, reporting, and field-to-office handoffs',
+    cta: 'Discuss an agent',
+    service: 'automation',
+    analyticsEvent: 'cta_service_automation',
+  },
+  {
+    icon: Bot,
+    title: 'RAG Chatbots',
+    description:
+      'A retrieval-backed chatbot that answers questions from approved documents, databases, or product data. The build includes source ingestion, retrieval and citation setup, interface integration, deployment, documentation, and handoff.',
+    exampleTitle: healthJournal.title,
+    example: healthJournal.description,
+    price: 'RAG chatbot builds start at $8,000.',
+    bestFor: 'customer support, internal knowledge bases, and sales enablement',
+    cta: 'Discuss a chatbot',
     service: 'assistant',
     analyticsEvent: 'cta_service_assistant',
   },
@@ -72,7 +92,15 @@ export const Services = () => {
                     <p className="text-granite-700">{service.description}</p>
                   </CardHeader>
 
-                  <CardContent className="flex-1">
+                  <CardContent className="flex-1 space-y-4">
+                    <p className="text-sm text-granite-700">
+                      <span className="font-medium text-pine-800">Example:</span>{' '}
+                      {service.exampleTitle} — {service.example}
+                    </p>
+                    <p className="text-sm text-granite-700">
+                      <span className="font-medium text-pine-800">Price:</span>{' '}
+                      {service.price}
+                    </p>
                     <p className="text-sm text-granite-700">
                       <span className="font-medium text-pine-800">Best for:</span>{' '}
                       {service.bestFor}
