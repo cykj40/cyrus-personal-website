@@ -9,15 +9,28 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ResumeRouteImport } from './routes/resume'
+import { Route as HireMeRouteImport } from './routes/hire-me'
 import { Route as EngineeringRouteImport } from './routes/engineering'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WorkIndexRouteImport } from './routes/work.index'
 import { Route as WorkSlugRouteImport } from './routes/work.$slug'
 
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResumeRoute = ResumeRouteImport.update({
   id: '/resume',
   path: '/resume',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HireMeRoute = HireMeRouteImport.update({
+  id: '/hire-me',
+  path: '/hire-me',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EngineeringRoute = EngineeringRouteImport.update({
@@ -35,6 +48,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WorkIndexRoute = WorkIndexRouteImport.update({
+  id: '/work/',
+  path: '/work/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WorkSlugRoute = WorkSlugRouteImport.update({
   id: '/work/$slug',
   path: '/work/$slug',
@@ -45,47 +63,98 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/engineering': typeof EngineeringRoute
+  '/hire-me': typeof HireMeRoute
   '/resume': typeof ResumeRoute
+  '/services': typeof ServicesRoute
   '/work/$slug': typeof WorkSlugRoute
+  '/work/': typeof WorkIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/engineering': typeof EngineeringRoute
+  '/hire-me': typeof HireMeRoute
   '/resume': typeof ResumeRoute
+  '/services': typeof ServicesRoute
   '/work/$slug': typeof WorkSlugRoute
+  '/work': typeof WorkIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/engineering': typeof EngineeringRoute
+  '/hire-me': typeof HireMeRoute
   '/resume': typeof ResumeRoute
+  '/services': typeof ServicesRoute
   '/work/$slug': typeof WorkSlugRoute
+  '/work/': typeof WorkIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contact' | '/engineering' | '/resume' | '/work/$slug'
+  fullPaths:
+    | '/'
+    | '/contact'
+    | '/engineering'
+    | '/hire-me'
+    | '/resume'
+    | '/services'
+    | '/work/$slug'
+    | '/work/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/engineering' | '/resume' | '/work/$slug'
-  id: '__root__' | '/' | '/contact' | '/engineering' | '/resume' | '/work/$slug'
+  to:
+    | '/'
+    | '/contact'
+    | '/engineering'
+    | '/hire-me'
+    | '/resume'
+    | '/services'
+    | '/work/$slug'
+    | '/work'
+  id:
+    | '__root__'
+    | '/'
+    | '/contact'
+    | '/engineering'
+    | '/hire-me'
+    | '/resume'
+    | '/services'
+    | '/work/$slug'
+    | '/work/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
   EngineeringRoute: typeof EngineeringRoute
+  HireMeRoute: typeof HireMeRoute
   ResumeRoute: typeof ResumeRoute
+  ServicesRoute: typeof ServicesRoute
   WorkSlugRoute: typeof WorkSlugRoute
+  WorkIndexRoute: typeof WorkIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resume': {
       id: '/resume'
       path: '/resume'
       fullPath: '/resume'
       preLoaderRoute: typeof ResumeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hire-me': {
+      id: '/hire-me'
+      path: '/hire-me'
+      fullPath: '/hire-me'
+      preLoaderRoute: typeof HireMeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/engineering': {
@@ -109,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/work/': {
+      id: '/work/'
+      path: '/work'
+      fullPath: '/work/'
+      preLoaderRoute: typeof WorkIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/work/$slug': {
       id: '/work/$slug'
       path: '/work/$slug'
@@ -123,8 +199,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
   EngineeringRoute: EngineeringRoute,
+  HireMeRoute: HireMeRoute,
   ResumeRoute: ResumeRoute,
+  ServicesRoute: ServicesRoute,
   WorkSlugRoute: WorkSlugRoute,
+  WorkIndexRoute: WorkIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

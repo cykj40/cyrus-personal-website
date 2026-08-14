@@ -6,7 +6,12 @@
   "redirects": [
     {
       "source": "/resume",
-      "destination": "/engineering",
+      "destination": "/hire-me",
+      "statusCode": 301
+    },
+    {
+      "source": "/engineering",
+      "destination": "/hire-me",
       "statusCode": 301
     }
   ],

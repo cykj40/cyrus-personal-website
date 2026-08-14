@@ -27,18 +27,18 @@ export const Footer = () => {
             <h4 className="mb-2 text-sm font-semibold text-forest-900">Quick Links</h4>
             <ul className="space-y-1 text-sm text-earth-500">
               <li>
-                <Link to="/" search={{ scrollTo: 'services' }} className="hover:text-forest-600">
+                <Link to="/services" className="hover:text-forest-600">
                   Services
                 </Link>
               </li>
               <li>
-                <Link to="/" search={{ scrollTo: 'work' }} className="hover:text-forest-600">
+                <Link to="/work" className="hover:text-forest-600">
                   Work
                 </Link>
               </li>
               <li>
-                <Link to="/engineering" className="hover:text-forest-600">
-                  Engineering
+                <Link to="/hire-me" className="hover:text-forest-600">
+                  Hire Me
                 </Link>
               </li>
               <li>

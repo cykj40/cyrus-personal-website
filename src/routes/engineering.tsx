@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from '@tanstack/react-router';
+import { createFileRoute, Link, redirect } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
 import {
   Download, MapPin, Phone, Mail, Globe, Github, Linkedin,
@@ -8,10 +8,12 @@ import { skills } from '@/data/skills';
 import { projectsData } from '@/data/projects';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { About } from '@/components/sections/About';
 
 export const Route = createFileRoute('/engineering')({
-  component: EngineeringPage,
+  beforeLoad: () => {
+    throw redirect({ to: '/hire-me' });
+  },
 });
 
 const fadeUp = {
@@ -89,13 +91,16 @@ function PageHeader() {
             </a>
           </motion.div>
 
-          <motion.div variants={fadeUp}>
+          <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
             <a href="/resume/Cyrus_Khiabani_AI_Engineer_Resume.pdf" download>
               <Button size="lg">
                 <Download className="h-5 w-5 mr-2" />
                 Download PDF
               </Button>
             </a>
+            <Link to="/contact">
+              <Button size="lg" variant="outline">Get in touch</Button>
+            </Link>
           </motion.div>
         </motion.div>
       </div>
@@ -407,9 +412,11 @@ function StickyDownload() {
   );
 }
 
-function EngineeringPage() {
-  useDocumentTitle('Engineering | Cyrus Khiabani');
+interface EngineeringContentProps {
+  includeAbout?: boolean;
+}
 
+export function EngineeringContent({ includeAbout = false }: EngineeringContentProps) {
   return (
     <>
       <PageHeader />
@@ -419,6 +426,7 @@ function EngineeringPage() {
       <ProjectsSection />
       <EducationSection />
       <StickyDownload />
+      {includeAbout && <About />}
     </>
   );
 }

@@ -1,28 +1,16 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useLocation, useNavigate } from '@tanstack/react-router';
-import { scrollToSection } from '@/lib/utils';
+import { Link } from '@tanstack/react-router';
 
-// Section links scroll on the homepage and route back to it from other pages.
-const sectionItems = [
-  { label: 'Services', href: 'services' },
-  { label: 'Work', href: 'work' },
-];
+const navigationItems = [
+  { label: 'Work', to: '/work' },
+  { label: 'Services', to: '/services' },
+  { label: 'Hire Me', to: '/hire-me' },
+] as const;
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const handleSectionClick = (href: string) => {
-    if (location.pathname === '/') {
-      scrollToSection(href);
-    } else {
-      navigate({ to: '/', search: { scrollTo: href } });
-    }
-    setIsOpen(false);
-  };
 
   return (
     <nav className="fixed top-0 z-50 w-full border-b border-earth-400/20 bg-white/80 backdrop-blur-md">
@@ -35,21 +23,15 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-8 md:flex">
-            {sectionItems.map((item) => (
-              <button
-                key={item.href}
-                onClick={() => handleSectionClick(item.href)}
+            {navigationItems.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
                 className="text-sm font-medium text-earth-600 transition-colors hover:text-forest-600"
               >
                 {item.label}
-              </button>
+              </Link>
             ))}
-            <Link
-              to="/engineering"
-              className="text-sm font-medium text-earth-600 transition-colors hover:text-forest-600"
-            >
-              Engineering
-            </Link>
             <Link
               to="/contact"
               className="inline-flex items-center rounded-lg bg-forest-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-forest-700 transition-colors"
@@ -80,22 +62,16 @@ export const Navbar = () => {
           >
             <div className="container mx-auto px-4 py-4">
               <div className="flex flex-col gap-4">
-                {sectionItems.map((item) => (
-                  <button
-                    key={item.href}
-                    onClick={() => handleSectionClick(item.href)}
+                {navigationItems.map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    onClick={() => setIsOpen(false)}
                     className="text-left text-base font-medium text-earth-600 hover:text-forest-600"
                   >
                     {item.label}
-                  </button>
+                  </Link>
                 ))}
-                <Link
-                  to="/engineering"
-                  onClick={() => setIsOpen(false)}
-                  className="text-left text-base font-medium text-earth-600 hover:text-forest-600"
-                >
-                  Engineering
-                </Link>
                 <Link
                   to="/contact"
                   onClick={() => setIsOpen(false)}

@@ -1,13 +1,9 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import { Hero }     from '@/components/sections/Hero';
-import { About }    from '@/components/sections/About';
-import { Projects } from '@/components/sections/Projects';
-import { Services } from '@/components/sections/Services';
-import { Engagements } from '@/components/sections/Engagements';
-import { Contact }  from '@/components/sections/Contact';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 import { scrollToSection } from '@/lib/utils';
+import { LandingTeasers } from '@/components/sections/LandingTeasers';
 
 const HOME_TITLE = 'Cyrus Khiabani — AI Agents, MCP Servers & Workflow Automation';
 
@@ -32,11 +28,7 @@ function HomePage() {
   return (
     <>
       <Hero />
-      <Services />
-      <Projects />
-      <Engagements />
-      <About />
-      <Contact />
+      <LandingTeasers />
     </>
   );
 }

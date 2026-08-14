@@ -118,7 +118,7 @@ const loadCalScript = (cal: CalFunction) => {
   return window.portfolioCalScript;
 };
 
-const SchedulingSlot = () => {
+export const SchedulingSlot = () => {
   const embedRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
