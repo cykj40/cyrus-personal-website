@@ -4,6 +4,8 @@ import { Hero }     from '@/components/sections/Hero';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 import { scrollToSection } from '@/lib/utils';
 import { LandingTeasers } from '@/components/sections/LandingTeasers';
+import { WhatIBuild } from '@/components/sections/WhatIBuild';
+import { FeaturedWork } from '@/components/sections/FeaturedWork';
 
 const HOME_TITLE = 'Cyrus Khiabani — AI Agents, MCP Servers & Workflow Automation';
 
@@ -28,6 +30,8 @@ function HomePage() {
   return (
     <>
       <Hero />
+      <WhatIBuild />
+      <FeaturedWork />
       <LandingTeasers />
     </>
   );
