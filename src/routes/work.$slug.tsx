@@ -34,13 +34,13 @@ function CaseStudyPage() {
 
   if (!caseStudy) {
     return (
-      <section className="bg-gradient-to-br from-forest-50 via-white to-mountain-50 bg-topographic px-4 pb-20 pt-32">
+      <section className="bg-gradient-to-br from-pine-50 via-white to-ridge-50 bg-topographic px-4 pb-20 pt-32">
         <div className="container mx-auto max-w-3xl">
-          <h1 className="mb-4 text-4xl font-bold text-forest-900">Case study not found</h1>
+          <h1 className="mb-4 text-4xl font-bold text-pine-900">Case study not found</h1>
           <Link
             to="/"
             search={{ scrollTo: 'work' }}
-            className="inline-flex items-center gap-2 text-forest-600 transition-colors hover:text-forest-700"
+            className="inline-flex items-center gap-2 text-pine-600 transition-colors hover:text-pine-700"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to case studies
@@ -52,7 +52,7 @@ function CaseStudyPage() {
 
   return (
     <>
-      <section className="bg-gradient-to-br from-forest-50 via-white to-mountain-50 bg-topographic pb-16 pt-28">
+      <section className="bg-gradient-to-br from-pine-50 via-white to-ridge-50 bg-topographic pb-16 pt-28">
         <div className="container mx-auto px-4">
           <motion.div
             variants={pageStagger}
@@ -64,7 +64,7 @@ function CaseStudyPage() {
               <Link
                 to="/"
                 search={{ scrollTo: 'work' }}
-                className="inline-flex items-center gap-2 text-sm text-earth-500 transition-colors hover:text-forest-600"
+                className="inline-flex items-center gap-2 text-sm text-granite-600 transition-colors hover:text-pine-600"
               >
                 <ArrowLeft className="h-4 w-4" />
                 Back to case studies
@@ -73,13 +73,13 @@ function CaseStudyPage() {
 
             <motion.p
               variants={pageFadeUp}
-              className="mb-3 text-sm font-medium text-mountain-600"
+              className="mb-3 text-sm font-medium text-ridge-700"
             >
               {caseStudy.client}
             </motion.p>
             <motion.h1
               variants={pageFadeUp}
-              className="text-4xl font-bold leading-tight text-forest-900 sm:text-5xl"
+              className="text-4xl font-bold leading-tight text-pine-900 sm:text-5xl"
             >
               {caseStudy.title}
             </motion.h1>
@@ -96,27 +96,27 @@ function CaseStudyPage() {
           className="container mx-auto max-w-3xl space-y-12 px-4"
         >
           <motion.div variants={pageFadeUp}>
-            <h2 className="mb-5 border-b-2 border-forest-100 pb-3 text-2xl font-bold text-forest-900">
+            <h2 className="mb-5 border-b-2 border-pine-100 pb-3 text-2xl font-bold text-pine-900">
               Problem
             </h2>
-            <p className="leading-relaxed text-earth-600">{caseStudy.problem}</p>
+            <p className="leading-relaxed text-granite-700">{caseStudy.problem}</p>
           </motion.div>
 
           <motion.div variants={pageFadeUp}>
-            <h2 className="mb-5 border-b-2 border-forest-100 pb-3 text-2xl font-bold text-forest-900">
+            <h2 className="mb-5 border-b-2 border-pine-100 pb-3 text-2xl font-bold text-pine-900">
               Build
             </h2>
-            <p className="leading-relaxed text-earth-600">{caseStudy.build}</p>
+            <p className="leading-relaxed text-granite-700">{caseStudy.build}</p>
           </motion.div>
 
           <motion.div variants={pageFadeUp}>
-            <h2 className="mb-5 border-b-2 border-forest-100 pb-3 text-2xl font-bold text-forest-900">
+            <h2 className="mb-5 border-b-2 border-pine-100 pb-3 text-2xl font-bold text-pine-900">
               Result
             </h2>
             <ul className="space-y-3">
               {caseStudy.result.map((outcome) => (
-                <li key={outcome} className="flex items-start gap-3 text-earth-600">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-forest-500" />
+                <li key={outcome} className="flex items-start gap-3 text-granite-700">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-pine-500" />
                   {outcome}
                 </li>
               ))}
@@ -124,14 +124,14 @@ function CaseStudyPage() {
           </motion.div>
 
           <motion.div variants={pageFadeUp}>
-            <h2 className="mb-5 border-b-2 border-forest-100 pb-3 text-2xl font-bold text-forest-900">
+            <h2 className="mb-5 border-b-2 border-pine-100 pb-3 text-2xl font-bold text-pine-900">
               Stack
             </h2>
             <div className="flex flex-wrap gap-2">
               {caseStudy.stack.map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-full bg-mountain-50 px-3 py-1 text-sm text-mountain-700"
+                  className="rounded-full bg-ridge-50 px-3 py-1 text-sm text-ridge-700"
                 >
                   {tech}
                 </span>

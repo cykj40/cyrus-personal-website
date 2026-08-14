@@ -33,7 +33,7 @@ export const LandingTeasers = () => {
         <section
           key={teaser.id}
           id={teaser.id}
-          className={index % 2 === 0 ? 'bg-forest-50/30 py-16' : 'py-16'}
+          className={index % 2 === 0 ? 'bg-pine-50/30 py-16' : 'py-16'}
         >
           <div className="container mx-auto px-4">
             <Card className="mx-auto max-w-3xl">
@@ -41,7 +41,7 @@ export const LandingTeasers = () => {
                 <CardTitle>{teaser.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-earth-600">{teaser.description}</p>
+                <p className="text-granite-700">{teaser.description}</p>
               </CardContent>
               <CardFooter>
                 <Link to={teaser.to}>

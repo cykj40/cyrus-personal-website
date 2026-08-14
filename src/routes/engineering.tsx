@@ -28,7 +28,7 @@ const stagger = {
 
 function PageHeader() {
   return (
-    <section className="bg-gradient-to-br from-forest-50 via-white to-mountain-50 bg-topographic pt-28 pb-16">
+    <section className="bg-gradient-to-br from-pine-50 via-white to-ridge-50 bg-topographic pt-28 pb-16">
       <div className="container mx-auto px-4">
         <motion.div
           variants={stagger}
@@ -40,7 +40,7 @@ function PageHeader() {
             <Link
               to="/"
               search={{ scrollTo: '' }}
-              className="inline-flex items-center gap-2 text-sm text-earth-500 hover:text-forest-600 transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-granite-600 hover:text-pine-600 transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to Portfolio
@@ -49,44 +49,44 @@ function PageHeader() {
 
           <motion.h1
             variants={fadeUp}
-            className="text-5xl font-bold text-forest-900 sm:text-6xl mb-3"
+            className="text-5xl font-bold text-pine-900 sm:text-6xl mb-3"
           >
             Cyrus Khiabani
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
-            className="text-xl font-medium text-mountain-600 mb-6"
+            className="text-xl font-medium text-ridge-700 mb-6"
           >
             AI Engineer &nbsp;·&nbsp; MCP Server Developer &nbsp;·&nbsp; Full-Stack Engineer
           </motion.p>
 
           <motion.div
             variants={fadeUp}
-            className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-earth-500 mb-8"
+            className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-granite-600 mb-8"
           >
             <span className="flex items-center gap-1.5">
-              <MapPin className="h-4 w-4 text-forest-500" />
+              <MapPin className="h-4 w-4 text-pine-500" />
               Holmdel, NJ
             </span>
-            <a href="tel:6467456825" className="flex items-center gap-1.5 hover:text-forest-600 transition-colors">
-              <Phone className="h-4 w-4 text-forest-500" />
+            <a href="tel:6467456825" className="flex items-center gap-1.5 hover:text-pine-600 transition-colors">
+              <Phone className="h-4 w-4 text-pine-500" />
               (646) 745-6825
             </a>
-            <a href="mailto:cyrus@cyruskhiabani.com" className="flex items-center gap-1.5 hover:text-forest-600 transition-colors">
-              <Mail className="h-4 w-4 text-forest-500" />
+            <a href="mailto:cyrus@cyruskhiabani.com" className="flex items-center gap-1.5 hover:text-pine-600 transition-colors">
+              <Mail className="h-4 w-4 text-pine-500" />
               cyrus@cyruskhiabani.com
             </a>
-            <a href="https://cyruskhiabani.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-forest-600 transition-colors">
-              <Globe className="h-4 w-4 text-forest-500" />
+            <a href="https://cyruskhiabani.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-pine-600 transition-colors">
+              <Globe className="h-4 w-4 text-pine-500" />
               cyruskhiabani.com
             </a>
-            <a href="https://github.com/cykj40" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-forest-600 transition-colors">
-              <Github className="h-4 w-4 text-forest-500" />
+            <a href="https://github.com/cykj40" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-pine-600 transition-colors">
+              <Github className="h-4 w-4 text-pine-500" />
               github.com/cykj40
             </a>
-            <a href="https://www.linkedin.com/in/cyrus-jalili-khiabani-44605b163" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-forest-600 transition-colors">
-              <Linkedin className="h-4 w-4 text-forest-500" />
+            <a href="https://www.linkedin.com/in/cyrus-jalili-khiabani-44605b163" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-pine-600 transition-colors">
+              <Linkedin className="h-4 w-4 text-pine-500" />
               LinkedIn
             </a>
           </motion.div>
@@ -120,11 +120,11 @@ function SummarySection() {
         >
           <motion.h2
             variants={fadeUp}
-            className="text-2xl font-bold text-forest-900 mb-6 pb-3 border-b-2 border-forest-100"
+            className="text-2xl font-bold text-pine-900 mb-6 pb-3 border-b-2 border-pine-100"
           >
             Summary
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-earth-600 leading-relaxed text-base">
+          <motion.p variants={fadeUp} className="text-granite-700 leading-relaxed text-base">
             AI Engineer and Full-Stack Developer specializing in production-grade LLM integration,
             MCP server development, and agentic workflow automation. Currently building T1Copilot —
             an open-source, self-hosted multi-agent AI platform for Type 1 Diabetes management,
@@ -141,7 +141,7 @@ function SummarySection() {
 
 function SkillsSection() {
   return (
-    <section className="py-14 bg-forest-50/40">
+    <section className="py-14 bg-pine-50/40">
       <div className="container mx-auto px-4">
         <motion.div
           variants={stagger}
@@ -151,7 +151,7 @@ function SkillsSection() {
         >
           <motion.h2
             variants={fadeUp}
-            className="text-2xl font-bold text-forest-900 mb-8 pb-3 border-b-2 border-forest-100 max-w-3xl mx-auto"
+            className="text-2xl font-bold text-pine-900 mb-8 pb-3 border-b-2 border-pine-100 max-w-3xl mx-auto"
           >
             Technical Skills
           </motion.h2>
@@ -168,7 +168,7 @@ function SkillsSection() {
                       {cat.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="rounded-full bg-mountain-50 px-3 py-1 text-xs text-mountain-700"
+                          className="rounded-full bg-ridge-50 px-3 py-1 text-xs text-ridge-700"
                         >
                           {skill}
                         </span>
@@ -224,7 +224,7 @@ function ExperienceSection() {
         >
           <motion.h2
             variants={fadeUp}
-            className="text-2xl font-bold text-forest-900 mb-8 pb-3 border-b-2 border-forest-100"
+            className="text-2xl font-bold text-pine-900 mb-8 pb-3 border-b-2 border-pine-100"
           >
             Experience
           </motion.h2>
@@ -232,25 +232,25 @@ function ExperienceSection() {
           <motion.div variants={fadeUp}>
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-1">
               <div>
-                <h3 className="text-lg font-bold text-forest-900">
+                <h3 className="text-lg font-bold text-pine-900">
                   Long &amp; DeLosa Construction Group
                 </h3>
-                <p className="text-sm text-mountain-600 font-medium">
+                <p className="text-sm text-ridge-700 font-medium">
                   Technical Project Manager &amp; AI Automation Engineer
                 </p>
               </div>
-              <div className="text-sm text-earth-500 sm:text-right mt-1 sm:mt-0 shrink-0">
+              <div className="text-sm text-granite-600 sm:text-right mt-1 sm:mt-0 shrink-0">
                 <p>Brooklyn, NY</p>
                 <p>Feb 2020 – Present</p>
               </div>
             </div>
 
-            <ul className="mt-5 space-y-3 border-l-2 border-forest-200 pl-5">
+            <ul className="mt-5 space-y-3 border-l-2 border-pine-200 pl-5">
               {experienceBullets.map((b) => (
                 <li key={b.label} className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-forest-500 mt-0.5 shrink-0" />
-                  <span className="text-sm text-earth-600 leading-relaxed">
-                    <strong className="text-forest-800">{b.label}:</strong> {b.text}
+                  <CheckCircle2 className="h-4 w-4 text-pine-500 mt-0.5 shrink-0" />
+                  <span className="text-sm text-granite-700 leading-relaxed">
+                    <strong className="text-pine-800">{b.label}:</strong> {b.text}
                   </span>
                 </li>
               ))}
@@ -267,7 +267,7 @@ const engineeringProjects = projectsData.filter((project) => !caseStudyProjectId
 
 function ProjectsSection() {
   return (
-    <section className="py-14 bg-forest-50/40">
+    <section className="py-14 bg-pine-50/40">
       <div className="container mx-auto px-4 max-w-3xl">
         <motion.div
           variants={stagger}
@@ -277,28 +277,28 @@ function ProjectsSection() {
         >
           <motion.h2
             variants={fadeUp}
-            className="text-2xl font-bold text-forest-900 mb-8 pb-3 border-b-2 border-forest-100"
+            className="text-2xl font-bold text-pine-900 mb-8 pb-3 border-b-2 border-pine-100"
           >
             More Engineering Projects
           </motion.h2>
 
           <motion.div variants={fadeUp}>
-            <Card className="divide-y divide-earth-400/20 p-0">
+            <Card className="divide-y divide-granite-400/20 p-0">
               {engineeringProjects.map((project) => (
                 <div
                   key={project.id}
                   className="flex flex-col gap-2 p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-6"
                 >
                   <div>
-                    <h3 className="font-bold text-forest-900">{project.title}</h3>
-                    <p className="mt-1 text-sm text-earth-600">{project.description}</p>
+                    <h3 className="font-bold text-pine-900">{project.title}</h3>
+                    <p className="mt-1 text-sm text-granite-700">{project.description}</p>
                   </div>
                   {project.github && (
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex shrink-0 items-center gap-1 text-sm text-mountain-600 transition-colors hover:text-mountain-700"
+                      className="flex shrink-0 items-center gap-1 text-sm text-ridge-700 transition-colors hover:text-ridge-700"
                     >
                       <Github className="h-4 w-4" />
                       Repository
@@ -357,7 +357,7 @@ function EducationSection() {
         >
           <motion.h2
             variants={fadeUp}
-            className="text-2xl font-bold text-forest-900 mb-8 pb-3 border-b-2 border-forest-100"
+            className="text-2xl font-bold text-pine-900 mb-8 pb-3 border-b-2 border-pine-100"
           >
             Education &amp; Certifications
           </motion.h2>
@@ -366,21 +366,21 @@ function EducationSection() {
             {education.map((edu) => (
               <div key={edu.institution} className="flex flex-col sm:flex-row sm:justify-between gap-1">
                 <div>
-                  <h3 className="font-bold text-forest-900">{edu.institution}</h3>
-                  <p className="text-sm text-mountain-600 font-medium">{edu.credential}</p>
-                  <p className="text-sm text-earth-500 mt-0.5">{edu.detail}</p>
+                  <h3 className="font-bold text-pine-900">{edu.institution}</h3>
+                  <p className="text-sm text-ridge-700 font-medium">{edu.credential}</p>
+                  <p className="text-sm text-granite-600 mt-0.5">{edu.detail}</p>
                 </div>
-                <p className="text-sm text-earth-400 shrink-0 sm:text-right">{edu.period}</p>
+                <p className="text-sm text-granite-400 shrink-0 sm:text-right">{edu.period}</p>
               </div>
             ))}
           </motion.div>
 
           <motion.div variants={fadeUp}>
-            <h3 className="font-bold text-forest-900 mb-4">Certifications</h3>
+            <h3 className="font-bold text-pine-900 mb-4">Certifications</h3>
             <ul className="space-y-2">
               {certifications.map((cert) => (
-                <li key={cert} className="flex items-start gap-2 text-sm text-earth-600">
-                  <CheckCircle2 className="h-4 w-4 text-forest-500 mt-0.5 shrink-0" />
+                <li key={cert} className="flex items-start gap-2 text-sm text-granite-700">
+                  <CheckCircle2 className="h-4 w-4 text-pine-500 mt-0.5 shrink-0" />
                   {cert}
                 </li>
               ))}
@@ -404,7 +404,7 @@ function StickyDownload() {
       className="hidden md:block fixed bottom-6 left-6 z-40"
       aria-label="Download resume PDF"
     >
-      <Button size="md" className="shadow-lg shadow-forest-900/20">
+      <Button size="md" className="shadow-lg shadow-pine-900/20">
         <Download className="h-4 w-4 mr-2" />
         Download PDF
       </Button>

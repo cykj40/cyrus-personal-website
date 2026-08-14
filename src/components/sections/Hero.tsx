@@ -1,185 +1,116 @@
-import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowDown } from 'lucide-react';
 import { Link } from '@tanstack/react-router';
 import { track } from '@vercel/analytics/react';
-import { Button } from '@/components/ui/Button';
+import { TopographicContours } from '@/components/ui/TopographicContours';
 import { scrollToSection } from '@/lib/utils';
 
-// Typographic proof strip — no cards, no icons.
-const proofStats = [
-  { stat: '90% less manual billing work', label: 'construction firm, 50+ field users' },
-  { stat: '5 production MCP servers', label: 'shipped and running on real infrastructure' },
-  { stat: '30 min → 5 min', label: 'timesheet-to-invoice cycle' },
+/**
+ * Proof strip. Set as a map scale bar — hairline rule, mono, tabular figures —
+ * so the numbers read as measurements rather than marketing tiles.
+ */
+const proof = [
+  { value: '90%', label: 'ops reduction' },
+  { value: '6', label: 'production MCP servers & AI systems' },
+  { value: '50+', label: 'daily field users' },
+  { value: '55 tests / 9 suites', label: 'on Peloton MCP' },
 ];
 
-// A REAL, sanitized call to the TSheets/QuickBooks Time MCP server.
-// Tool name, input fields (dateRange), and result fields (totalHours,
-// userTotals[].userName/hours, jobcodeTotals[].jobcodeName/hours) are taken
-// verbatim from the actual server source (cykj40/Tsheets-MCP,
-// src/index.ts + src/tools/get-project-report-summary.ts). Every identifying
-// value — employee names, job numbers, client names, IDs — is replaced with a
-// generic placeholder. Static; no typing/cursor animation.
-function ToolCallPane() {
-  const key = 'text-forest-200';
-  const str = 'text-mountain-200';
-  const num = 'text-sunrise-400';
-  const punc = 'text-earth-400';
-  return (
-    <div className="w-full max-w-[520px] overflow-hidden rounded-xl border border-forest-800 bg-forest-900 font-mono text-xs shadow-2xl">
-      {/* Title bar */}
-      <div className="flex items-center gap-2 border-b border-white/10 bg-forest-800 px-4 py-2.5">
-        <span className="h-2.5 w-2.5 rounded-full bg-sunrise-500/80" />
-        <span className="h-2.5 w-2.5 rounded-full bg-sunrise-400/50" />
-        <span className="h-2.5 w-2.5 rounded-full bg-forest-400/70" />
-        <span className="ml-2 text-[11px] text-earth-400">tsheets-mcp · claude</span>
-      </div>
-      {/* Body */}
-      <div className="overflow-x-auto p-4 leading-relaxed text-forest-50">
-        <div className="space-y-1 whitespace-nowrap">
-          <div>
-            <span className={punc}>tool_use →</span>{' '}
-            <span className={str}>get_project_report_summary</span>
-          </div>
-          <div>
-            <span className={punc}>{'{ '}</span>
-            <span className={key}>"dateRange"</span>
-            <span className={punc}>: </span>
-            <span className={str}>"last week"</span>
-            <span className={punc}>{' }'}</span>
-          </div>
-          <div className="h-2" />
-          <div>
-            <span className={punc}>tool_result ←</span>
-          </div>
-          <div>
-            <span className={punc}>{'{'}</span>
-          </div>
-          <div className="pl-3">
-            <span className={key}>"totalHours"</span>
-            <span className={punc}>: </span>
-            <span className={num}>342.5</span>
-            <span className={punc}>,</span>
-          </div>
-          <div className="pl-3">
-            <span className={key}>"userTotals"</span>
-            <span className={punc}>: [ {'{ '}</span>
-            <span className={key}>"userName"</span>
-            <span className={punc}>: </span>
-            <span className={str}>"Employee A"</span>
-            <span className={punc}>, </span>
-            <span className={key}>"hours"</span>
-            <span className={punc}>: </span>
-            <span className={num}>41.0</span>
-            <span className={punc}> {'}'}, … ]</span>
-          </div>
-          <div className="pl-3">
-            <span className={key}>"jobcodeTotals"</span>
-            <span className={punc}>: [ {'{ '}</span>
-            <span className={key}>"jobcodeName"</span>
-            <span className={punc}>: </span>
-            <span className={str}>"Project 1"</span>
-            <span className={punc}>, </span>
-            <span className={key}>"hours"</span>
-            <span className={punc}>: </span>
-            <span className={num}>118.5</span>
-            <span className={punc}> {'}'}, … ]</span>
-          </div>
-          <div>
-            <span className={punc}>{'}'}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export const Hero = () => {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen bg-gradient-to-br from-forest-50 via-white to-mountain-50 bg-topographic"
-    >
-      <div className="container mx-auto flex min-h-screen items-center px-4 pt-16">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Left Column - Text Content */}
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col justify-center"
-          >
-            <div className="mb-4 inline-block">
-              <span className="rounded-full bg-forest-100 px-4 py-1.5 text-sm font-medium text-forest-700">
-                AI integration &amp; automation
-              </span>
-            </div>
-            <h1 className="mb-6 text-4xl font-bold leading-tight text-forest-900 sm:text-5xl lg:text-6xl">
-              AI that plugs into{' '}
-              <span className="text-gradient-mountain">the software you already run.</span>
-            </h1>
-            <p className="mb-8 max-w-xl text-lg text-earth-500 sm:text-xl">
-              I build custom agents, MCP servers, and assistants that connect Claude and GPT to
-              your real tools — QuickBooks, Procore, your database, your internal APIs. Not demos.
-              Systems that run in production and get used every week.
-            </p>
+    <section id="hero" className="relative isolate min-h-svh overflow-hidden bg-pine-900">
+      <TopographicContours />
 
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4">
-              <Link to="/contact" onClick={() => track('cta_hero_book')}>
-                <Button size="lg">Get in touch</Button>
-              </Link>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => scrollToSection('work')}
+      {/* Atmosphere over the summits, so the field has a light source. */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[1]"
+        style={{
+          background:
+            'radial-gradient(58% 62% at 74% 34%, rgba(95,168,160,0.16) 0%, rgba(95,168,160,0.05) 42%, rgba(95,168,160,0) 72%)',
+        }}
+      />
+
+      {/* Legibility scrim. Vertical on narrow screens where the copy spans the
+          full width; from md up it becomes a left margin the terrain fades out
+          of, keeping the map visible where nothing is set over it. */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] md:hidden"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(14,42,31,0.86) 0%, rgba(14,42,31,0.58) 46%, rgba(14,42,31,0.40) 72%, rgba(14,42,31,0.30) 100%)',
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] hidden md:block"
+        style={{
+          background:
+            'linear-gradient(92deg, #0E2A1F 0%, rgba(14,42,31,0.94) 24%, rgba(14,42,31,0.62) 41%, rgba(14,42,31,0.16) 55%, rgba(14,42,31,0) 66%)',
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 z-[1]"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(8,26,19,0.45) 0%, rgba(8,26,19,0) 18%, rgba(8,26,19,0) 62%, rgba(8,26,19,0.55) 100%)',
+        }}
+      />
+
+      <div className="container relative z-[2] mx-auto flex min-h-svh flex-col justify-center px-5 pb-[4.5rem] pt-[5.75rem] sm:px-6 sm:pb-20 sm:pt-28">
+        <div className="max-w-3xl">
+          {/* Availability — an eyebrow, not a section. */}
+          <span className="inline-flex items-baseline gap-2.5 rounded-full border border-ocean-400/30 bg-ocean-400/[0.07] px-3 py-1.5 font-mono text-[0.625rem] uppercase tracking-[0.055em] text-ocean-200 sm:px-4 sm:text-xs sm:tracking-[0.09em]">
+            <span className="size-1.5 shrink-0 self-center rounded-full bg-ocean-400 ring-[3px] ring-ocean-400/20" />
+            Open to Full-time · Part-time · Freelance
+          </span>
+
+          <h1 className="mt-5 font-display text-[clamp(2.9rem,8vw,5.75rem)] font-semibold leading-[0.94] tracking-[-0.025em] text-birch-100">
+            AI-First Programmer<span className="text-ocean-400">.</span>
+          </h1>
+
+          <p className="mt-4 max-w-xl text-[clamp(1.05rem,1.6vw,1.3rem)] leading-relaxed text-pine-100">
+            Chatbots, agents &amp; MCP servers that run in production — not demos.
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              to="/hire-me"
+              onClick={() => track('cta_hero_hire')}
+              className="inline-flex h-[3.25rem] w-full items-center justify-center rounded-lg bg-ember-500 px-7 text-base font-semibold text-pine-950 transition-colors hover:bg-ember-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-300 focus-visible:ring-offset-2 focus-visible:ring-offset-pine-900 min-[480px]:w-auto"
+            >
+              Hire Me
+            </Link>
+            <Link
+              to="/services"
+              onClick={() => track('cta_hero_freelance')}
+              className="inline-flex h-[3.25rem] w-full items-center justify-center rounded-lg border border-birch-100/30 bg-pine-900/45 px-7 text-base font-semibold text-birch-100 transition-colors hover:border-ocean-400/60 hover:bg-pine-800/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-300 focus-visible:ring-offset-2 focus-visible:ring-offset-pine-900 min-[480px]:w-auto"
+            >
+              Freelance &amp; Project Work
+            </Link>
+          </div>
+
+          <ul className="mt-10 grid max-w-4xl grid-cols-1 font-mono text-xs tracking-[0.03em] tabular-nums min-[400px]:grid-cols-2 min-[400px]:gap-x-5 sm:mt-14 lg:grid-cols-4">
+            {proof.map((item) => (
+              <li
+                key={item.label}
+                className="mt-2.5 border-t border-ocean-400/30 pt-3 leading-normal text-pine-300"
               >
-                See case studies
-              </Button>
-            </div>
-
-            {/* Proof strip — one row of three (sm+), clean stack on mobile */}
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-6 border-t border-earth-400/20 pt-8 sm:grid-cols-3">
-              {proofStats.map((s) => (
-                <div key={s.stat}>
-                  <p className="text-lg font-bold text-forest-800">{s.stat}</p>
-                  <p className="mt-1 text-sm text-earth-500">{s.label}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Right Column - Real MCP tool call.
-              Hidden below md (cramped at 375px); on md–lg it stacks below the
-              copy, at lg+ it sits in the second column. */}
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="hidden items-center justify-center md:flex"
-          >
-            <ToolCallPane />
-          </motion.div>
+                <span className="mb-0.5 block text-sm font-medium tracking-[0.01em] text-ocean-300">
+                  {item.value}
+                </span>
+                {item.label}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      <button
+        type="button"
+        onClick={() => scrollToSection('work')}
+        aria-label="Scroll to next section"
+        className="absolute bottom-6 left-1/2 z-[2] hidden -translate-x-1/2 flex-col items-center gap-2 p-2 font-mono text-[0.6rem] uppercase tracking-[0.16em] text-ocean-400 transition-colors hover:text-ocean-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-300 focus-visible:ring-offset-2 focus-visible:ring-offset-pine-900 md:flex"
       >
-        <button
-          onClick={() => scrollToSection('services')}
-          className="flex flex-col items-center gap-2 text-earth-400 transition-colors hover:text-forest-600"
-          aria-label="Scroll to next section"
-        >
-          <span className="text-sm">Scroll Down</span>
-          <ArrowDown className="h-5 w-5 animate-bounce motion-reduce:animate-none" />
-        </button>
-      </motion.div>
+        Scroll
+        <span className="block h-6 w-px animate-topo-cue bg-gradient-to-b from-ocean-400/0 to-ocean-400/75 motion-reduce:animate-none motion-reduce:opacity-90" />
+      </button>
     </section>
   );
 };

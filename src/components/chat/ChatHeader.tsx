@@ -6,7 +6,7 @@ interface ChatHeaderProps {
 
 export function ChatHeader({ onClose }: ChatHeaderProps) {
   return (
-    <div className="h-14 bg-gradient-to-r from-forest-600 to-forest-700 text-white px-4 rounded-t-2xl flex items-center justify-between border-b border-forest-800">
+    <div className="h-14 bg-gradient-to-r from-pine-600 to-pine-700 text-white px-4 rounded-t-2xl flex items-center justify-between border-b border-pine-800">
       <div className="flex items-center gap-3">
         <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
           <Bot className="w-5 h-5 text-white" />

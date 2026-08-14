@@ -64,17 +64,17 @@ export const Services = () => {
                 <Card hover className="flex h-full flex-col">
                   <CardHeader>
                     <div className="mb-4 flex items-center gap-3">
-                      <div className="rounded-lg bg-forest-100 p-3">
-                        <Icon className="h-6 w-6 text-forest-600" />
+                      <div className="rounded-lg bg-pine-100 p-3">
+                        <Icon className="h-6 w-6 text-pine-600" />
                       </div>
                       <CardTitle>{service.title}</CardTitle>
                     </div>
-                    <p className="text-earth-600">{service.description}</p>
+                    <p className="text-granite-700">{service.description}</p>
                   </CardHeader>
 
                   <CardContent className="flex-1">
-                    <p className="text-sm text-earth-600">
-                      <span className="font-medium text-forest-800">Best for:</span>{' '}
+                    <p className="text-sm text-granite-700">
+                      <span className="font-medium text-pine-800">Best for:</span>{' '}
                       {service.bestFor}
                     </p>
                   </CardContent>

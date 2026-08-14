@@ -27,7 +27,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
     >
       {!isUser && (
         <div className="flex-shrink-0">
-          <div className="w-8 h-8 rounded-full bg-forest-600 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-pine-600 flex items-center justify-center">
             <Bot className="w-5 h-5 text-white" />
           </div>
         </div>
@@ -36,8 +36,8 @@ export function ChatMessage({ message }: ChatMessageProps) {
       <div
         className={`max-w-[80%] rounded-2xl px-4 py-2.5 ${
           isUser
-            ? 'bg-mountain-500 text-white'
-            : 'bg-forest-50 text-forest-900'
+            ? 'bg-ridge-500 text-white'
+            : 'bg-pine-50 text-pine-900'
         }`}
       >
         <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">
@@ -54,15 +54,15 @@ export function TypingIndicator() {
   return (
     <div className="flex gap-3 justify-start">
       <div className="flex-shrink-0">
-        <div className="w-8 h-8 rounded-full bg-forest-600 flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full bg-pine-600 flex items-center justify-center">
           <Bot className="w-5 h-5 text-white" />
         </div>
       </div>
 
-      <div className="bg-forest-50 rounded-2xl px-4 py-3">
+      <div className="bg-pine-50 rounded-2xl px-4 py-3">
         <div className="flex gap-1">
           <motion.div
-            className="w-2 h-2 rounded-full bg-forest-600"
+            className="w-2 h-2 rounded-full bg-pine-600"
             animate={{
               y: [0, -6, 0],
             }}
@@ -73,7 +73,7 @@ export function TypingIndicator() {
             }}
           />
           <motion.div
-            className="w-2 h-2 rounded-full bg-forest-600"
+            className="w-2 h-2 rounded-full bg-pine-600"
             animate={{
               y: [0, -6, 0],
             }}
@@ -85,7 +85,7 @@ export function TypingIndicator() {
             }}
           />
           <motion.div
-            className="w-2 h-2 rounded-full bg-forest-600"
+            className="w-2 h-2 rounded-full bg-pine-600"
             animate={{
               y: [0, -6, 0],
             }}

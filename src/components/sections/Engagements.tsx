@@ -54,15 +54,15 @@ export const Engagements = () => {
                   <CardTitle>{engagement.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-1">
-                  <p className="text-earth-600">{engagement.description}</p>
+                  <p className="text-granite-700">{engagement.description}</p>
                 </CardContent>
-                <CardFooter className="border-t border-earth-400/20 pt-4">
+                <CardFooter className="border-t border-granite-400/20 pt-4">
                   <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-earth-500">Price</p>
+                    <p className="text-xs font-medium uppercase tracking-wide text-granite-600">Price</p>
                     {engagement.price ? (
-                      <p className="mt-1 text-xl font-bold text-forest-900">{engagement.price}</p>
+                      <p className="mt-1 text-xl font-bold text-pine-900">{engagement.price}</p>
                     ) : (
-                      <p className="mt-1 text-sm text-earth-500">
+                      <p className="mt-1 text-sm text-granite-600">
                         {/* TODO: fill in price */}
                         To be confirmed
                       </p>

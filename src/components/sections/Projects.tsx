@@ -11,7 +11,7 @@ export const Projects = () => {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="work" className="bg-forest-50/30 py-20">
+    <section id="work" className="bg-pine-50/30 py-20">
       <div className="container mx-auto px-4">
         <SectionHeading
           title="Case Studies"
@@ -31,16 +31,16 @@ export const Projects = () => {
               >
                 <Card hover className="flex h-full flex-col">
                   <CardHeader>
-                    <p className="text-sm font-medium text-mountain-600">{caseStudy.client}</p>
+                    <p className="text-sm font-medium text-ridge-700">{caseStudy.client}</p>
                     <CardTitle>{caseStudy.title}</CardTitle>
-                    <p className="text-sm text-earth-500">{caseStudy.problem}</p>
+                    <p className="text-sm text-granite-600">{caseStudy.problem}</p>
                   </CardHeader>
 
                   <CardContent className="flex-1">
                     <ul className="mb-5 space-y-2">
                       {caseStudy.result.map((outcome) => (
-                        <li key={outcome} className="flex items-start gap-2 text-sm text-earth-600">
-                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-forest-500" />
+                        <li key={outcome} className="flex items-start gap-2 text-sm text-granite-700">
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-pine-500" />
                           {outcome}
                         </li>
                       ))}
@@ -50,7 +50,7 @@ export const Projects = () => {
                       {caseStudy.stack.map((tech) => (
                         <span
                           key={tech}
-                          className="rounded-full bg-mountain-50 px-2 py-1 text-xs text-mountain-700"
+                          className="rounded-full bg-ridge-50 px-2 py-1 text-xs text-ridge-700"
                         >
                           {tech}
                         </span>

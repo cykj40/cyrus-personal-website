@@ -157,8 +157,8 @@ export const SchedulingSlot = () => {
   return (
     <Card className="bg-white/70 shadow-none">
       <CardContent className="py-5">
-        <p className="font-medium text-forest-900">Prefer to talk it through?</p>
-        <p className="mt-1 text-sm text-earth-600">
+        <p className="font-medium text-pine-900">Prefer to talk it through?</p>
+        <p className="mt-1 text-sm text-granite-700">
           You can also book a 30-minute call.
         </p>
         <div
@@ -217,7 +217,7 @@ export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) =
   };
 
   return (
-    <section id="contact" className="bg-forest-50/30 py-20">
+    <section id="contact" className="bg-pine-50/30 py-20">
       <div className="container mx-auto px-4">
         <SectionHeading
           title="Get In Touch"
@@ -235,8 +235,8 @@ export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) =
             <Card>
               <CardContent className="py-6">
                 <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-forest-900">Send a message</h3>
-                  <p className="mt-2 text-earth-600">
+                  <h3 className="text-2xl font-bold text-pine-900">Send a message</h3>
+                  <p className="mt-2 text-granite-700">
                     Tell me what you’re working on and I’ll follow up by email.
                   </p>
                 </div>
@@ -244,14 +244,14 @@ export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) =
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                   {/* Name */}
                   <div>
-                    <label htmlFor="name" className="mb-1 block text-sm font-medium text-forest-900">
+                    <label htmlFor="name" className="mb-1 block text-sm font-medium text-pine-900">
                       Name
                     </label>
                     <input
                       id="name"
                       type="text"
                       {...register('name')}
-                      className="w-full rounded-lg border border-earth-400/30 px-4 py-2 focus:border-forest-500 focus:outline-none focus:ring-2 focus:ring-forest-500/20"
+                      className="w-full rounded-lg border border-granite-400/30 px-4 py-2 focus:border-pine-500 focus:outline-none focus:ring-2 focus:ring-pine-500/20"
                       placeholder="Your name"
                     />
                     {errors.name && (
@@ -261,14 +261,14 @@ export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) =
 
                   {/* Email */}
                   <div>
-                    <label htmlFor="email" className="mb-1 block text-sm font-medium text-forest-900">
+                    <label htmlFor="email" className="mb-1 block text-sm font-medium text-pine-900">
                       Email
                     </label>
                     <input
                       id="email"
                       type="email"
                       {...register('email')}
-                      className="w-full rounded-lg border border-earth-400/30 px-4 py-2 focus:border-forest-500 focus:outline-none focus:ring-2 focus:ring-forest-500/20"
+                      className="w-full rounded-lg border border-granite-400/30 px-4 py-2 focus:border-pine-500 focus:outline-none focus:ring-2 focus:ring-pine-500/20"
                       placeholder="your.email@example.com"
                     />
                     {errors.email && (
@@ -280,7 +280,7 @@ export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) =
                   <div>
                     <label
                       htmlFor="service"
-                      className="mb-1 block text-sm font-medium text-forest-900"
+                      className="mb-1 block text-sm font-medium text-pine-900"
                     >
                       What do you need?
                     </label>
@@ -289,7 +289,7 @@ export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) =
                       {...register('service', {
                         setValueAs: (value) => value || undefined,
                       })}
-                      className="w-full rounded-lg border border-earth-400/30 bg-white px-4 py-2 focus:border-forest-500 focus:outline-none focus:ring-2 focus:ring-forest-500/20"
+                      className="w-full rounded-lg border border-granite-400/30 bg-white px-4 py-2 focus:border-pine-500 focus:outline-none focus:ring-2 focus:ring-pine-500/20"
                     >
                       <option value="">Select a service</option>
                       {contactServiceOptions.map((option) => (
@@ -305,14 +305,14 @@ export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) =
 
                   {/* Subject */}
                   <div>
-                    <label htmlFor="subject" className="mb-1 block text-sm font-medium text-forest-900">
+                    <label htmlFor="subject" className="mb-1 block text-sm font-medium text-pine-900">
                       Subject
                     </label>
                     <input
                       id="subject"
                       type="text"
                       {...register('subject')}
-                      className="w-full rounded-lg border border-earth-400/30 px-4 py-2 focus:border-forest-500 focus:outline-none focus:ring-2 focus:ring-forest-500/20"
+                      className="w-full rounded-lg border border-granite-400/30 px-4 py-2 focus:border-pine-500 focus:outline-none focus:ring-2 focus:ring-pine-500/20"
                       placeholder="What's this about?"
                     />
                     {errors.subject && (
@@ -322,14 +322,14 @@ export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) =
 
                   {/* Message */}
                   <div>
-                    <label htmlFor="message" className="mb-1 block text-sm font-medium text-forest-900">
+                    <label htmlFor="message" className="mb-1 block text-sm font-medium text-pine-900">
                       Message
                     </label>
                     <textarea
                       id="message"
                       {...register('message')}
                       rows={5}
-                      className="w-full rounded-lg border border-earth-400/30 px-4 py-2 focus:border-forest-500 focus:outline-none focus:ring-2 focus:ring-forest-500/20"
+                      className="w-full rounded-lg border border-granite-400/30 px-4 py-2 focus:border-pine-500 focus:outline-none focus:ring-2 focus:ring-pine-500/20"
                       placeholder="Tell me about your project..."
                     />
                     {errors.message && (
@@ -374,8 +374,8 @@ export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) =
             className="space-y-6"
           >
             <div>
-              <h3 className="mb-4 text-2xl font-bold text-forest-900">Let's Connect</h3>
-              <p className="text-earth-600">
+              <h3 className="mb-4 text-2xl font-bold text-pine-900">Let's Connect</h3>
+              <p className="text-granite-700">
                 I'm always interested in hearing about new projects, opportunities, and
                 collaborations. Whether you need a developer, consultant, or just want to chat about
                 tech—reach out!
@@ -385,14 +385,14 @@ export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) =
             <div className="space-y-4">
               <Card>
                 <CardContent className="flex items-center gap-4 py-4">
-                  <div className="rounded-lg bg-forest-100 p-3">
-                    <Mail className="h-5 w-5 text-forest-600" />
+                  <div className="rounded-lg bg-pine-100 p-3">
+                    <Mail className="h-5 w-5 text-pine-600" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-forest-900">Email</p>
+                    <p className="text-sm font-medium text-pine-900">Email</p>
                     <a
                       href="mailto:cyrus@cyruskhiabani.com"
-                      className="text-earth-600 hover:text-forest-600"
+                      className="text-granite-700 hover:text-pine-600"
                     >
                       cyrus@cyruskhiabani.com
                     </a>
@@ -402,12 +402,12 @@ export const Contact = ({ service, showSchedulingSlot = false }: ContactProps) =
 
               <Card>
                 <CardContent className="flex items-center gap-4 py-4">
-                  <div className="rounded-lg bg-mountain-100 p-3">
-                    <MapPin className="h-5 w-5 text-mountain-600" />
+                  <div className="rounded-lg bg-ridge-100 p-3">
+                    <MapPin className="h-5 w-5 text-ridge-700" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-forest-900">Location</p>
-                    <p className="text-earth-600">New Jersey Shore, USA</p>
+                    <p className="text-sm font-medium text-pine-900">Location</p>
+                    <p className="text-granite-700">New Jersey Shore, USA</p>
                   </div>
                 </CardContent>
               </Card>

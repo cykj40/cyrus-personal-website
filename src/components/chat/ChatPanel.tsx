@@ -63,7 +63,7 @@ export function ChatPanel({ messages, isLoading, error, onSend, onClose }: ChatP
 
       <div
         ref={messagesContainerRef}
-        className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-white to-forest-50/30 scroll-smooth"
+        className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-white to-pine-50/30 scroll-smooth"
         aria-live="polite"
       >
         {messages.map((message) => (
