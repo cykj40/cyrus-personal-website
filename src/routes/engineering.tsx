@@ -61,6 +61,14 @@ function PageHeader() {
             AI Engineer &nbsp;·&nbsp; MCP Server Developer &nbsp;·&nbsp; Full-Stack Engineer
           </motion.p>
 
+          <motion.p
+            variants={fadeUp}
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-ocean-400/30 bg-ocean-400/[0.07] px-4 py-2 text-sm font-medium text-pine-800"
+          >
+            <span className="size-1.5 shrink-0 rounded-full bg-ocean-500 ring-[3px] ring-ocean-400/20" />
+            Open to full-time and part-time roles. Based in Monmouth County, NJ — willing to travel for the right opportunity.
+          </motion.p>
+
           <motion.div
             variants={fadeUp}
             className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-granite-600 mb-8"
@@ -128,11 +136,63 @@ function SummarySection() {
             AI Engineer and Full-Stack Developer specializing in production-grade LLM integration,
             MCP server development, and agentic workflow automation. Currently building T1Copilot —
             an open-source, self-hosted multi-agent AI platform for Type 1 Diabetes management,
-            with 7 specialized agents reasoning over live CGM, workout, and metabolic data. Proven 90%
-            reduction in operational overhead through AI deployments built on TypeScript, Next.js,
+            with a 7-agent graph reasoning over live CGM, workout, and metabolic data. Every medical
+            write passes through a human-in-the-loop gate; no agent autonomously logs insulin or
+            modifies parameters. Proven 90% reduction in operational overhead through AI deployments built on TypeScript, Next.js,
             Vercel AI SDK, and PostgreSQL. Strong bias toward clean architecture, type-safety, and
             systems that scale beyond prototypes.
           </motion.p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function StorySection() {
+  return (
+    <section className="border-y border-granite-400/20 bg-pine-50/40 py-14">
+      <div className="container mx-auto max-w-3xl px-4">
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          <motion.h2
+            variants={fadeUp}
+            className="mb-6 border-b-2 border-pine-100 pb-3 text-2xl font-bold text-pine-900"
+          >
+            The path here
+          </motion.h2>
+          <motion.p variants={fadeUp} className="text-base leading-relaxed text-granite-700">
+            Tech's been an obsession since Atari — arcades, consoles, gadgets, all of it — channeled through a science background into a coding bootcamp about five years ago instead of a lab. Three months in, he picked up GitHub Copilot during its free trial, before AI-assisted coding was common knowledge, and has spent the years since figuring out what actually works — testing tools, refining habits, building AI-first the whole way. A lot of that drive now goes into building the health tech he needs for his own Type 1 diabetes.
+          </motion.p>
+
+          <motion.div
+            variants={fadeUp}
+            className="mt-8 rounded-xl border border-ocean-400/30 bg-white p-5 shadow-sm sm:p-6"
+          >
+            <p className="font-mono text-xs uppercase tracking-[0.09em] text-ridge-700">
+              Continue the conversation
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-granite-700">
+              Use the <span className="font-medium text-pine-900">“Ask me about Cyrus”</span> launcher in the bottom-right corner for the longer version. Try:
+            </p>
+            <ul className="mt-4 flex flex-wrap gap-2" aria-label="Suggested chat questions">
+              {[
+                'What’s Cyrus’s path into tech?',
+                'How does he work with AI coding agents?',
+                'Why is he building health tech?',
+              ].map((question) => (
+                <li
+                  key={question}
+                  className="rounded-full bg-ocean-50 px-3 py-1.5 text-sm text-pine-800"
+                >
+                  {question}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
         </motion.div>
       </div>
     </section>
@@ -187,8 +247,8 @@ function SkillsSection() {
 
 const experienceBullets = [
   {
-    label: 'MCP Server Architecture',
-    text: 'Designed and shipped production TSheets/QuickBooks Time MCP server with full OAuth2 flow, reducing manual timesheet-to-billing processing by 90% and enabling Claude AI to extract, format, and route construction job notes directly into Sage 100 Contractor.',
+    label: 'MCP Servers Shipped',
+    text: 'Designed and shipped production MCP servers, including TSheets/QuickBooks Time with full OAuth2 flow, reducing manual timesheet-to-billing processing by 90% and enabling Claude AI to extract, format, and route construction job notes directly into Sage 100 Contractor.',
   },
   {
     label: 'Agentic AI Deployment',
@@ -337,6 +397,7 @@ const education = [
 ];
 
 const certifications = [
+  'CompTIA A+ Core 1 (220-1101) — passed',
   'DeepLearning.ai — Open Source Models with Hugging Face · Knowledge Graphs for RAG',
   'Kaggle — Python · Machine Learning · Pandas · Intermediate Machine Learning',
   'IBM — Web Development Professional Certificate',
@@ -421,6 +482,7 @@ export function EngineeringContent({ includeAbout = false }: EngineeringContentP
     <>
       <PageHeader />
       <SummarySection />
+      <StorySection />
       <SkillsSection />
       <ExperienceSection />
       <ProjectsSection />
