@@ -12,7 +12,7 @@ const engagements = [
   {
     title: 'Setup & Integration',
     description:
-      'Configure existing MCP servers and AI tools in your systems. The fixed fee covers up to two integrations; each additional integration is $750.',
+      'Configure existing MCP servers and AI tools in your systems. The fixed fee covers up to five integrations; each additional integration is $750.',
     price: '$2,500',
   },
   {

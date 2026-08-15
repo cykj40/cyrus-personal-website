@@ -22,3 +22,7 @@ These defaults are optimized for AI coding agents (and humans) working on apps t
   needed. Always curl https://ai-gateway.vercel.sh/v1/models first; never trust model IDs from memory
 - For durable agent loops or untrusted code: use Workflow (pause/resume/state) + Sandbox; use Vercel MCP for secure infra access
 <!-- VERCEL BEST PRACTICES END -->
+
+## Project documentation
+
+- All phase notes, audit reports, and other session documentation go in `project-notebook/`, not the repo root. Do not create new `.md` files at the repo root except `README.md`, `LICENSE`, and existing agent-instruction files (`AGENTS.md`, `.claud.md`).

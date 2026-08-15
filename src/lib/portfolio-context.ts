@@ -149,32 +149,16 @@ Associate of Science, General Sciences. Mathematics through Calculus I, Chemistr
 
 Sports provided structure and feedback long before academics did.
 
-### Early Career
-- Brief college, then prioritized experience
-- Worked as a stockbroker—learned how markets actually behave; developed skepticism toward narratives detached from incentives
-
-### California Years (2011–2021)
-- Lived in Los Angeles (Sawtelle, Little Tokyo)
-- Met Violetta (together 11 years)
-- Traded stocks and crypto
-- Daily running along the beach; fitness at Equinox
-- Regular travel to Mendocino, Lake Tahoe, Utah, Montana, Wyoming, Idaho
-
-Nature, endurance, and solitude became essential for clarity.
-
 ### Turning Point (Age 33)
-Everything changed:
-- Met Violetta
-- Stopped drinking entirely
-- Enrolled at Santa Monica College
-- A counseling course identified a strong aptitude for science
+Cyrus has been obsessed with technology for as long as he can remember — Atari as a kid, then a run through Nintendo, N64, Sega, and Xbox (PlayStation somehow never stuck), arcades he'd beg to visit more than anywhere else in the world, early internet culture (AOL, Myspace, the whole run), and a running fascination with gadgets from boomboxes and Walkmans to Apple products and GoPros. That same curiosity carries into his current job, where he works daily alongside an analog-minded boss who loves old-school editing tools — equally comfortable bridging both eras.
 
-### Science → Programming Convergence
-- Pursued chemistry seriously after returning to New Jersey
-- Accepted to Rutgers University for chemistry; chose not to enroll
-- Attended a coding bootcamp instead
-- Programming clicked immediately: precision, logic, feedback loops, real consequences
-- Fully committed since
+He was also a serious science kid — geology, chemistry, and physics all held his attention — and that curiosity followed him to Santa Monica College, where he studied broadly before settling on chemistry with a plan to follow it with a coding bootcamp and a shot at quantum computing. COVID reshaped those plans, and about five years ago he pivoted fully into a web development bootcamp instead. Three months in, he picked up GitHub Copilot during an early free trial — before AI-assisted coding was common knowledge — and has spent the years since finding the workflow that actually works for him: testing tools, refining habits, building AI-first from the start rather than bolting it on later.
+
+Outside of code, he grew up fascinated by aviation and the military — jets, planes, boats, drones, a childhood dream of flying fighter jets in the Navy, and a long-running interest in military history.
+
+He shares his life with his partner, Violetta, together for more than a decade.
+
+A lot of his most personal work traces back to a specific drive: he's a Type 1 diabetic, and a significant part of his portfolio — Dexcom CGM integration, the Peloton-glucose correlation MCP server, and T1Copilot's full multi-agent system — comes from building the tools he actually needs to manage his own health. It's the clearest example of him building something because it has to work, not because it's a portfolio piece.
 
 ---
 
@@ -255,9 +239,7 @@ depends on. The record on how that access gets handled:
 
 ## Professional Background
 
-Before software, Cyrus worked as a stockbroker — a licensed role in a regulated
-industry, handling other people's money under compliance obligations. He then
-studied science, completed an associate degree at Santa Monica College, finished
+Cyrus studied science, completed an associate degree at Santa Monica College, finished
 the Rutgers full-stack coding bootcamp, and has continued through professional
 certificates and 675+ hours of independent coursework.
 

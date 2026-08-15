@@ -25,7 +25,7 @@ const services = [
     exampleTitle: 'TSheets MCP',
     example: tsheetsBilling.result[0],
     price:
-      'Custom MCP server builds start at $8,000. Existing-server setup is $2,500 for up to two integrations, plus $750 for each additional integration.',
+      'Custom MCP server builds start at $8,000. Existing-server setup is $2,500 for up to five integrations, plus $750 for each additional integration.',
     bestFor: 'third-party APIs, internal tools, and legacy line-of-business software',
     cta: 'Discuss an integration',
     service: 'mcp',
