@@ -1,11 +1,17 @@
 import { useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { track } from '@vercel/analytics/react';
 import { ChatButton } from './ChatButton';
 import { ChatPanel } from './ChatPanel';
 import { useChat } from '@/hooks/useChat';
 
 export function ChatWidget() {
   const { messages, isLoading, error, isOpen, sendMessage, closeChat, openChat } = useChat();
+
+  const handleOpenChat = () => {
+    track('chatbot_open');
+    openChat();
+  };
 
   // Handle Escape key to close chat
   useEffect(() => {
@@ -43,7 +49,7 @@ export function ChatWidget() {
             onClose={closeChat}
           />
         ) : (
-          <ChatButton key="button" onClick={openChat} />
+          <ChatButton key="button" onClick={handleOpenChat} />
         )}
       </AnimatePresence>
     </>

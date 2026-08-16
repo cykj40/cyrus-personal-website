@@ -23,6 +23,7 @@ function CaseStudyPage() {
   const caseStudy = caseStudies.find((entry) => entry.slug === slug);
   const shouldReduceMotion = useReducedMotion();
   const pageTitle = caseStudy ? `${caseStudy.title} | Cyrus Khiabani` : 'Case Study | Cyrus Khiabani';
+  const pageDescription = caseStudy?.problem ?? 'Case studies: production MCP servers, multi-agent AI systems, and automation tools built for real users — not demos.';
   const pageFadeUp = shouldReduceMotion
     ? { hidden: { opacity: 1, y: 0 }, show: { opacity: 1, y: 0 } }
     : fadeUp;
@@ -30,7 +31,11 @@ function CaseStudyPage() {
     ? { hidden: {}, show: {} }
     : stagger;
 
-  useDocumentTitle(pageTitle);
+  useDocumentTitle(pageTitle, {
+    description: pageDescription,
+    image: '/og/work.png',
+    path: `/work/${slug}`,
+  });
 
   if (!caseStudy) {
     return (

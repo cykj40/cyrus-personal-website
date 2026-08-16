@@ -120,6 +120,7 @@ const loadCalScript = (cal: CalFunction) => {
 
 export const SchedulingSlot = () => {
   const embedRef = useRef<HTMLDivElement>(null);
+  const hasTrackedBookingStart = useRef(false);
 
   useEffect(() => {
     const embedElement = embedRef.current;
@@ -134,6 +135,22 @@ export const SchedulingSlot = () => {
     cal.config.forwardQueryParams = true;
 
     let isActive = true;
+    let focusCheckFrame: number | undefined;
+    const handleWindowBlur = () => {
+      focusCheckFrame = window.requestAnimationFrame(() => {
+        const activeElement = document.activeElement;
+        if (
+          !hasTrackedBookingStart.current
+          && activeElement instanceof HTMLIFrameElement
+          && embedElement.contains(activeElement)
+        ) {
+          hasTrackedBookingStart.current = true;
+          track('cal_booking_started', { source: window.location.pathname });
+        }
+      });
+    };
+
+    window.addEventListener('blur', handleWindowBlur);
     void loadCalScript(cal).then(() => {
       if (!isActive) return;
 
@@ -150,6 +167,8 @@ export const SchedulingSlot = () => {
 
     return () => {
       isActive = false;
+      window.removeEventListener('blur', handleWindowBlur);
+      if (focusCheckFrame !== undefined) window.cancelAnimationFrame(focusCheckFrame);
       embedElement.replaceChildren();
     };
   }, []);

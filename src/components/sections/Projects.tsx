@@ -4,7 +4,6 @@ import { track } from '@vercel/analytics/react';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
 import { caseStudies } from '@/data/caseStudies';
 
 export const Projects = () => {
@@ -63,11 +62,10 @@ export const Projects = () => {
                       to="/work/$slug"
                       params={{ slug: caseStudy.slug }}
                       onClick={() => track('case_study_click', { slug: caseStudy.slug })}
+                      className="inline-flex h-9 items-center justify-center rounded-lg border-2 border-pine-600 px-3 text-sm font-medium text-pine-600 transition-all hover:bg-pine-50 active:bg-pine-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-400 focus-visible:ring-offset-2"
                     >
-                      <Button variant="outline" size="sm">
-                        View case study
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
+                      View case study
+                      <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </CardFooter>
                 </Card>

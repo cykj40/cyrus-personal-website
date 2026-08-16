@@ -120,7 +120,7 @@
   }
 
   .text-gradient-ember {
-    @apply bg-gradient-to-r from-ember-600 to-ember-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-ember-800 to-ember-700 bg-clip-text text-transparent;
   }
 }
 
@@ -232,6 +232,15 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
   html {
     scroll-behavior: auto;
   }
@@ -247,4 +256,11 @@
     opacity: 1;
     transform: none;
   }
+}
+
+/* Sitewide keyboard fallback. Component-specific rings can add context, but
+   no interactive control is allowed to lose its visible focus indicator. */
+:where(a[href], button, input, select, textarea, summary, [tabindex]:not([tabindex='-1'])):focus-visible {
+  outline: 2px solid rgb(var(--color-ocean-glass)) !important;
+  outline-offset: 3px !important;
 }

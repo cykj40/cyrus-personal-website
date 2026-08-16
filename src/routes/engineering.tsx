@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { createFileRoute, Link, redirect } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
+import { track } from '@vercel/analytics/react';
 import {
   Download, MapPin, Phone, Mail, Globe, Github, Linkedin,
   ArrowLeft, ExternalLink, CheckCircle2,
@@ -108,14 +109,20 @@ function PageHeader({ onOpenResume }: PageHeaderProps) {
 
           <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
             <Button size="lg" variant="outline" onClick={onOpenResume}>View my resume</Button>
-            <a href={RESUME_PDF_PATH} download>
-              <Button size="lg">
-                <Download className="h-5 w-5 mr-2" />
-                Download PDF
-              </Button>
+            <a
+              href={RESUME_PDF_PATH}
+              download
+              onClick={() => track('resume_download', { source: 'hire_me_header' })}
+              className="inline-flex h-14 items-center justify-center rounded-lg bg-pine-600 px-8 text-lg font-medium text-white transition-all hover:bg-pine-700 active:bg-pine-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-400 focus-visible:ring-offset-2"
+            >
+              <Download className="mr-2 h-5 w-5" />
+              Download PDF
             </a>
-            <Link to="/contact">
-              <Button size="lg" variant="outline">Get in touch</Button>
+            <Link
+              to="/contact"
+              className="inline-flex h-14 items-center justify-center rounded-lg border-2 border-pine-600 px-8 text-lg font-medium text-pine-600 transition-all hover:bg-pine-50 active:bg-pine-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-400 focus-visible:ring-offset-2"
+            >
+              Get in touch
             </Link>
           </motion.div>
         </motion.div>
@@ -470,13 +477,12 @@ function StickyDownload() {
     <a
       href={RESUME_PDF_PATH}
       download
-      className="hidden md:block fixed bottom-6 left-6 z-40"
+      onClick={() => track('resume_download', { source: 'hire_me_sticky' })}
+      className="fixed bottom-6 left-6 z-40 hidden h-11 items-center justify-center rounded-lg bg-pine-600 px-6 text-base font-medium text-white shadow-lg shadow-pine-900/20 transition-all hover:bg-pine-700 active:bg-pine-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-400 focus-visible:ring-offset-2 md:inline-flex"
       aria-label="Download resume PDF"
     >
-      <Button size="md" className="shadow-lg shadow-pine-900/20">
-        <Download className="h-4 w-4 mr-2" />
-        Download PDF
-      </Button>
+      <Download className="mr-2 h-4 w-4" />
+      Download PDF
     </a>
   );
 }
@@ -488,9 +494,14 @@ interface EngineeringContentProps {
 export function EngineeringContent({ includeAbout = false }: EngineeringContentProps) {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
+  const handleOpenResume = () => {
+    track('resume_modal_open');
+    setIsResumeOpen(true);
+  };
+
   return (
     <>
-      <PageHeader onOpenResume={() => setIsResumeOpen(true)} />
+      <PageHeader onOpenResume={handleOpenResume} />
       <SummarySection />
       <StorySection />
       <SkillsSection />

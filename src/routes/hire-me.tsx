@@ -7,7 +7,11 @@ export const Route = createFileRoute('/hire-me')({
 });
 
 function HireMePage() {
-  useDocumentTitle('Hire Me | Cyrus Khiabani');
+  useDocumentTitle('Hire Me | Cyrus Khiabani', {
+    description: 'AI-First Programmer open to full-time and part-time roles. Monmouth County, NJ — willing to travel.',
+    image: '/og/hire-me.png',
+    path: '/hire-me',
+  });
 
   return <EngineeringContent includeAbout />;
 }

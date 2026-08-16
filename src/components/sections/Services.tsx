@@ -4,7 +4,6 @@ import { track } from '@vercel/analytics/react';
 import { Bot, Workflow, Puzzle } from 'lucide-react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
 import { caseStudies } from '@/data/caseStudies';
 import { projectsData } from '@/data/projects';
 
@@ -114,8 +113,9 @@ export const Services = () => {
                       onClick={() =>
                         track(service.analyticsEvent, { service: service.service })
                       }
+                      className="inline-flex h-9 items-center justify-center rounded-lg bg-pine-600 px-3 text-sm font-medium text-white transition-all hover:bg-pine-700 active:bg-pine-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-400 focus-visible:ring-offset-2"
                     >
-                      <Button size="sm">{service.cta}</Button>
+                      {service.cta}
                     </Link>
                   </CardFooter>
                 </Card>

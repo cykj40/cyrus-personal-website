@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
+import { track } from '@vercel/analytics/react';
 import {
   Download, MapPin, Phone, Mail, Globe, Github, Linkedin,
   ExternalLink, CheckCircle2,
 } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 
 // Single source of truth for the resume PDF path — every download button on the
@@ -81,11 +81,14 @@ function ResumeHeader({ headingId }: ResumeHeaderProps) {
           </motion.div>
 
           <motion.div variants={fadeUp}>
-            <a href={RESUME_PDF_PATH} download>
-              <Button size="lg">
-                <Download className="h-5 w-5 mr-2" />
-                Download PDF
-              </Button>
+            <a
+              href={RESUME_PDF_PATH}
+              download
+              onClick={() => track('resume_download', { source: 'resume_modal' })}
+              className="inline-flex h-14 items-center justify-center rounded-lg bg-pine-600 px-8 text-lg font-medium text-white transition-all hover:bg-pine-700 active:bg-pine-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-400 focus-visible:ring-offset-2"
+            >
+              <Download className="mr-2 h-5 w-5" />
+              Download PDF
             </a>
           </motion.div>
         </motion.div>
