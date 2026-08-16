@@ -130,17 +130,17 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background: #3a6b24;
+    background: rgb(var(--color-ocean-glass));
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 12px rgba(45, 80, 22, 0.3);
+    box-shadow: 0 2px 12px rgb(var(--color-ocean-glass) / 0.4);
     transition: box-shadow 0.15s ease;
     flex-shrink: 0;
   }
 
   .robot-btn:hover {
-    box-shadow: 0 4px 18px rgba(45, 80, 22, 0.45);
+    box-shadow: 0 4px 18px rgb(var(--color-ocean-glass) / 0.55);
   }
 
   .robot-svg {
@@ -158,7 +158,7 @@
     padding: 7px 12px;
     font-size: 13px;
     font-weight: 500;
-    color: #2d5016;
+    color: rgb(var(--color-pine-deep));
     white-space: nowrap;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     /* Hidden by default, fades in after 2s on load */
@@ -234,5 +234,17 @@
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .body-bob,
+  .arm-wave,
+  .eye-blink {
+    animation: none;
+  }
+
+  .speech-bubble {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }

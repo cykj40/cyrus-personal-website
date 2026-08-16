@@ -1,8 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { sendChatMessage, ChatAPIError } from '@/lib/chat-api';
-import type { ChatMessage } from '@/types/chat';
-import { WELCOME_MESSAGE } from '@/types/chat';
+import type { ChatErrorState, ChatMessage } from '@/types/chat';
+import { CHAT_ERROR_COPY, DEFAULT_CHAT_ERROR, WELCOME_MESSAGE } from '@/types/chat';
 
 const STORAGE_KEY = 'chat-messages';
 const STORAGE_OPEN_KEY = 'chat-is-open';
@@ -41,7 +41,7 @@ export function useChat() {
     return false;
   });
 
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<ChatErrorState | null>(null);
 
   // Persist messages to sessionStorage
   useEffect(() => {
@@ -78,11 +78,10 @@ export function useChat() {
       setError(null);
     },
     onError: (err: Error) => {
-      if (err instanceof ChatAPIError) {
-        setError(err.message);
-      } else {
-        setError("Sorry, I'm having trouble responding right now. Please try again.");
-      }
+      // Map to friendly copy by code — the server's own message string is kept
+      // generic on purpose and isn't shown to the visitor.
+      const code = err instanceof ChatAPIError ? err.code : undefined;
+      setError((code && CHAT_ERROR_COPY[code]) || DEFAULT_CHAT_ERROR);
     },
   });
 

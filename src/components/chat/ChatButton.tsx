@@ -36,18 +36,18 @@ export function ChatButton({ onClick }: ChatButtonProps) {
             <circle cx="16" cy="3.5" r="1.5" fill="white" opacity="0.7" />
             {/* Left eye */}
             <g className="eye-blink" style={{ transformOrigin: '13px 13px' }}>
-              <circle cx="13" cy="13" r="2" fill="#3a6b24" />
+              <circle cx="13" cy="13" r="2" fill="rgb(var(--color-pine-deep))" />
               <circle cx="13" cy="12.5" r="0.7" fill="white" opacity="0.9" />
             </g>
             {/* Right eye */}
             <g className="eye-blink" style={{ transformOrigin: '19px 13px' }}>
-              <circle cx="19" cy="13" r="2" fill="#3a6b24" />
+              <circle cx="19" cy="13" r="2" fill="rgb(var(--color-pine-deep))" />
               <circle cx="19" cy="12.5" r="0.7" fill="white" opacity="0.9" />
             </g>
             {/* Body */}
             <rect x="8" y="18" width="16" height="11" rx="3" fill="white" opacity="0.92" />
             {/* Smile */}
-            <path d="M13 23.5 Q16 25.5 19 23.5" stroke="#3a6b24" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+            <path d="M13 23.5 Q16 25.5 19 23.5" stroke="rgb(var(--color-pine-deep))" strokeWidth="1.2" strokeLinecap="round" fill="none" />
             {/* Left leg */}
             <rect x="10" y="29" width="4" height="5" rx="1.5" fill="white" opacity="0.75" />
             {/* Right leg */}

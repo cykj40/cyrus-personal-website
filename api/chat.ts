@@ -2,6 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
 import { CHAT_SYSTEM_PROMPT, PORTFOLIO_CONTEXT } from '../src/lib/portfolio-context.js';
+import { checkRateLimit, getClientIdentifier } from './_lib/rate-limit.js';
 
 const SYSTEM_PROMPT = `${CHAT_SYSTEM_PROMPT}
 
@@ -29,6 +30,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    // Rate limit before doing any billable work. Fail-open: if Redis is
+    // unreachable the decision comes back allowed, and the reason is logged
+    // inside the limiter.
+    const identifier = getClientIdentifier(req);
+    const decision = await checkRateLimit(identifier);
+
+    if (!decision.allowed) {
+      res.setHeader('Retry-After', String(decision.retryAfterSeconds));
+      return res.status(429).json({
+        error: 'Rate limit exceeded. Please try again later.',
+        code: 'RATE_LIMIT',
+      });
+    }
+
     // Validate request body
     const validatedData = ChatRequestSchema.parse(req.body);
     const { message, conversationHistory = [] } = validatedData;
@@ -40,8 +55,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(500).json({ error: 'Server configuration error' });
     }
 
-    // Initialize Anthropic client
-    const anthropic = new Anthropic({ apiKey });
+    // Initialize Anthropic client. The explicit timeout keeps a hung upstream
+    // call from holding the function open until the platform kills it, which
+    // would leave the widget spinning with no response.
+    const anthropic = new Anthropic({
+      apiKey,
+      timeout: 60_000,
+      maxRetries: 2,
+    });
 
     // Build conversation context
     const messages: Anthropic.MessageParam[] = [];
@@ -82,7 +103,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // than assuming it is first.
     const textBlock = response.content.find((block) => block.type === 'text');
     if (!textBlock) {
-      throw new Error('No text block in Claude API response');
+      // Malformed/unexpected shape rather than a transport failure — log the
+      // block types so the cause is diagnosable from the function logs.
+      console.error(
+        'Chat API error: no text block in Claude response.',
+        `stop_reason=${response.stop_reason}`,
+        `blockTypes=${JSON.stringify(response.content.map((block) => block.type))}`
+      );
+      return res.status(502).json({
+        error: 'Failed to process your message. Please try again.',
+        code: 'UPSTREAM_ERROR',
+      });
     }
 
     const assistantMessage = textBlock.text;
@@ -92,34 +123,54 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       sources: [], // Can add source tracking later
     });
   } catch (error) {
-    console.error('Chat API error:', error);
-
-    // Handle validation errors
+    // Handle validation errors. Zod issues describe the caller's own payload,
+    // so echoing them back leaks nothing internal.
     if (error instanceof z.ZodError) {
+      console.error('Chat API validation error:', error.issues);
       return res.status(400).json({
         error: 'Invalid request data',
         details: error.issues,
       });
     }
 
-    // Handle Anthropic API errors
-    if (error instanceof Anthropic.APIError) {
-      if (error.status === 429) {
-        return res.status(429).json({
-          error: 'Rate limit exceeded. Please try again in a moment.',
-          code: 'RATE_LIMIT',
-        });
-      }
-
-      console.error('Anthropic API error:', error.status, error.message);
-      return res.status(500).json({
-        error: 'Failed to process your message. Please try again.',
+    // Connection-level failures (DNS, socket, TLS) never produced a response.
+    if (error instanceof Anthropic.APIConnectionError) {
+      console.error('Anthropic connection error:', error.name, error.message);
+      return res.status(503).json({
+        error: 'The assistant is unavailable right now. Please try again.',
+        code: 'UPSTREAM_ERROR',
       });
     }
 
-    // Generic error
+    // Handle Anthropic API errors
+    if (error instanceof Anthropic.APIError) {
+      // Upstream quota exhaustion, not the visitor's fault. Distinguished from
+      // our own limiter by code so the client can word it correctly.
+      if (error.status === 429) {
+        console.error('Anthropic rate limit hit:', error.message);
+        return res.status(503).json({
+          error: 'The assistant is unavailable right now. Please try again.',
+          code: 'UPSTREAM_ERROR',
+        });
+      }
+
+      console.error(
+        'Anthropic API error:',
+        `status=${error.status}`,
+        `type=${error.name}`,
+        error.message
+      );
+      return res.status(502).json({
+        error: 'Failed to process your message. Please try again.',
+        code: 'UPSTREAM_ERROR',
+      });
+    }
+
+    // Generic error — log the full object server-side, return nothing specific.
+    console.error('Chat API unexpected error:', error);
     return res.status(500).json({
       error: 'An unexpected error occurred. Please try again.',
+      code: 'UNKNOWN_ERROR',
     });
   }
 }

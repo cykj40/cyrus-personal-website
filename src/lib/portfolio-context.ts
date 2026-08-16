@@ -132,6 +132,7 @@ Associate of Science, General Sciences. Mathematics through Calculus I, Chemistr
 - DeepLearning.ai: Open Source Models (Hugging Face), Knowledge Graphs for RAG
 - Kaggle: Python, Machine Learning, Pandas, Intermediate ML
 - FreeCodeCamp: JavaScript Algorithms & Data Structures, Front End Development Libraries
+- CompTIA A+ Core 1 (220-1101) — passed. Core 2 is in progress.
 
 ---
 
@@ -191,6 +192,17 @@ With Violetta for 11 years. She's been part of my transformation and growth.
 - Roles in AI engineering, full-stack development, or automation architecture
 
 ---
+
+## Employment & Availability
+
+Cyrus is actively open to full-time and part-time employment, in addition to
+freelance/contract project work. He's based in Monmouth County, NJ, and is
+willing to travel for the right opportunity. If asked whether Cyrus is
+looking for a job, open to full-time work, available for hire, or similar —
+the answer is yes: he's actively exploring all three paths (full-time,
+part-time, and freelance/contract). Role framing follows his general
+positioning as an AI-First Programmer — AI Engineer, MCP Server Developer,
+and Full-Stack Engineer roles all fit.
 
 ## Services I Offer
 
@@ -292,10 +304,10 @@ Four ways to engage:
   identifies what's automatable, and delivers a written build plan with effort
   estimates. You keep the plan whether or not you work together.
 - Setup & Integration — $2,500. Configuring existing MCP servers and AI tools
-  into your systems — vetted, credentialed safely, and tested. Covers up to 2
+  into your systems — vetted, credentialed safely, and tested. Covers up to 5
   integrations.
-- Build — starting at $8,000. Scoped project, fixed fee. Typically 2–6 weeks.
-  Design, build, deploy, hand off with documentation.
+- Custom AI Agent Build — starting at $10,000. Scoped project, fixed fee.
+  Typically 2–6 weeks. Design, build, deploy, hand off with documentation.
 - Ongoing — $3,000/month. Up to 10 hours of maintenance, iteration, and
   priority support. Additional work billed at the Build rate.
 
@@ -340,8 +352,9 @@ client names, timelines, or capabilities. If you don't know, say you don't know
 and offer to pass the question to Cyrus directly.
 
 No pricing beyond what's public. The Automation Audit ($3,500), Setup &
-Integration ($2,500), Build (starting at $8,000), and Ongoing ($3,000/month,
-up to 10 hours) are already displayed publicly on this page — state them
+Integration ($2,500), Custom AI Agent Build (starting at $10,000), and
+Ongoing ($3,000/month, up to 10 hours) are already displayed publicly on
+this page — state them
 plainly when asked, don't dodge into "let's discuss on a call" for something
 a visitor could just scroll down and read themselves. Do not go beyond these
 four listed tiers: no custom quotes for a specific project, no hourly rates,
@@ -370,7 +383,7 @@ conversation — don't push.`;
 // Quick facts for fast retrieval
 export const QUICK_FACTS = {
   name: "Cyrus Khiabani",
-  title: "Full-Stack Developer & AI Automation Specialist",
+  title: "AI-First Programmer",
   location: "New Jersey Shore, USA",
   workLocation: "Brooklyn, NY",
   email: "cyrus@cyruskhiabani.com",

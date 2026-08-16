@@ -42,7 +42,7 @@ export function ChatInput({ onSend, isLoading, disabled = false }: ChatInputProp
   const canSend = value.trim().length > 0 && !isDisabled;
 
   return (
-    <div className="p-4 border-t border-pine-100 bg-white">
+    <div className="p-4 border-t border-ocean-100 bg-white">
       <div className="flex gap-2 items-end">
         <textarea
           ref={textareaRef}
@@ -52,12 +52,12 @@ export function ChatInput({ onSend, isLoading, disabled = false }: ChatInputProp
           placeholder="Ask me a question..."
           disabled={isDisabled}
           rows={1}
-          className="flex-1 resize-none border border-pine-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-pine-500 focus:border-transparent disabled:bg-gray-50 disabled:text-gray-500 max-h-32 overflow-y-auto"
+          className="flex-1 resize-none border border-ocean-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:border-transparent disabled:bg-gray-50 disabled:text-gray-500 max-h-32 overflow-y-auto"
         />
         <button
           onClick={handleSubmit}
           disabled={!canSend}
-          className="flex-shrink-0 w-10 h-10 rounded-xl bg-pine-600 text-white flex items-center justify-center hover:bg-pine-700 focus:outline-none focus:ring-2 focus:ring-pine-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="flex-shrink-0 w-10 h-10 rounded-xl bg-ocean-600 text-white flex items-center justify-center hover:bg-ocean-700 focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           aria-label="Send message"
         >
           {isLoading ? (
