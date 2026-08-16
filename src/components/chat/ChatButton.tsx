@@ -2,20 +2,28 @@ import { motion } from 'framer-motion';
 
 interface ChatButtonProps {
   onClick: () => void;
+  /** Warm the lazily-loaded chat panel chunk before the click lands. */
+  onPrefetch?: () => void;
 }
 
-export function ChatButton({ onClick }: ChatButtonProps) {
+export function ChatButton({ onClick, onPrefetch }: ChatButtonProps) {
   return (
     <motion.button
       onClick={onClick}
+      onMouseEnter={onPrefetch}
+      onFocus={onPrefetch}
+      onTouchStart={onPrefetch}
       whileHover={{ scale: 1.06 }}
       whileTap={{ scale: 0.95 }}
       className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2.5 border-none bg-transparent p-0 cursor-pointer focus:outline-none"
-      aria-label="Open chat assistant"
+      // Starts with the button's own visible text so the accessible name is a
+      // superset of it (WCAG 2.5.3 "Label in Name"); the decorative ✦ is not
+      // part of the name.
+      aria-label="Ask me about Cyrus — open chat assistant"
     >
       {/* Speech bubble */}
       <div className="speech-bubble">
-        Ask me about Cyrus ✦
+        Ask me about Cyrus <span aria-hidden="true">✦</span>
       </div>
 
       {/* Robot button circle */}

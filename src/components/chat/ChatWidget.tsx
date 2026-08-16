@@ -1,17 +1,38 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { track } from '@vercel/analytics/react';
 import { ChatButton } from './ChatButton';
-import { ChatPanel } from './ChatPanel';
-import { useChat } from '@/hooks/useChat';
+import { useChatOpenState } from '@/hooks/useChatOpenState';
+
+// The panel, the message history, the API client and react-query together come
+// to ~38 kB minified and are needed by nobody who does not open the chat. They
+// load on the first open; `prefetchChatConversation` warms the chunk on hover so
+// the panel is already in cache by the time the click lands.
+const importChatConversation = () => import('./ChatConversation');
+const ChatConversation = lazy(() =>
+  importChatConversation().then((m) => ({ default: m.ChatConversation }))
+);
+
+let chatConversationPrefetched = false;
+const prefetchChatConversation = () => {
+  if (chatConversationPrefetched) return;
+  chatConversationPrefetched = true;
+  void importChatConversation();
+};
 
 export function ChatWidget() {
-  const { messages, isLoading, error, isOpen, sendMessage, closeChat, openChat } = useChat();
+  const { isOpen, openChat, closeChat } = useChatOpenState();
 
   const handleOpenChat = () => {
     track('chatbot_open');
     openChat();
   };
+
+  // The chat was left open in a previous navigation this session — start
+  // fetching the panel immediately rather than waiting on Suspense.
+  useEffect(() => {
+    if (isOpen) prefetchChatConversation();
+  }, [isOpen]);
 
   // Handle Escape key to close chat
   useEffect(() => {
@@ -40,16 +61,15 @@ export function ChatWidget() {
     <>
       <AnimatePresence mode="wait">
         {isOpen ? (
-          <ChatPanel
-            key="panel"
-            messages={messages}
-            isLoading={isLoading}
-            error={error}
-            onSend={sendMessage}
-            onClose={closeChat}
-          />
+          <Suspense key="panel" fallback={null}>
+            <ChatConversation onClose={closeChat} />
+          </Suspense>
         ) : (
-          <ChatButton key="button" onClick={handleOpenChat} />
+          <ChatButton
+            key="button"
+            onClick={handleOpenChat}
+            onPrefetch={prefetchChatConversation}
+          />
         )}
       </AnimatePresence>
     </>

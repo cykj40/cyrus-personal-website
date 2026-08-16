@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { EngineeringContent } from '@/routes/engineering';
+import { EngineeringContent } from '@/components/sections/EngineeringContent';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 
 export const Route = createFileRoute('/hire-me')({

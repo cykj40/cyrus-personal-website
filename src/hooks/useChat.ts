@@ -5,8 +5,14 @@ import type { ChatErrorState, ChatMessage } from '@/types/chat';
 import { CHAT_ERROR_COPY, DEFAULT_CHAT_ERROR, WELCOME_MESSAGE } from '@/types/chat';
 
 const STORAGE_KEY = 'chat-messages';
-const STORAGE_OPEN_KEY = 'chat-is-open';
 
+/**
+ * The chat conversation: history, the send mutation, and error mapping.
+ *
+ * Open/closed state lives in `useChatOpenState` instead, so that the widget
+ * shell can render the launcher without loading this module (and with it
+ * react-query, ~28 kB minified).
+ */
 export function useChat() {
   const [messages, setMessages] = useState<ChatMessage[]>(() => {
     // Load messages from sessionStorage
@@ -28,19 +34,6 @@ export function useChat() {
     return [WELCOME_MESSAGE];
   });
 
-  const [isOpen, setIsOpen] = useState(() => {
-    // Load open state from sessionStorage
-    if (typeof window !== 'undefined') {
-      try {
-        const stored = sessionStorage.getItem(STORAGE_OPEN_KEY);
-        return stored === 'true';
-      } catch (error) {
-        return false;
-      }
-    }
-    return false;
-  });
-
   const [error, setError] = useState<ChatErrorState | null>(null);
 
   // Persist messages to sessionStorage
@@ -53,17 +46,6 @@ export function useChat() {
       }
     }
   }, [messages]);
-
-  // Persist open state to sessionStorage
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        sessionStorage.setItem(STORAGE_OPEN_KEY, String(isOpen));
-      } catch (error) {
-        console.error('Failed to save chat open state:', error);
-      }
-    }
-  }, [isOpen]);
 
   const mutation = useMutation({
     mutationFn: sendChatMessage,
@@ -121,27 +103,11 @@ export function useChat() {
     }
   }, []);
 
-  const toggleChat = useCallback(() => {
-    setIsOpen((prev) => !prev);
-  }, []);
-
-  const openChat = useCallback(() => {
-    setIsOpen(true);
-  }, []);
-
-  const closeChat = useCallback(() => {
-    setIsOpen(false);
-  }, []);
-
   return {
     messages,
     isLoading: mutation.isPending,
     error,
-    isOpen,
     sendMessage,
     clearChat,
-    toggleChat,
-    openChat,
-    closeChat,
   };
 }

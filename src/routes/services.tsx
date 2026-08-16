@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Engagements } from '@/components/sections/Engagements';
-import { SchedulingSlot } from '@/components/sections/Contact';
+import { SchedulingSlot } from '@/components/sections/SchedulingSlot';
 import { Services } from '@/components/sections/Services';
 import { ServicesProcess } from '@/components/sections/ServicesProcess';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
