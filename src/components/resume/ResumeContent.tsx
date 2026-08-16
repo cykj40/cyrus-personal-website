@@ -1,27 +1,19 @@
-import { useState } from 'react';
-import { createFileRoute, Link, redirect } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
 import {
   Download, MapPin, Phone, Mail, Globe, Github, Linkedin,
-  ArrowLeft, ExternalLink, CheckCircle2,
+  ExternalLink, CheckCircle2,
 } from 'lucide-react';
-import { skills } from '@/data/skills';
-import { projectsData } from '@/data/projects';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import { About } from '@/components/sections/About';
-import { ResumeModal } from '@/components/resume/ResumeModal';
-import { RESUME_PDF_PATH } from '@/components/resume/ResumeContent';
 
-export const Route = createFileRoute('/engineering')({
-  beforeLoad: () => {
-    throw redirect({ to: '/hire-me' });
-  },
-});
+// Single source of truth for the resume PDF path — every download button on the
+// site (this component, the /hire-me sticky button, the resume modal) reads from
+// here so they can never point at different files.
+export const RESUME_PDF_PATH = '/resume/Cyrus_Khiabani_Resume.pdf';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
 const stagger = {
@@ -29,13 +21,13 @@ const stagger = {
   show: { transition: { staggerChildren: 0.08 } },
 };
 
-interface PageHeaderProps {
-  onOpenResume: () => void;
+interface ResumeHeaderProps {
+  headingId: string;
 }
 
-function PageHeader({ onOpenResume }: PageHeaderProps) {
+function ResumeHeader({ headingId }: ResumeHeaderProps) {
   return (
-    <section className="bg-gradient-to-br from-pine-50 via-white to-ridge-50 bg-topographic pt-28 pb-16">
+    <section className="bg-gradient-to-br from-pine-50 via-white to-ridge-50 bg-topographic pt-10 pb-12">
       <div className="container mx-auto px-4">
         <motion.div
           variants={stagger}
@@ -43,20 +35,10 @@ function PageHeader({ onOpenResume }: PageHeaderProps) {
           animate="show"
           className="max-w-3xl"
         >
-          <motion.div variants={fadeUp} className="mb-6">
-            <Link
-              to="/"
-              search={{ scrollTo: '' }}
-              className="inline-flex items-center gap-2 text-sm text-granite-600 hover:text-pine-600 transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back to Portfolio
-            </Link>
-          </motion.div>
-
           <motion.h1
+            id={headingId}
             variants={fadeUp}
-            className="text-5xl font-bold text-pine-900 sm:text-6xl mb-3"
+            className="font-display text-4xl font-semibold text-pine-900 sm:text-5xl mb-3"
           >
             Cyrus Khiabani
           </motion.h1>
@@ -66,14 +48,6 @@ function PageHeader({ onOpenResume }: PageHeaderProps) {
             className="text-xl font-medium text-ridge-700 mb-6"
           >
             AI Engineer &nbsp;·&nbsp; MCP Server Developer &nbsp;·&nbsp; Full-Stack Engineer
-          </motion.p>
-
-          <motion.p
-            variants={fadeUp}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-ocean-400/30 bg-ocean-400/[0.07] px-4 py-2 text-sm font-medium text-pine-800"
-          >
-            <span className="size-1.5 shrink-0 rounded-full bg-ocean-500 ring-[3px] ring-ocean-400/20" />
-            Open to full-time and part-time roles. Based in Monmouth County, NJ — willing to travel for the right opportunity.
           </motion.p>
 
           <motion.div
@@ -106,17 +80,13 @@ function PageHeader({ onOpenResume }: PageHeaderProps) {
             </a>
           </motion.div>
 
-          <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
-            <Button size="lg" variant="outline" onClick={onOpenResume}>View my resume</Button>
+          <motion.div variants={fadeUp}>
             <a href={RESUME_PDF_PATH} download>
               <Button size="lg">
                 <Download className="h-5 w-5 mr-2" />
                 Download PDF
               </Button>
             </a>
-            <Link to="/contact">
-              <Button size="lg" variant="outline">Get in touch</Button>
-            </Link>
           </motion.div>
         </motion.div>
       </div>
@@ -142,13 +112,12 @@ function SummarySection() {
           </motion.h2>
           <motion.p variants={fadeUp} className="text-granite-700 leading-relaxed text-base">
             AI Engineer and Full-Stack Developer specializing in production-grade LLM integration,
-            MCP server development, and agentic workflow automation. Currently building T1Copilot —
-            an open-source, self-hosted multi-agent AI platform for Type 1 Diabetes management,
-            with a 7-agent graph reasoning over live CGM, workout, and metabolic data. Every medical
-            write passes through a human-in-the-loop gate; no agent autonomously logs insulin or
-            modifies parameters. Proven 90% reduction in operational overhead through AI deployments built on TypeScript, Next.js,
-            Vercel AI SDK, and PostgreSQL. Strong bias toward clean architecture, type-safety, and
-            systems that scale beyond prototypes.
+            MCP server development, and agentic workflow automation. Builds real tools that solve
+            real problems — from OAuth2-secured MCP servers connecting Claude AI to healthcare APIs
+            and construction billing systems, to full-stack health platforms with real-time CGM data
+            analysis. Proven 90% reduction in operational overhead through AI deployments built on
+            TypeScript, Next.js, Node.js, and PostgreSQL. Strong bias toward clean architecture,
+            type-safety, and systems that scale beyond prototypes.
           </motion.p>
         </motion.div>
       </div>
@@ -156,56 +125,20 @@ function SummarySection() {
   );
 }
 
-function StorySection() {
-  return (
-    <section className="border-y border-granite-400/20 bg-pine-50/40 py-14">
-      <div className="container mx-auto max-w-3xl px-4">
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-        >
-          <motion.h2
-            variants={fadeUp}
-            className="mb-6 border-b-2 border-pine-100 pb-3 text-2xl font-bold text-pine-900"
-          >
-            The path here
-          </motion.h2>
-          <motion.p variants={fadeUp} className="text-base leading-relaxed text-granite-700">
-            Tech's been an obsession since Atari — arcades, consoles, gadgets, all of it — channeled through a science background into a coding bootcamp about five years ago instead of a lab. Three months in, he picked up GitHub Copilot during its free trial, before AI-assisted coding was common knowledge, and has spent the years since figuring out what actually works — testing tools, refining habits, building AI-first the whole way. A lot of that drive now goes into building the health tech he needs for his own Type 1 diabetes.
-          </motion.p>
-
-          <motion.div
-            variants={fadeUp}
-            className="mt-8 rounded-xl border border-ocean-400/30 bg-white p-5 shadow-sm sm:p-6"
-          >
-            <p className="font-mono text-xs uppercase tracking-[0.09em] text-ridge-700">
-              Continue the conversation
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-granite-700">
-              Use the <span className="font-medium text-pine-900">“Ask me about Cyrus”</span> launcher in the bottom-right corner for the longer version. Try:
-            </p>
-            <ul className="mt-4 flex flex-wrap gap-2" aria-label="Suggested chat questions">
-              {[
-                'What’s Cyrus’s path into tech?',
-                'How does he work with AI coding agents?',
-                'Why is he building health tech?',
-              ].map((question) => (
-                <li
-                  key={question}
-                  className="rounded-full bg-ocean-50 px-3 py-1.5 text-sm text-pine-800"
-                >
-                  {question}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  );
+interface SkillCategory {
+  category: string;
+  skills: string[];
 }
+
+const resumeSkills: SkillCategory[] = [
+  { category: 'Core Languages', skills: ['TypeScript', 'JavaScript', 'Python', 'Go', 'SQL', 'HTML/CSS'] },
+  { category: 'Frontend', skills: ['React', 'Next.js', 'TanStack Router', 'TanStack Query', 'Tailwind CSS', 'Framer Motion'] },
+  { category: 'Backend & APIs', skills: ['Node.js', 'Fastify', 'Express', 'REST', 'GraphQL', 'Webhooks', 'Background Jobs'] },
+  { category: 'Databases & ORM', skills: ['PostgreSQL', 'pgvector', 'SQLite', 'Drizzle ORM', 'Prisma', 'Upstash Redis'] },
+  { category: 'AI & LLM Engineering', skills: ['Claude API', 'OpenAI API', 'MCP Protocol', 'AI Agents', 'Tool Calling', 'RAG', 'Pinecone', 'Whisper API'] },
+  { category: 'Auth & Security', skills: ['OAuth2', 'JWT', 'iron-session', 'Clerk', 'Zod', 'Type-safe validation'] },
+  { category: 'Infrastructure', skills: ['Git', 'Docker', 'Linux', 'GitHub Actions', 'CI/CD', 'Vercel', 'Vite', 'pnpm', 'Vitest'] },
+];
 
 function SkillsSection() {
   return (
@@ -225,23 +158,23 @@ function SkillsSection() {
           </motion.h2>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
-            {skills.map((cat) => (
+            {resumeSkills.map((cat) => (
               <motion.div key={cat.category} variants={fadeUp}>
                 <Card className="h-full">
                   <CardHeader>
                     <CardTitle className="text-base">{cat.category}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="flex flex-wrap gap-2">
+                    <ul className="flex flex-wrap gap-2">
                       {cat.skills.map((skill) => (
-                        <span
+                        <li
                           key={skill}
-                          className="rounded-full bg-ridge-50 px-3 py-1 text-xs text-ridge-700"
+                          className="rounded-full bg-ridge-50 px-3 py-1 font-mono text-xs text-ridge-700"
                         >
                           {skill}
-                        </span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -255,8 +188,8 @@ function SkillsSection() {
 
 const experienceBullets = [
   {
-    label: 'MCP Servers Shipped',
-    text: 'Designed and shipped production MCP servers, including TSheets/QuickBooks Time with full OAuth2 flow, reducing manual timesheet-to-billing processing by 90% and enabling Claude AI to extract, format, and route construction job notes directly into Sage 100 Contractor.',
+    label: 'MCP Server Architecture',
+    text: 'Designed and shipped production TSheets/QuickBooks Time MCP server with full OAuth2 flow, reducing manual timesheet-to-billing processing by 90% and enabling Claude AI to extract, format, and route construction job notes directly into Sage 100 Contractor.',
   },
   {
     label: 'Agentic AI Deployment',
@@ -301,10 +234,10 @@ function ExperienceSection() {
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-1">
               <div>
                 <h3 className="text-lg font-bold text-pine-900">
-                  Long &amp; DeLosa Construction Group
+                  Technical Project Manager &amp; AI Automation Engineer
                 </h3>
                 <p className="text-sm text-ridge-700 font-medium">
-                  Technical Project Manager &amp; AI Automation Engineer
+                  Long &amp; DeLosa Construction Group
                 </p>
               </div>
               <div className="text-sm text-granite-600 sm:text-right mt-1 sm:mt-0 shrink-0">
@@ -330,8 +263,57 @@ function ExperienceSection() {
   );
 }
 
-const caseStudyProjectIds = new Set(['tsheets-mcp', 'field-notes', 't1copilot']);
-const engineeringProjects = projectsData.filter((project) => !caseStudyProjectIds.has(project.id));
+interface ResumeProject {
+  name: string;
+  github: string;
+  tech: string[];
+  description: string;
+}
+
+const resumeProjects: ResumeProject[] = [
+  {
+    name: 'Peloton MCP Server',
+    github: 'https://github.com/cykj40/Peloton-MCP-Server',
+    tech: ['TypeScript', 'Node.js', 'MCP SDK', 'SQLite', 'Zod', 'Axios', 'Vitest'],
+    description:
+      'Production MCP server correlating Peloton workout history with real-time Dexcom CGM blood glucose data for Type 1 diabetes management. Features JWT Bearer auth with auto-refresh, SQLite persistence, muscle group impact analytics, delayed hypoglycemia risk detection, and discipline-level glucose pattern insights. Ships with 55 tests across 9 test suites (Vitest) and an in-memory cache layer with rate-limit-aware retry logic.',
+  },
+  {
+    name: 'Dexcom MCP Server',
+    github: 'https://github.com/cykj40/dexcom-mcp-server',
+    tech: ['TypeScript', 'Node.js', 'MCP Protocol', 'OAuth2', 'SQLite', 'Claude API'],
+    description:
+      'MCP server connecting Claude AI to Dexcom CGM devices for intelligent diabetes management. Implements adaptive metabolic modeling that learns insulin sensitivity over time, predictive intelligence for glucose impact estimation, parameter drift detection, and AGP visualization. Local-first architecture — all data stays on-device. Full OAuth2 for secure Dexcom API access.',
+  },
+  {
+    name: 'TSheets / QuickBooks Time MCP Server',
+    github: 'https://github.com/cykj40/Tsheets-MCP',
+    tech: ['TypeScript', 'Node.js', 'Express.js', 'MCP Protocol', 'OAuth2', 'Zod', 'TSheets API', 'Claude API'],
+    description:
+      'Production MCP server enabling Claude AI to interact with the TSheets time-tracking API. Handles OAuth2 token management, hierarchical job structure parsing, and type-safe data extraction with Zod — cutting timesheet-to-Sage-100-Contractor billing from 30 minutes to under 5.',
+  },
+  {
+    name: 'Diabetes AI Agent',
+    github: 'https://github.com/cykj40',
+    tech: ['Next.js', 'TypeScript', 'Fastify', 'PostgreSQL', 'Prisma', 'GPT-4o', 'Pinecone', 'JWT'],
+    description:
+      'Full-stack health platform with real-time Dexcom CGM integration, AI-driven glucose trend analysis, RAG-powered health Q&A via Pinecone vector store, JWT auth, and nutrition/workout tracking with interactive Recharts visualizations.',
+  },
+  {
+    name: 'Health Journal AI',
+    github: 'https://github.com/cykj40/journal-ai-app',
+    tech: ['Next.js', 'TypeScript', 'Claude API', 'PostgreSQL', 'Drizzle ORM', 'Clerk', 'Recharts', 'Tailwind'],
+    description:
+      'AI-powered health journaling platform using Claude as the core reasoning layer. Log mood, sleep, vitals, and nutrition — Claude identifies patterns, flags anomalies, and surfaces actionable insights via a conversational chat interface with time-series visualizations.',
+  },
+  {
+    name: 'T1Copilot',
+    github: 'https://github.com/cykj40/t1pilot',
+    tech: ['TypeScript', 'Next.js 15', 'Vercel AI SDK', 'LangGraph.ts', 'Claude API', 'MCP Protocol', 'Drizzle ORM', 'Neon Postgres', 'PGVector', 'Turso', 'Zod', 'Fly.io', 'Vitest', 'Laminar'],
+    description:
+      'Production multi-agent AI system for real-world T1D management. A 7-agent graph (Orchestrator, Glucose, Exercise, Modeling, Event Logger, Research, Insight) reasons over live Dexcom CGM readings, Peloton workout data, insulin events, and carb intake simultaneously. Built on Next.js 15, Vercel AI SDK streaming chat, LangGraph.ts, Drizzle ORM, Neon Postgres with PGVector, and two production MCP servers on Fly.io. Full HITL gate on all medical writes — no agent autonomously logs insulin or modifies parameters. Self-hosted BYOD architecture.',
+  },
+];
 
 function ProjectsSection() {
   return (
@@ -347,36 +329,45 @@ function ProjectsSection() {
             variants={fadeUp}
             className="text-2xl font-bold text-pine-900 mb-8 pb-3 border-b-2 border-pine-100"
           >
-            More Engineering Projects
+            Notable Projects
           </motion.h2>
 
-          <motion.div variants={fadeUp}>
-            <Card className="divide-y divide-granite-400/20 p-0">
-              {engineeringProjects.map((project) => (
-                <div
-                  key={project.id}
-                  className="flex flex-col gap-2 p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-6"
-                >
-                  <div>
-                    <h3 className="font-bold text-pine-900">{project.title}</h3>
-                    <p className="mt-1 text-sm text-granite-700">{project.description}</p>
-                  </div>
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex shrink-0 items-center gap-1 text-sm text-ridge-700 transition-colors hover:text-ridge-700"
-                    >
-                      <Github className="h-4 w-4" />
-                      Repository
-                      <ExternalLink className="h-3.5 w-3.5" />
-                    </a>
-                  )}
-                </div>
-              ))}
-            </Card>
-          </motion.div>
+          <div className="space-y-6">
+            {resumeProjects.map((project) => (
+              <motion.div key={project.name} variants={fadeUp}>
+                <Card>
+                  <CardHeader>
+                    <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                      <CardTitle className="text-base">{project.name}</CardTitle>
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex shrink-0 items-center gap-1 text-sm text-ridge-700 transition-colors hover:text-ridge-600"
+                      >
+                        <Github className="h-4 w-4" />
+                        {project.github.replace('https://', '')}
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    </div>
+                    <ul className="flex flex-wrap gap-2 pt-1">
+                      {project.tech.map((tech) => (
+                        <li
+                          key={tech}
+                          className="rounded-full bg-ridge-50 px-3 py-1 font-mono text-xs text-ridge-700"
+                        >
+                          {tech}
+                        </li>
+                      ))}
+                    </ul>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-granite-700 leading-relaxed">{project.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
@@ -405,7 +396,6 @@ const education = [
 ];
 
 const certifications = [
-  'CompTIA A+ Core 1 (220-1101) — passed',
   'DeepLearning.ai — Open Source Models with Hugging Face · Knowledge Graphs for RAG',
   'Kaggle — Python · Machine Learning · Pandas · Intermediate Machine Learning',
   'IBM — Web Development Professional Certificate',
@@ -461,45 +451,20 @@ function EducationSection() {
   );
 }
 
-function StickyDownload() {
-  // Pinned bottom-LEFT so it clears the chat button (bottom-right, z-50).
-  // Hidden below md: at 24px from the bottom its lower edge intrudes into the
-  // iOS home-indicator / Android gesture-nav safe area, so on mobile we rely on
-  // the inline "Download PDF" button in the page header instead.
-  return (
-    <a
-      href={RESUME_PDF_PATH}
-      download
-      className="hidden md:block fixed bottom-6 left-6 z-40"
-      aria-label="Download resume PDF"
-    >
-      <Button size="md" className="shadow-lg shadow-pine-900/20">
-        <Download className="h-4 w-4 mr-2" />
-        Download PDF
-      </Button>
-    </a>
-  );
+interface ResumeContentProps {
+  /** id placed on the resume's h1, so a wrapping modal can point aria-labelledby at it. */
+  headingId?: string;
 }
 
-interface EngineeringContentProps {
-  includeAbout?: boolean;
-}
-
-export function EngineeringContent({ includeAbout = false }: EngineeringContentProps) {
-  const [isResumeOpen, setIsResumeOpen] = useState(false);
-
+export function ResumeContent({ headingId = 'resume-heading' }: ResumeContentProps) {
   return (
     <>
-      <PageHeader onOpenResume={() => setIsResumeOpen(true)} />
+      <ResumeHeader headingId={headingId} />
       <SummarySection />
-      <StorySection />
       <SkillsSection />
       <ExperienceSection />
       <ProjectsSection />
       <EducationSection />
-      <StickyDownload />
-      {includeAbout && <About />}
-      <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
     </>
   );
 }
