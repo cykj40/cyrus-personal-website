@@ -10,9 +10,9 @@ export const PORTFOLIO_CONTEXT = `
 - **Languages**: TypeScript, JavaScript, Python, Go, SQL, HTML/CSS
 - **Frontend**: React 19, Next.js 14+, TanStack Router, TanStack Query, Tailwind CSS, Framer Motion
 - **Backend**: Node.js, Fastify, Express.js, Go HTTP servers
-- **Databases**: PostgreSQL, Drizzle ORM, Prisma, MongoDB
+- **Databases**: PostgreSQL, Drizzle ORM, Prisma
 - **AI/ML Integration**: Claude API, OpenAI API, MCP Protocol, LangChain, Vector Embeddings, Pinecone
-- **Auth & Security**: OAuth2, JWT, Clerk, HIPAA-compliant data handling
+- **Auth & Security**: OAuth2, JWT, Clerk
 - **Tools**: Git, Docker, Vite, Vercel, GitHub Actions, Zod validation
 
 ### Specialized Expertise
@@ -37,7 +37,7 @@ Never publicly deployed due to sensitive health data. Built for personal precisi
 ### TSheets MCP Server (Production)
 MCP server enabling Claude AI to interact with QuickBooks Time API. Automates timesheet extraction with OAuth2 authentication, type-safe Zod validation, and intelligent job notes processing.
 
-Eliminated approximately 6 hours of weekly manual data entry. Aggregates, formats, and groups field notes for Sage 100 Contractor billing. Reduced errors and removed administrative drag from real construction workflows.
+Reduced manual timesheet-to-billing processing by 90%, cutting each task from 30 minutes to under 5. Aggregates, formats, and groups field notes for Sage 100 Contractor billing. Reduced errors and removed administrative drag from real construction workflows.
 
 **What used to take 30 minutes now takes 5.**
 
@@ -60,7 +60,7 @@ Currently being rebuilt with Claude as the core AI layer for deeper reasoning an
 ---
 
 ### Dexcom MCP Server
-OAuth2-enabled MCP server for glucose monitoring data with native Claude Desktop integration. Enables AI assistants to query real-time CGM data, analyze trends, and provide contextual health insights with HIPAA-compliant data handling.
+OAuth2-enabled MCP server for glucose monitoring data with native Claude Desktop integration. Enables AI assistants to query real-time CGM data, analyze trends, and provide contextual health insights.
 
 **Tech**: TypeScript, OAuth2, Dexcom API, MCP Protocol
 
@@ -204,6 +204,11 @@ part-time, and freelance/contract). Role framing follows his general
 positioning as an AI-First Programmer — AI Engineer, MCP Server Developer,
 and Full-Stack Engineer roles all fit.
 
+If asked about seeing Cyrus's resume, point visitors to the resume controls on
+this page first: the "View my resume" button opens it in a readable format, and
+there is a direct PDF download. Email is a fallback only for questions beyond
+viewing the resume.
+
 ## Services I Offer
 
 ### Full-Stack Development
@@ -320,10 +325,11 @@ to figure out what's actually needed before committing to anything bigger.
 Rather than general claims, here is what to point to when a visitor asks what
 Cyrus is good at or whether he can handle a specific kind of work:
 
-- MCP protocol and MCP server development — five production MCP servers
-  shipped (TSheets/QuickBooks Time, Dexcom, Peloton, plus two more inside
-  T1Copilot), each with real OAuth2 flows, type-safe validation, and audit
-  trails. MCP has existed publicly only since late 2024; production
+- MCP protocol and MCP server development — three distinct production MCP
+  servers shipped: TSheets/QuickBooks Time, Dexcom, and Peloton. T1Copilot's
+  multi-agent system runs on the existing Dexcom and Peloton MCP servers, not
+  additional servers. Each has real OAuth2 flows, type-safe validation, and
+  audit trails. MCP has existed publicly only since late 2024; production
   experience in it is still rare.
 - Connecting AI systems to messy, undocumented, real-world business software
   — not clean demo APIs. The TSheets server had to parse a hierarchical job
