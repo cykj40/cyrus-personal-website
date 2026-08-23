@@ -37,7 +37,7 @@ test.describe('desktop navigation and routing', () => {
 
     await expectLinkTargetToReturn200(page, logo);
     await logo.click();
-    await expect(page).toHaveURL(/\/$/);
+    await expect.poll(() => new URL(page.url()).pathname).toBe('/');
   });
 
   for (const legacyPath of ['/resume', '/engineering']) {
@@ -89,6 +89,6 @@ test.describe('mobile navigation', () => {
 
     await expectLinkTargetToReturn200(page, logo);
     await logo.click();
-    await expect(page).toHaveURL(/\/$/);
+    await expect.poll(() => new URL(page.url()).pathname).toBe('/');
   });
 });

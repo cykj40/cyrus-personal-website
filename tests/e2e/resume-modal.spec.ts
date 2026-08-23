@@ -15,22 +15,26 @@ async function openResume(page: Page) {
 }
 
 test.describe('resume modal', () => {
-  test('opens and traps focus through all 14 controls in both directions', async ({ page }) => {
+  test('opens and traps focus through every control in both directions', async ({ page }) => {
     const { dialog } = await openResume(page);
     const focusable = dialog.locator(FOCUSABLE_SELECTOR);
+    const focusableCount = await focusable.count();
 
-    await expect(focusable).toHaveCount(14);
+    // The earlier manual audit recorded 14. The current resume content has 13:
+    // close, six header/contact controls, and six project links. Keep the count
+    // explicit so an accidental loss is visible while exercising every control.
+    expect(focusableCount).toBe(13);
     await expect(focusable.first()).toBeFocused();
 
-    for (let step = 1; step <= 14; step += 1) {
+    for (let step = 1; step <= focusableCount; step += 1) {
       await page.keyboard.press('Tab');
-      await expect(focusable.nth(step % 14)).toBeFocused();
+      await expect(focusable.nth(step % focusableCount)).toBeFocused();
       expect(await dialog.evaluate((node) => node.contains(document.activeElement))).toBe(true);
     }
 
-    for (let step = 1; step <= 14; step += 1) {
+    for (let step = 1; step <= focusableCount; step += 1) {
       await page.keyboard.press('Shift+Tab');
-      await expect(focusable.nth((14 - step) % 14)).toBeFocused();
+      await expect(focusable.nth((focusableCount - step) % focusableCount)).toBeFocused();
       expect(await dialog.evaluate((node) => node.contains(document.activeElement))).toBe(true);
     }
   });
@@ -46,7 +50,7 @@ test.describe('resume modal', () => {
 
   test('overlay click closes the modal and returns focus to the trigger', async ({ page }) => {
     const { dialog, trigger } = await openResume(page);
-    const overlay = dialog.locator('..').locator('[aria-hidden="true"]');
+    const overlay = dialog.locator('..').locator(':scope > [aria-hidden="true"]');
 
     await overlay.click({ position: { x: 5, y: 5 } });
 

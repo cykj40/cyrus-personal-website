@@ -9,6 +9,25 @@ for (const route of majorRoutes) {
     await expect(page.locator('main')).toBeVisible();
     await page.evaluate(() => document.fonts.ready.then(() => undefined));
 
+    // Axe can otherwise sample Framer Motion's temporary partial opacity and
+    // report contrast failures that disappear at the animation's final state.
+    // Disable motion and let pending frames settle before evaluating colors.
+    await page.addStyleTag({
+      content: `
+        *, *::before, *::after {
+          animation-duration: 0s !important;
+          transition-duration: 0s !important;
+          scroll-behavior: auto !important;
+        }
+      `,
+    });
+    await page.evaluate(async () => {
+      document.getAnimations().forEach((animation) => animation.finish());
+      await new Promise<void>((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+      );
+    });
+
     const results = await new AxeBuilder({ page }).analyze();
     const violations = results.violations.filter(
       (violation) => violation.impact === 'serious' || violation.impact === 'critical'
