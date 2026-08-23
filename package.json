@@ -10,6 +10,8 @@
     "generate:og": "node scripts/generate-og-images.mjs",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "deploy": "vercel --prod"
   },
   "author": "Cyrus Khiabani",
@@ -37,6 +39,8 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.62.1",
     "@tanstack/react-query-devtools": "^5.95.2",
     "@tanstack/router-devtools": "^1.166.11",
     "@tanstack/router-vite-plugin": "^1.166.23",

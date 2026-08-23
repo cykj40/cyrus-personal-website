@@ -22,6 +22,9 @@ Thumbs.db
 
 # Logs
 *.log
+playwright-report/
+test-results/
+blob-report/
 
 # Claude Code (machine-specific permissions, not project config)
 .claude/settings.local.json
