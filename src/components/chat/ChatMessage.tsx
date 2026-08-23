@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Bot } from 'lucide-react';
 import type { ChatMessage as ChatMessageType } from '@/types/chat';
 
@@ -15,19 +15,25 @@ const messageVariants = {
   },
 };
 
+const reducedMessageVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.15 } },
+};
+
 export function ChatMessage({ message }: ChatMessageProps) {
   const isUser = message.role === 'user';
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <motion.div
-      variants={messageVariants}
+      variants={shouldReduceMotion ? reducedMessageVariants : messageVariants}
       initial="hidden"
       animate="visible"
       className={`flex gap-3 ${isUser ? 'justify-end' : 'justify-start'}`}
     >
       {!isUser && (
         <div className="flex-shrink-0">
-          <div className="w-8 h-8 rounded-full bg-forest-600 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-ocean-600 flex items-center justify-center">
             <Bot className="w-5 h-5 text-white" />
           </div>
         </div>
@@ -36,8 +42,8 @@ export function ChatMessage({ message }: ChatMessageProps) {
       <div
         className={`max-w-[80%] rounded-2xl px-4 py-2.5 ${
           isUser
-            ? 'bg-mountain-500 text-white'
-            : 'bg-forest-50 text-forest-900'
+            ? 'bg-ocean-500 text-white'
+            : 'bg-ocean-50 text-pine-900'
         }`}
       >
         <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">
@@ -51,21 +57,21 @@ export function ChatMessage({ message }: ChatMessageProps) {
 }
 
 export function TypingIndicator() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div className="flex gap-3 justify-start">
       <div className="flex-shrink-0">
-        <div className="w-8 h-8 rounded-full bg-forest-600 flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full bg-ocean-600 flex items-center justify-center">
           <Bot className="w-5 h-5 text-white" />
         </div>
       </div>
 
-      <div className="bg-forest-50 rounded-2xl px-4 py-3">
+      <div className="bg-ocean-50 rounded-2xl px-4 py-3">
         <div className="flex gap-1">
           <motion.div
-            className="w-2 h-2 rounded-full bg-forest-600"
-            animate={{
-              y: [0, -6, 0],
-            }}
+            className="w-2 h-2 rounded-full bg-ocean-500"
+            animate={shouldReduceMotion ? { opacity: [0.4, 1, 0.4] } : { y: [0, -6, 0] }}
             transition={{
               duration: 0.6,
               repeat: Infinity,
@@ -73,10 +79,8 @@ export function TypingIndicator() {
             }}
           />
           <motion.div
-            className="w-2 h-2 rounded-full bg-forest-600"
-            animate={{
-              y: [0, -6, 0],
-            }}
+            className="w-2 h-2 rounded-full bg-ocean-500"
+            animate={shouldReduceMotion ? { opacity: [0.4, 1, 0.4] } : { y: [0, -6, 0] }}
             transition={{
               duration: 0.6,
               repeat: Infinity,
@@ -85,10 +89,8 @@ export function TypingIndicator() {
             }}
           />
           <motion.div
-            className="w-2 h-2 rounded-full bg-forest-600"
-            animate={{
-              y: [0, -6, 0],
-            }}
+            className="w-2 h-2 rounded-full bg-ocean-500"
+            animate={shouldReduceMotion ? { opacity: [0.4, 1, 0.4] } : { y: [0, -6, 0] }}
             transition={{
               duration: 0.6,
               repeat: Infinity,

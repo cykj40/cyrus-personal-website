@@ -7,7 +7,6 @@ export interface Project {
   github?: string;
   demo?: string;
   live?: string;
-  image: string;
   featured: boolean;
   category: 'health' | 'ai' | 'productivity' | 'entertainment' | 'construction' | 'web' | 'security';
 }
@@ -21,7 +20,6 @@ export const projectsData: Project[] = [
       'Tired of manually transcribing field notes into billing systems, I built an MCP server that lets Claude AI do it automatically. Construction crews log time in TSheets with job notes and photos—Claude extracts everything, formats it for Sage 100 Contractor, and generates professional reports. What used to take 30 minutes now takes 5. Full OAuth2 implementation, type-safe throughout, handles hierarchical job structures automatically. This is what AI automation should look like: real tools solving real problems.',
     tech: ['TypeScript', 'Node.js', 'Express.js', 'MCP Protocol', 'OAuth2', 'Zod', 'TSheets API', 'Claude API'],
     github: 'https://github.com/cykj40/Tsheets-MCP',
-    image: '/images/projects/t-sheets-mcp.png',
     featured: true,
     category: 'construction',
   },
@@ -34,7 +32,6 @@ export const projectsData: Project[] = [
     tech: ['Next.js', 'TypeScript', 'Whisper API', 'Upstash Redis', 'Zod', 'iron-session', 'PWA', 'Tailwind CSS'],
     github: 'https://github.com/cykj40/field-notes-assistant',
     live: '',
-    image: '/images/projects/field-notes-app.jpeg',
     featured: false,
     category: 'productivity',
   },
@@ -57,7 +54,6 @@ export const projectsData: Project[] = [
     ],
     github: 'https://github.com/cykj40/journal-ai-app',
     live: 'https://journal-ai-app-eta.vercel.app',
-    image: '/images/projects/health-journal-ai.jpg',
     featured: true,
     category: 'health',
   },
@@ -84,7 +80,6 @@ export const projectsData: Project[] = [
       'Laminar',
     ],
     github: 'https://github.com/cykj40/t1pilot',
-    image: '/images/projects/t1D-image.jpeg',
     featured: true,
     category: 'health',
   },
@@ -97,7 +92,6 @@ export const projectsData: Project[] = [
     tech: ['TypeScript', 'Node.js', 'MCP SDK', 'better-sqlite3', 'Zod', 'Axios', 'Vitest'],
     github: 'https://github.com/cykj40/Peloton-MCP-Server',
     live: '',
-    image: '/images/projects/peloton-mcp.png',
     featured: true,
     category: 'health',
   },
@@ -110,7 +104,6 @@ export const projectsData: Project[] = [
       'Model Context Protocol server that connects Claude AI to Dexcom CGM devices for intelligent diabetes management assistance. Features real-time glucose monitoring with trend analysis, adaptive metabolic modeling that learns insulin sensitivity over time, predictive intelligence for estimating glucose impact of insulin and carbs, parameter drift detection to identify when physiology changes, and comprehensive event logging for meals, insulin, and exercise. Built with TypeScript and SQLite for local-first privacy—all data stays on your machine. Implements OAuth2 for secure Dexcom API access and provides visualization tools including AGP (Ambulatory Glucose Profile) charts. Pure assistive intelligence: Claude analyzes and recommends, but you decide and act.',
     tech: ['TypeScript', 'Node.js', 'MCP Protocol', 'OAuth2', 'SQLite', 'Dexcom API', 'Claude API'],
     github: 'https://github.com/cykj40/dexcom-mcp-server',
-    image: '/images/projects/dexcom-mcp-server.png',
     featured: true,
     category: 'health',
   }

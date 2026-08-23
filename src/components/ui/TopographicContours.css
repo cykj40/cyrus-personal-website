@@ -1,0 +1,98 @@
+/*
+ * Animation for <TopographicContours />.
+ *
+ * Every animated property is `transform` or `opacity`, so each layer gets its
+ * own compositor layer and the loop never touches layout or paint. The three
+ * motions live on three nested elements — scroll offset, entrance fade, and
+ * ambient drift — because one element can only carry one `transform` and one
+ * clean animation.
+ */
+
+.topo-root {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.topo-scroll,
+.topo-fade,
+.topo-drift {
+  position: absolute;
+  inset: 0;
+}
+
+/* Scroll parallax. --topo-y is a 0..1 progress value written by the component
+   from a rAF-throttled passive scroll listener; --topo-depth is per-band. */
+.topo-scroll {
+  transform: translate3d(0, calc(var(--topo-y, 0) * var(--topo-depth, 0px)), 0);
+}
+
+/* Entrance: the map settles in once, low ground first, rather than snapping. */
+.topo-fade {
+  opacity: 0;
+  animation: topo-fade-in 1200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes topo-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Ambient drift. Each band gets its own amplitude, period, and phase offset
+   (a negative animation-delay) so the layers never resynchronise. */
+.topo-drift {
+  animation-name: topo-drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: transform;
+}
+
+@keyframes topo-drift {
+  from {
+    transform: translate3d(calc(var(--topo-dx) * -1), calc(var(--topo-dy) * -1), 0);
+  }
+  to {
+    transform: translate3d(var(--topo-dx), var(--topo-dy), 0);
+  }
+}
+
+/* Nothing to animate while the field is off-screen. */
+.topo-root[data-idle='true'] .topo-drift {
+  animation-play-state: paused;
+  will-change: auto;
+}
+
+.topo-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/*
+ * Reduced motion: not a slower animation — no animation at all.
+ *
+ * Each band is parked at 45% of its drift amplitude rather than at the
+ * keyframe origin, which is roughly where the layers sit through the middle of
+ * the loop. The frozen composition is therefore a good frame of the animation,
+ * not its first frame: the bands still sit offset from one another, so the
+ * field keeps its depth instead of collapsing into a flat stack.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .topo-drift {
+    animation: none;
+    transform: translate3d(calc(var(--topo-dx) * 0.45), calc(var(--topo-dy) * 0.45), 0);
+    will-change: auto;
+  }
+
+  .topo-scroll {
+    transform: none;
+  }
+
+  .topo-fade {
+    opacity: 1;
+    animation: none;
+  }
+}

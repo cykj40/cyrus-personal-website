@@ -22,31 +22,45 @@ export async function sendChatMessage(request: ChatRequest): Promise<ChatRespons
     });
 
     if (!response.ok) {
-      if (response.status === 429) {
-        throw new ChatAPIError(
-          'I need a moment to catch up. Please try again in a few seconds.',
-          429,
-          'RATE_LIMIT'
-        );
-      }
-
       const errorData = await response.json().catch(() => ({}));
+
+      // Prefer the server's code. Fall back to inferring one from the status so
+      // an unexpected/proxy-generated response still maps to friendly copy.
+      const code =
+        errorData.code ??
+        (response.status === 429
+          ? 'RATE_LIMIT'
+          : response.status >= 500
+            ? 'UPSTREAM_ERROR'
+            : 'UNKNOWN_ERROR');
+
       throw new ChatAPIError(
         errorData.error || 'Failed to get response. Please try again.',
         response.status,
-        errorData.code
+        code
       );
     }
 
     const data = await response.json();
+
+    // A 200 with no usable message would otherwise render as an empty bubble.
+    if (typeof data?.message !== 'string' || data.message.trim().length === 0) {
+      throw new ChatAPIError(
+        'Malformed response from chat API.',
+        response.status,
+        'UPSTREAM_ERROR'
+      );
+    }
+
     return data;
   } catch (error) {
     if (error instanceof ChatAPIError) {
       throw error;
     }
 
-    // Network errors
-    if (error instanceof TypeError && error.message.includes('fetch')) {
+    // Network errors. A failed fetch throws TypeError; the message text varies
+    // across browsers, so treat any TypeError here as a transport failure.
+    if (error instanceof TypeError) {
       throw new ChatAPIError(
         'You appear to be offline. Please check your connection.',
         0,

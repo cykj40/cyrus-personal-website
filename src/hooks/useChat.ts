@@ -1,12 +1,18 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { sendChatMessage, ChatAPIError } from '@/lib/chat-api';
-import type { ChatMessage } from '@/types/chat';
-import { WELCOME_MESSAGE } from '@/types/chat';
+import type { ChatErrorState, ChatMessage } from '@/types/chat';
+import { CHAT_ERROR_COPY, DEFAULT_CHAT_ERROR, WELCOME_MESSAGE } from '@/types/chat';
 
 const STORAGE_KEY = 'chat-messages';
-const STORAGE_OPEN_KEY = 'chat-is-open';
 
+/**
+ * The chat conversation: history, the send mutation, and error mapping.
+ *
+ * Open/closed state lives in `useChatOpenState` instead, so that the widget
+ * shell can render the launcher without loading this module (and with it
+ * react-query, ~28 kB minified).
+ */
 export function useChat() {
   const [messages, setMessages] = useState<ChatMessage[]>(() => {
     // Load messages from sessionStorage
@@ -28,20 +34,7 @@ export function useChat() {
     return [WELCOME_MESSAGE];
   });
 
-  const [isOpen, setIsOpen] = useState(() => {
-    // Load open state from sessionStorage
-    if (typeof window !== 'undefined') {
-      try {
-        const stored = sessionStorage.getItem(STORAGE_OPEN_KEY);
-        return stored === 'true';
-      } catch (error) {
-        return false;
-      }
-    }
-    return false;
-  });
-
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<ChatErrorState | null>(null);
 
   // Persist messages to sessionStorage
   useEffect(() => {
@@ -53,17 +46,6 @@ export function useChat() {
       }
     }
   }, [messages]);
-
-  // Persist open state to sessionStorage
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        sessionStorage.setItem(STORAGE_OPEN_KEY, String(isOpen));
-      } catch (error) {
-        console.error('Failed to save chat open state:', error);
-      }
-    }
-  }, [isOpen]);
 
   const mutation = useMutation({
     mutationFn: sendChatMessage,
@@ -78,11 +60,10 @@ export function useChat() {
       setError(null);
     },
     onError: (err: Error) => {
-      if (err instanceof ChatAPIError) {
-        setError(err.message);
-      } else {
-        setError("Sorry, I'm having trouble responding right now. Please try again.");
-      }
+      // Map to friendly copy by code — the server's own message string is kept
+      // generic on purpose and isn't shown to the visitor.
+      const code = err instanceof ChatAPIError ? err.code : undefined;
+      setError((code && CHAT_ERROR_COPY[code]) || DEFAULT_CHAT_ERROR);
     },
   });
 
@@ -122,27 +103,11 @@ export function useChat() {
     }
   }, []);
 
-  const toggleChat = useCallback(() => {
-    setIsOpen((prev) => !prev);
-  }, []);
-
-  const openChat = useCallback(() => {
-    setIsOpen(true);
-  }, []);
-
-  const closeChat = useCallback(() => {
-    setIsOpen(false);
-  }, []);
-
   return {
     messages,
     isLoading: mutation.isPending,
     error,
-    isOpen,
     sendMessage,
     clearChat,
-    toggleChat,
-    openChat,
-    closeChat,
   };
 }

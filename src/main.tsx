@@ -1,10 +1,8 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Analytics } from '@vercel/analytics/react';
-import { queryClient } from '@/lib/queryClient';
+import { MotionConfig } from 'framer-motion';
 import '@/index.css';
 
 // Import the generated route tree
@@ -26,11 +24,16 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <QueryClientProvider client={queryClient}>
+      {/*
+        No QueryClientProvider here on purpose: the chatbot is react-query's only
+        consumer, so the provider lives inside the lazily-loaded chat chunk
+        (src/components/chat/ChatConversation.tsx) and react-query stays off the
+        critical path for every route.
+      */}
+      <MotionConfig reducedMotion="user">
         <RouterProvider router={router} />
-        {import.meta.env.DEV && <ReactQueryDevtools />}
-      </QueryClientProvider>
-      <Analytics />
+        <Analytics />
+      </MotionConfig>
     </StrictMode>
   );
 }

@@ -4,9 +4,16 @@ import { Resend } from 'resend';
 interface ContactFormData {
   name: string;
   email: string;
+  service?: 'automation' | 'mcp' | 'assistant';
   subject: string;
   message: string;
 }
+
+const serviceLabels: Record<NonNullable<ContactFormData['service']>, string> = {
+  automation: 'Workflow Automation & AI Agents',
+  mcp: 'System & MCP Integrations',
+  assistant: 'AI Assistants & Chatbots',
+};
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -17,7 +24,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { name, email, subject, message } = req.body as ContactFormData;
+    const { name, email, service, subject, message } = req.body as ContactFormData;
+    const serviceLabel = service && serviceLabels[service];
 
     // Basic validation
     if (!name || !email || !subject || !message) {
@@ -45,6 +53,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       html: `
         <h2>New Contact Form Submission</h2>
         <p><strong>From:</strong> ${name} (${email})</p>
+        ${serviceLabel ? `<p><strong>Service:</strong> ${serviceLabel}</p>` : ''}
         <p><strong>Subject:</strong> ${subject}</p>
         <hr />
         <p><strong>Message:</strong></p>

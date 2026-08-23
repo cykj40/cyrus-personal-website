@@ -3,6 +3,18 @@
   "outputDirectory": "dist",
   "devCommand": "vite",
   "installCommand": "pnpm install",
+  "redirects": [
+    {
+      "source": "/resume",
+      "destination": "/hire-me",
+      "statusCode": 301
+    },
+    {
+      "source": "/engineering",
+      "destination": "/hire-me",
+      "statusCode": 301
+    }
+  ],
   "rewrites": [
     {
       "source": "/((?!api/).*)",

@@ -1,127 +1,128 @@
-import { motion } from 'framer-motion';
-import { Bot, Code2, Database, Puzzle } from 'lucide-react';
+import { Link } from '@tanstack/react-router';
+import { motion, useReducedMotion } from 'framer-motion';
+import { track } from '@vercel/analytics/react';
+import { Bot, Workflow, Puzzle } from 'lucide-react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card';
+import { caseStudies } from '@/data/caseStudies';
+import { projectsData } from '@/data/projects';
+
+const tsheetsBilling = caseStudies.find((caseStudy) => caseStudy.slug === 'tsheets-billing');
+const fieldNotes = caseStudies.find((caseStudy) => caseStudy.slug === 'field-notes-pwa');
+const healthJournal = projectsData.find((project) => project.id === 'journalai');
+
+if (!tsheetsBilling || !fieldNotes || !healthJournal) {
+  throw new Error('Missing project data required by the services page.');
+}
 
 const services = [
   {
-    icon: Code2,
-    title: 'Full-Stack Development',
+    icon: Puzzle,
+    title: 'MCP Servers',
     description:
-      'End-to-end web application development with React, TypeScript, Node.js, and modern frameworks. Clean, maintainable code that scales.',
-    features: [
-      'React & Next.js',
-      'TypeScript',
-      'REST API Design, Authentication, and Data Modeling',
-      'PostgreSQL & Drizzle',
-    ],
+      'A production MCP server or integration that connects an AI client to the business systems you already use. The scope includes authentication, typed tools, input validation, testing, deployment, documentation, and handoff.',
+    exampleTitle: 'TSheets MCP',
+    example: tsheetsBilling.result[0],
+    price:
+      'Custom MCP server builds start at $8,000. Existing-server setup is $2,500 for up to five integrations, plus $750 for each additional integration.',
+    bestFor: 'third-party APIs, internal tools, and legacy line-of-business software',
+    cta: 'Discuss an integration',
+    service: 'mcp',
+    analyticsEvent: 'cta_service_mcp',
+  },
+  {
+    icon: Workflow,
+    title: 'Agents',
+    description:
+      'A custom agent or automation for a defined operational workflow. The build includes triggers, integrations, validation, human approval steps where needed, production deployment, documentation, and handoff.',
+    exampleTitle: 'Field Notes PWA',
+    example: fieldNotes.result[0],
+    price: 'Custom AI agent builds start at $10,000.',
+    bestFor: 'operations, back-office work, reporting, and field-to-office handoffs',
+    cta: 'Discuss an agent',
+    service: 'automation',
+    analyticsEvent: 'cta_service_automation',
   },
   {
     icon: Bot,
-    title: 'AI Integration & Automation',
+    title: 'RAG Chatbots',
     description:
-      'Build production-grade AI systems—chatbots, agents, and MCP servers—using Claude and OpenAI APIs to automate real workflows.',
-    features: [
-      'MCP Server Development',
-      'Chatbots & AI Agents',
-      'Claude API Integration',
-      'OpenAI API Integration',
-      'Workflow Automation',
-      'Prompt Engineering',
-    ],
+      'A retrieval-backed chatbot that answers questions from approved documents, databases, or product data. The build includes source ingestion, retrieval and citation setup, interface integration, deployment, documentation, and handoff.',
+    exampleTitle: healthJournal.title,
+    example: healthJournal.description,
+    price: 'RAG chatbot builds start at $8,000.',
+    bestFor: 'customer support, internal knowledge bases, and sales enablement',
+    cta: 'Discuss a chatbot',
+    service: 'assistant',
+    analyticsEvent: 'cta_service_assistant',
   },
-  {
-    icon: Database,
-    title: 'Operations & Business Systems Integration',
-    description:
-      'Custom integrations between time tracking, billing, and internal systems to automate reporting and reduce operational overhead in real-world businesses.',
-    features: [
-      'TSheets API Integration',
-      'Sage 100 Data Formatting & Export',
-      'Job Notes & Field Data Automation',
-      'Secure OAuth2 API Integrations',
-      'Internal Tooling for Operations Teams',
-    ],
-  },
-  {
-    icon: Puzzle,
-    title: 'Software Modernization & Code Conversion',
-    description:
-      'Modernizing legacy codebases and translating systems between languages and stacks, with a focus on moving older backends to TypeScript-based architectures.',
-    features: [
-      'Java → TypeScript / Node.js conversions',
-      'Backend stack migrations',
-      'API refactoring & normalization',
-      'Legacy code cleanup',
-      'Architecture simplification',
-    ],
-  },
-];
+] as const;
 
 export const Services = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section id="services" className="py-20">
       <div className="container mx-auto px-4">
         <SectionHeading
           title="What I Do"
-          subtitle="Specialized services for startups, health tech companies, and developers"
+          subtitle="Specialized AI systems built around the tools and information your business already uses"
         />
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-8 lg:grid-cols-3">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <motion.div
                 key={service.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <Card hover className="h-full">
+                <Card hover className="flex h-full flex-col">
                   <CardHeader>
                     <div className="mb-4 flex items-center gap-3">
-                      <div className="rounded-lg bg-forest-100 p-3">
-                        <Icon className="h-6 w-6 text-forest-600" />
+                      <div className="rounded-lg bg-pine-100 p-3">
+                        <Icon className="h-6 w-6 text-pine-600" />
                       </div>
                       <CardTitle>{service.title}</CardTitle>
                     </div>
-                    <p className="text-earth-600">{service.description}</p>
+                    <p className="text-granite-700">{service.description}</p>
                   </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {service.features.map((feature) => (
-                        <li key={feature} className="flex items-center gap-2 text-sm text-earth-600">
-                          <span className="h-1.5 w-1.5 rounded-full bg-forest-500" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
+
+                  <CardContent className="flex-1 space-y-4">
+                    <p className="text-sm text-granite-700">
+                      <span className="font-medium text-pine-800">Example:</span>{' '}
+                      {service.exampleTitle} — {service.example}
+                    </p>
+                    <p className="text-sm text-granite-700">
+                      <span className="font-medium text-pine-800">Price:</span>{' '}
+                      {service.price}
+                    </p>
+                    <p className="text-sm text-granite-700">
+                      <span className="font-medium text-pine-800">Best for:</span>{' '}
+                      {service.bestFor}
+                    </p>
                   </CardContent>
+
+                  <CardFooter>
+                    <Link
+                      to="/contact"
+                      search={{ service: service.service }}
+                      onClick={() =>
+                        track(service.analyticsEvent, { service: service.service })
+                      }
+                      className="inline-flex h-9 items-center justify-center rounded-lg bg-pine-600 px-3 text-sm font-medium text-white transition-all hover:bg-pine-700 active:bg-pine-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-400 focus-visible:ring-offset-2"
+                    >
+                      {service.cta}
+                    </Link>
+                  </CardFooter>
                 </Card>
               </motion.div>
             );
           })}
         </div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 text-center"
-        >
-          <p className="mb-4 text-lg text-earth-600">
-            Ready to build something great together?
-          </p>
-          <a
-            href="#contact"
-            className="inline-block rounded-lg bg-forest-600 px-8 py-3 font-medium text-white transition-colors hover:bg-forest-700"
-          >
-            Let's Talk
-          </a>
-        </motion.div>
       </div>
     </section>
   );

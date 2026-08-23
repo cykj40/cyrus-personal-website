@@ -1,11 +1,14 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import { Hero }     from '@/components/sections/Hero';
-import { About }    from '@/components/sections/About';
-import { Projects } from '@/components/sections/Projects';
-import { Services } from '@/components/sections/Services';
-import { Contact }  from '@/components/sections/Contact';
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 import { scrollToSection } from '@/lib/utils';
+import { LandingTeasers } from '@/components/sections/LandingTeasers';
+import { WhatIBuild } from '@/components/sections/WhatIBuild';
+import { FeaturedWork } from '@/components/sections/FeaturedWork';
+
+const HOME_TITLE = 'Cyrus Khiabani — AI-First Programmer | Chatbots, Agents & MCP Servers';
+const HOME_DESCRIPTION = 'AI Engineer building production chatbots, agents, and MCP servers. Open to full-time, part-time, and freelance work.';
 
 export const Route = createFileRoute('/')({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -17,6 +20,12 @@ export const Route = createFileRoute('/')({
 function HomePage() {
   const { scrollTo } = useSearch({ from: '/' });
 
+  useDocumentTitle(HOME_TITLE, {
+    description: HOME_DESCRIPTION,
+    image: '/og/home.png',
+    path: '/',
+  });
+
   useEffect(() => {
     if (!scrollTo) return;
     const timer = setTimeout(() => scrollToSection(scrollTo), 100);
@@ -26,10 +35,9 @@ function HomePage() {
   return (
     <>
       <Hero />
-      <About />
-      <Projects />
-      <Services />
-      <Contact />
+      <WhatIBuild />
+      <FeaturedWork />
+      <LandingTeasers />
     </>
   );
 }
