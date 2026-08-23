@@ -20,7 +20,7 @@ const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
  */
 const targets = [
   {
-    source: 'public/images/profile/cyrus-portfolio-picture-1.png',
+    source: 'image-sources/cyrus-portfolio-picture-1.png',
     outputDirectory: 'public/images/profile',
     basename: 'cyrus-portfolio',
     widths: [280, 560, 840],
