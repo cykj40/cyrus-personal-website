@@ -262,7 +262,8 @@ certificates and 675+ hours of independent coursework.
 
 He is currently Technical Project Manager and AI Automation Engineer at a
 Brooklyn construction group, where he has built the internal AI and automation
-systems in production use there.
+systems in production use there, including the TSheets MCP server that
+reduced timesheet-to-billing processing by 90% — from 30 minutes to under 5.
 
 ## What Cyrus Will Not Do
 
@@ -326,11 +327,11 @@ Rather than general claims, here is what to point to when a visitor asks what
 Cyrus is good at or whether he can handle a specific kind of work:
 
 - MCP protocol and MCP server development — three distinct production MCP
-  servers shipped: TSheets/QuickBooks Time, Dexcom, and Peloton. T1Copilot's
-  multi-agent system runs on the existing Dexcom and Peloton MCP servers, not
-  additional servers. Each has real OAuth2 flows, type-safe validation, and
-  audit trails. MCP has existed publicly only since late 2024; production
-  experience in it is still rare.
+  servers shipped: TSheets/QuickBooks Time, Dexcom, and Peloton, with
+  T1Copilot's multi-agent system reusing those existing Dexcom and Peloton
+  servers rather than requiring new ones. Each has real OAuth2 flows,
+  type-safe validation, and audit trails. MCP has existed publicly only
+  since late 2024; production experience in it is still rare.
 - Connecting AI systems to messy, undocumented, real-world business software
   — not clean demo APIs. The TSheets server had to parse a hierarchical job
   structure with no clean documentation to work from.
